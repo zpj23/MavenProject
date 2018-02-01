@@ -1,0 +1,3 @@
+2018-02-01 15:22:26.026 DEBUG [main] org.apache.ibatis.logging.LogFactory.setImplementation():115 -Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2018-02-01 15:22:26.769 DEBUG [main] org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory():358 -Property 'configLocation' not specified, using default MyBatis Configuration
+2018-02-01 15:22:27.106 DEBUG [main] org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory():468 -Parsed mapper file: 'file [G:\Downloads\ssm\target\classes\org\ssm\dufy\mapper\UserMapper.xml]'
