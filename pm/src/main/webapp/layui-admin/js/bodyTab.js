@@ -161,4 +161,4 @@ layui.define(["element","jquery"],function(exports){
 	exports("bodyTab",function(option){
 		return bodyTab.set(option);
 	});
-})
+});

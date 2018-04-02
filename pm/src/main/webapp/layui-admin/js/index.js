@@ -1,6 +1,6 @@
 var $,tab,skyconsWeather;
 layui.config({
-	base : "js/"
+	base : "layui-admin/js/"
 }).use(['bodyTab','form','element','layer','jquery'],function(){
 	var form = layui.form(),
 		layer = layui.layer,
@@ -132,7 +132,7 @@ layui.config({
 		}
 	}
 
-})
+});
 
 //打开新窗口
 function addTab(_this){

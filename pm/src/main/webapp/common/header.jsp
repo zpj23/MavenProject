@@ -7,10 +7,12 @@
 <%-- <%@ taglib prefix="mf" uri="/MyFramework-tags"%> --%>
 <%-- 绝对路径 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="layui-admin/layui/css/layui.css" media="all" />
-<link rel="stylesheet" href="layui-admin/css/font_eolqem241z66flxr.css" media="all" />
-<link rel="stylesheet" href="layui-admin/css/main.css" media="all" />
-<script type="text/javascript" src="layui-admin/layui/layui.js"></script>
+<link rel="stylesheet" href="${ctx}/layui-master/src/css/layui.css">
+<script type="text/javascript" src="${ctx}/layui-master/src/layui.js"></script>
+
+<%-- <link rel="stylesheet" href="${ctx}/layui-admin/layui/css/layui.css" media="all" /> --%>
+<%-- <link rel="stylesheet" href="${ctx}/layui-admin/css/font_eolqem241z66flxr.css" media="all" /> --%>
+<%-- <link rel="stylesheet" href="${ctx}/layui-admin/css/main.css" media="all" /> --%>
 <script type="text/javascript">
 var CTX="${ctx}";
 </script>

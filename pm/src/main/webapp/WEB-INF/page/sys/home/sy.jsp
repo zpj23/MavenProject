@@ -84,7 +84,7 @@
 					</li>
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="images/face.jpg" class="layui-circle" width="35" height="35">
+							<img src="${ctx}/layui-admin/images/face.jpg" class="layui-circle" width="35" height="35">
 							<cite>请叫我马哥</cite>
 						</a>
 						<dl class="layui-nav-child">
@@ -99,7 +99,7 @@
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="images/face.jpg"></a>
+				<a class="img" title="我的头像" ><img src="${ctx}/layui-admin/images/face.jpg"></a>
 				<p>你好！<span class="userName">请叫我马哥</span>, 欢迎登录</p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
@@ -112,7 +112,7 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="page/main.html"></iframe>
+						<iframe src="${ctx}/home/toMain"></iframe>
 					</div>
 				</div>
 			</div>
@@ -125,7 +125,7 @@
 
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
-		<div class="admin-header-lock-img"><img src="images/face.jpg"/></div>
+		<div class="admin-header-lock-img"><img src="${ctx}/layui-admin/images/face.jpg"/></div>
 		<div class="admin-header-lock-name" id="lockUserName">请叫我马哥</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
@@ -137,8 +137,8 @@
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
 	
-	<script type="text/javascript" src="js/nav.js"></script>
-	<script type="text/javascript" src="js/leftNav.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="${ctx}/layui-admin/js/nav.js"></script>
+	<script type="text/javascript" src="${ctx}/layui-admin/js/leftNav.js"></script>
+	<script type="text/javascript" src="${ctx}/layui-admin/js/index.js"></script>
 </body>
 </html>
