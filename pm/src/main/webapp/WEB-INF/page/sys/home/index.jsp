@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/header.jsp"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
+		+ request.getServerName() + ":" + request.getServerPort()
+		+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,9 +19,15 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
+	<link rel="stylesheet" href="${ctx}/plugin/layui/css/layui.css">
+	<link rel="stylesheet" href="${ctx}/plugin/layui/css/font_eolqem241z66flxr.css" media="all" />
+	<link rel="stylesheet" href="${ctx}/plugin/layui/css/main.css" media="all" />
+<script type="text/javascript">
+var basePath="<%=basePath%>";
+</script>	
 </head>
-<body class="main_body"  >
-<div class="layui-layout layui-layout-admin">
+<body class="main_body">
+	<div class="layui-layout layui-layout-admin">
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
@@ -49,7 +60,7 @@
 			        <i class="layui-icon">&#xe615;</i>
 			    </div>
 			    <!-- 天气信息 -->
-			    <div class="weather" pc>
+			    <div class="weather" >
 			    	<div id="tp-weather-widget"></div>
 					<script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
 					<script>tpwidget("init", {
@@ -98,10 +109,10 @@
 		</div>
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
-			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="${ctx}/layui-admin/images/face.jpg"></a>
-				<p>你好！<span class="userName">请叫我马哥</span>, 欢迎登录</p>
-			</div>
+<!-- 			<div class="user-photo"> -->
+<%-- 				<a class="img" title="我的头像" ><img src="${ctx}/layui-admin/images/face.jpg"></a> --%>
+<!-- 				<p>你好！<span class="userName">请叫我马哥</span>, 欢迎登录</p> -->
+<!-- 			</div> -->
 			<div class="navBar layui-side-scroll"></div>
 		</div>
 		<!-- 右侧内容 -->
@@ -112,7 +123,8 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="${ctx}/home/toMain"></iframe>
+					111
+<%-- 						<iframe src="${ctx}/home/toMain"></iframe> --%>
 					</div>
 				</div>
 			</div>
@@ -136,9 +148,9 @@
 	<!-- 移动导航 -->
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
-	
-	<script type="text/javascript" src="${ctx}/layui-admin/js/nav.js"></script>
-	<script type="text/javascript" src="${ctx}/layui-admin/js/leftNav.js"></script>
-	<script type="text/javascript" src="${ctx}/layui-admin/js/index.js"></script>
+	<script type="text/javascript" src="${ctx}/plugin/layui/layui.js"></script>
+	<script type="text/javascript" src="${ctx}/js/home/index.js">
+
+</script>
 </body>
 </html>

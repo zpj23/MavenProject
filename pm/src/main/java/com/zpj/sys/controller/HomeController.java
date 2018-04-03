@@ -10,18 +10,14 @@ public class HomeController extends BaseController{
 	
 	@RequestMapping("/toIndex")
 	public String toIndex(){
-		return "/sys/home1/index";
+		return "/sys/home/index";
 	}
 	
 	@RequestMapping("/test")
 	public String test(){
-		return "/sys/home1/test";
+		return "/sys/home/test";
 	}
 	
-	@RequestMapping("/toSy")
-	public String toSy(){
-		return "/sys/home/sy";
-	}
 	@RequestMapping("/toMain")
 	public String toMain(){
 		return "sys/home/main";
