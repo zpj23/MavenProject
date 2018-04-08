@@ -95,8 +95,8 @@ var basePath="<%=basePath%>";
 					</li>
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="${ctx}/layui-admin/images/face.jpg" class="layui-circle" width="35" height="35">
-							<cite>请叫我马哥</cite>
+							<img src="${ctx}/plugin/layui/images/face.jpg" class="layui-circle" width="35" height="35">
+							<cite>卡尔哈哈</cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
@@ -123,21 +123,20 @@ var basePath="<%=basePath%>";
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-					111
-<%-- 						<iframe src="${ctx}/home/toMain"></iframe> --%>
+						<iframe src="${ctx}/home/toMain"></iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 底部 -->
 		<div class="layui-footer footer">
-			<p>copyright @2017 请叫我马哥 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a>　　<a onclick="donation()" class="layui-btn layui-btn-danger l·ayui-btn-small">捐赠作者</a></p>
+			<p>copyright @2017 <a href="http://www.mycodes.net/" target="_blank">LayUI</a></p>
 		</div>
 	</div>
 
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
-		<div class="admin-header-lock-img"><img src="${ctx}/layui-admin/images/face.jpg"/></div>
+		<div class="admin-header-lock-img"><img src="${ctx}/plugin/layui/images/face.jpg"/></div>
 		<div class="admin-header-lock-name" id="lockUserName">请叫我马哥</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />

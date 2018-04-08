@@ -8,10 +8,8 @@
 <%-- 绝对路径 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
-
-<%-- <link rel="stylesheet" href="${ctx}/layui-admin/layui/css/layui.css" media="all" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/layui-admin/css/font_eolqem241z66flxr.css" media="all" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/layui-admin/css/main.css" media="all" /> --%>
+<link rel="stylesheet" href="${ctx}/plugin/layui/css/layui.css" media="all" />
+<script type="text/javascript" src="${ctx}/plugin/layui/layui.js"></script>	
 <script type="text/javascript">
 var CTX="${ctx}";
 </script>

@@ -12,7 +12,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="${ctx}/layui-admin/css/main.css" media="all" />
+	<link rel="stylesheet" href="${ctx}/plugin/layui/css/font_eolqem241z66flxr.css" media="all" />
+	<link rel="stylesheet" href="${ctx}/plugin/layui/css/main.css" media="all" />
+	
 </head>
 <body class="childrenBody">
 	<div class="panel_box row">
@@ -161,6 +163,7 @@
 			</table> 
 		</div>
 	</div>
-	<script type="text/javascript" src="${ctx}/layui-admin/js/main.js"></script>
+	<script type="text/javascript" src="${ctx}/plugin/layui/js/main.js"></script>
+	
 </body>
 </html>

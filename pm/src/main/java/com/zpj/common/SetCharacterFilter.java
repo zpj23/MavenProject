@@ -16,14 +16,16 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SetCharacterFilter implements Filter{
 
-	protected String endcoding = null;
+	protected String endcoding = "UTF-8";
 	protected FilterConfig filterConfig = null;
 	
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
-		HttpServletResponse res = (HttpServletResponse)response;
+		String str_url=req.getRequestURI();
+		System.out.println(str_url);
+//		HttpServletResponse res = (HttpServletResponse)response;
 		req.setCharacterEncoding(endcoding);		
 		chain.doFilter(request, response);
 	}

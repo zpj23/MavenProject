@@ -167,15 +167,15 @@ var navs = [{
 	"href" : "page/systemParameter/systemParameter.html",
 	"spread" : false
 },{
-	"title" : "二级菜单演示",
+	"title" : "系统管理",
 	"icon" : "&#xe61c;",
 	"href" : "",
 	"spread" : false,
 	"children" : [
 		{
-			"title" : "二级菜单1",
+			"title" : "用户管理",
 			"icon" : "&#xe631;",
-			"href" : "",
+			"href" : "../userInfo/toList",
 			"spread" : false
 		},
 		{
