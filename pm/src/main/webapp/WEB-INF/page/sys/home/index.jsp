@@ -109,10 +109,10 @@ var basePath="<%=basePath%>";
 		</div>
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
-<!-- 			<div class="user-photo"> -->
-<%-- 				<a class="img" title="我的头像" ><img src="${ctx}/layui-admin/images/face.jpg"></a> --%>
-<!-- 				<p>你好！<span class="userName">请叫我马哥</span>, 欢迎登录</p> -->
-<!-- 			</div> -->
+			<div class="user-photo">
+				<a class="img" title="我的头像" ><img src="${ctx}/plugin/layui/images/face.jpg"></a>
+				<p>你好！<span class="userName">卡尔哈哈</span>, 欢迎登录</p>
+			</div>
 			<div class="navBar layui-side-scroll"></div>
 		</div>
 		<!-- 右侧内容 -->
@@ -137,7 +137,7 @@ var basePath="<%=basePath%>";
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
 		<div class="admin-header-lock-img"><img src="${ctx}/plugin/layui/images/face.jpg"/></div>
-		<div class="admin-header-lock-name" id="lockUserName">请叫我马哥</div>
+		<div class="admin-header-lock-name" id="lockUserName">卡尔哈哈</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
 			<button class="layui-btn" id="unlock">解锁</button>
