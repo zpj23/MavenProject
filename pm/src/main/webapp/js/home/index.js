@@ -175,7 +175,7 @@ var navs = [{
 		{
 			"title" : "用户管理",
 			"icon" : "&#xe631;",
-			"href" : "../userInfo/toList",
+			"href" : basePath+"userInfo/toList",
 			"spread" : false
 		},
 		{
