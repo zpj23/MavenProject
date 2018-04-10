@@ -1,5 +1,7 @@
 package com.zpj.sys.service.impl;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void saveInfo(User info) {
-		// TODO Auto-generated method stub
+		if(null!=info.getId()&&!"".equalsIgnoreCase("")){
+			User user=this.findById(info.getId());
+			if(null!=user){
+				userDao.merge(info, info.getId());
+			}else{
+				userDao.add(info);
+			}
+		}else{
+			info.setId(UUID.randomUUID().toString());
+			userDao.add(info);
+		}
 		
 	}
 

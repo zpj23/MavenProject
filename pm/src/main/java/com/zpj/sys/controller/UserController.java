@@ -1,5 +1,8 @@
 package com.zpj.sys.controller;
 
+import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zpj.common.BaseController;
 import com.zpj.common.MyPage;
+import com.zpj.sys.entity.User;
 import com.zpj.sys.service.UserService;
 
 /**
@@ -17,14 +21,14 @@ import com.zpj.sys.service.UserService;
  * @version 1.0.0
  */
 @Controller
-@RequestMapping("userinfo")
+@RequestMapping("/userInfo")
 public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("toList")
+	@RequestMapping("/toList")
 	public String toUserList(){
-		return "";
+		return "sys/user/list";
 	}
 	
 	/**
@@ -48,9 +52,16 @@ public class UserController extends BaseController{
 	 * @author zpj
 	 * @Date 2018年4月6日 上午10:13:09
 	 */
-	@RequestMapping("toAdd")
+	@RequestMapping("/toAdd")
 	public String addUser(String id){
-		return "";
+		User user;
+		if(null!=id&&!"".equalsIgnoreCase(id)){
+			user=userService.findById(id);
+		}else{
+			user=new User();
+		}
+		request.setAttribute("user",user);
+		return "sys/user/add";
 	}
 	/**
 	 * @Description (保存用户信息)
@@ -61,8 +72,10 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping("doAdd")
 	@ResponseBody
-	public void doAddUser(String user){
-		
+	public void doAddUser(User user){
+		user.setCreateTime(new Date());
+		userService.saveInfo(user);
+		jsonWrite("success");
 	}
 	
 	

@@ -32,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @SuppressWarnings("unchecked")
+@Transactional
 public class BaseDao<T extends Serializable> {
 	@Autowired
 	private SessionFactory sessionFactory;

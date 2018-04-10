@@ -1,10 +1,14 @@
 package com.zpj.sys.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModel;
 
@@ -18,10 +22,18 @@ import io.swagger.annotations.ApiModel;
 public class User implements java.io.Serializable {
 	private String id;//id
 	private String name;//名称
+	private String loginName;
+	private String password;//密码
+	private String email;
+	private String sex;
+	private String priority;//优先级
+	private String state;
+	private Date createTime;
+	private Date lastLoginTime;
 	
 	
 	@Id
-	@Column()
+	@Column(name = "id", unique = true, nullable = false ,length=36)
 	public String getId() {
 		return id;
 	}
@@ -34,7 +46,59 @@ public class User implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	
+	public String getPriority() {
+		return priority;
+	}
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	@Temporal(value=TemporalType.TIMESTAMP)
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+	
 	
 
 }
