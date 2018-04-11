@@ -445,6 +445,22 @@ public class BaseDao<T extends Serializable> {
 						sql.append(" and ").append(key.replace("-begin", "")).append(" > '").append(value).append("' ");
 					} else if (key.endsWith("-end")) {
 						sql.append(" and ").append(key.replace("-end", "")).append(" < '").append(value).append("' ");
+					}else if(key.endsWith("-or")){
+						//或者的值，用大写OR拼成一个字符串，这边会进行分割
+						String[] valus=  value.split("OR");
+						String tempkey=key.replace("-or", "");
+						sql.append(" and ( ");
+						for(int m=0;m<valus.length;m++){
+							if(m>0){
+								sql.append(" or ");
+							}
+							if(valus[m].equalsIgnoreCase("null")){
+								sql.append(tempkey).append(" is null ");
+							}else{
+								sql.append(tempkey).append(" = '").append(valus[m]).append("' ");
+							}
+						}
+						sql.append(" ) "); 
 					}else{
 						sql.append(" and ").append(key).append(" = '").append(value).append("' ");
 					}
@@ -456,15 +472,18 @@ public class BaseDao<T extends Serializable> {
 		String sqlcount = sql.toString().replace("*", " count(*) as num ,1 ");
 		List<Object[]> lt = findBySql(sqlcount);
 		if (lt != null) {
-			num = (int) lt.get(0)[0];
+			num=Integer.parseInt(((BigInteger) lt.get(0)[0]).toString());
 		}
 
 		// 结果集
-		sql.append(" order by ");
-		for (Map.Entry<String, Object> entry : px.entrySet()) {
-			sql.append(entry.getKey().toString()).append(" ").append(value = entry.getValue().toString()).append(" ");
+		if(px.size()>0){
+			sql.append(" order by ");
+			for (Map.Entry<String, Object> entry : px.entrySet()) {
+				sql.append(entry.getKey().toString()).append(" ").append(value = entry.getValue().toString()).append(" ");
 
+			}
 		}
+		
 //		sql.append("  offset " + (page - 1) * pagesize + " rows fetch next " + pagesize + " rows only");
 		sql.append("  limit " + (page - 1) * pagesize + " , " + pagesize + " ");
 		List<T> list = findBySqlT(sql.toString(), t);

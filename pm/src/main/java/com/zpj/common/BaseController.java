@@ -35,6 +35,34 @@ public class BaseController {
 	public Integer limit = 10; // 行数
 	
 
+	public Integer getPage() {
+		return page;
+	}
+
+
+
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+
+
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+
+
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+
+
+
 	public HttpSession getSession() {
 		return request.getSession();
 	}
@@ -69,42 +97,31 @@ public class BaseController {
 		request.setAttribute(key, value);
 	}
 	
-	public Integer changePageInfo(String cpage,boolean flag){
-		if(null!=cpage&&!"".equalsIgnoreCase(cpage)){
-			return Integer.parseInt(cpage);
-		}else{
-			if(flag){
-				return page;
-			}else{
-				return limit;
-			}
-		}
-	}
 
 
-	public HashMap<String, String> getRequestMap() {  
-        HashMap<String, String> conditions = new HashMap<String, String>();  
-        Map map = request.getParameterMap();  
-        for (Object o : map.keySet()) {  
-            String key = (String) o;  
-            if(key.equalsIgnoreCase("page")){
-            	String val=((String[]) map.get(key))[0];
-            	if(val!=null&&!"".equals(val)){
-        			page=Integer.parseInt(val);
-        		}
-            	conditions.put(key, page+"");
-            }if(key.equalsIgnoreCase("limit")){
-            	String val=((String[]) map.get(key))[0];
-            	if(val!=null&&!"".equals(val)){
-            		limit=Integer.parseInt(val);
-        		}
-            	conditions.put(key, limit+"");
-            }else{
-            	conditions.put(key, ((String[]) map.get(key))[0]);  
-            }
-        }  
-        return conditions;  
-    }  
+//	public HashMap<String, String> getRequestMap() {  
+//        HashMap<String, String> conditions = new HashMap<String, String>();  
+//        Map map = request.getParameterMap();  
+//        for (Object o : map.keySet()) {  
+//            String key = (String) o;  
+//            if(key.equalsIgnoreCase("page")){
+//            	String val=((String[]) map.get(key))[0];
+//            	if(val!=null&&!"".equals(val)){
+//        			page=Integer.parseInt(val);
+//        		}
+//            	conditions.put(key, page+"");
+//            }if(key.equalsIgnoreCase("limit")){
+//            	String val=((String[]) map.get(key))[0];
+//            	if(val!=null&&!"".equals(val)){
+//            		limit=Integer.parseInt(val);
+//        		}
+//            	conditions.put(key, limit+"");
+//            }else{
+//            	conditions.put(key, ((String[]) map.get(key))[0]);  
+//            }
+//        }  
+//        return conditions;  
+//    }  
 	
 	/**
 	 * 类转json

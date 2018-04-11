@@ -1,21 +1,20 @@
-var $;
 layui.use(['form','layer','jquery'],function(){
 	var form = layui.form,
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage;
-		$ = layui.jquery;
+	var	$ = layui.jquery;
 
  	var addUserArray = [],addUser;
  	form.on("submit(addUser)",function(data){
-// 		var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-	 	$.ajax({
+ 		var index=null;
+ 		$.ajax({
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
                 url: basePath+"/userInfo/doAdd" ,//url
                 data: data.field,
                 success: function (result) {
                     console.log(result);//打印服务端返回的数据(调试用)
-                    if (result=="success") {
+                    if (result.flag) {
                     	//弹出loading
                         top.layer.close(index);
             			top.layer.msg("用户添加成功！");
@@ -24,35 +23,20 @@ layui.use(['form','layer','jquery'],function(){
             	 		parent.location.reload();
                     }
                     
-                },error:function(e){
-                	alert(e);
+                },error: function (XMLHttpRequest, textStatus, errorThrown) {
+                	console.log(textStatus);
+                	console.log(XMLHttpRequest);
+                	console.log(errorThrown);
+                },beforeSend: function () {
+                	index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+//                	index=layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                },
+                complete: function () {
+                	
                 }
             });
  		return false;
  	});
-//	function tijiao(){
-//		var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-//	 	$.ajax({
-//                type: "POST",//方法类型
-//                dataType: "json",//预期服务器返回的数据类型
-//                url: basePath+"/userInfo/doAdd" ,//url
-//                data: data.field,
-//                success: function (result) {
-//                    console.log(result);//打印服务端返回的数据(调试用)
-//                    if (result=="success") {
-//                    	//弹出loading
-//                        top.layer.close(index);
-//            			top.layer.msg("用户添加成功！");
-//             			layer.closeAll("iframe");
-//            	 		//刷新父页面
-//            	 		parent.location.reload();
-//                    }
-//                    
-//                },error:function(e){
-//                	alert(e);
-//                }
-//            });
-//	}
 })
 
 //格式化时间

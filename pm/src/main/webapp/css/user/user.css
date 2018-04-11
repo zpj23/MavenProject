@@ -7,7 +7,7 @@ form input.layui-input[disabled]{ background:#f2f2f2; color:#595963!important; }
 
 /*用户列表*/
 .news_list .layui-btn,.news_list .layui-btn+.layui-btn{ margin:2px 5px; }
-#page{ text-align:right; }
+#pageDiv{ text-align:right;margin-right: 50px; }
 
 /*修改密码*/
 .changePwd{ width:30%; margin:3% 0 0 5%; }

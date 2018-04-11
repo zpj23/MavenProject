@@ -1,7 +1,8 @@
 package com.zpj.sys.controller;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping("initList")
 	@ResponseBody
-	public void userList(String param){
+	public void userList(String param,int page,int limit){
 		MyPage pagedata =userService.findPageData(param,page,limit);		
 		this.jsonWrite2(pagedata);
 	}
@@ -75,7 +76,9 @@ public class UserController extends BaseController{
 	public void doAddUser(User user){
 		user.setCreateTime(new Date());
 		userService.saveInfo(user);
-		jsonWrite("success");
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
 	}
 	
 	

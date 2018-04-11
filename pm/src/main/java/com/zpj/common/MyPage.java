@@ -2,37 +2,66 @@ package com.zpj.common;
 
 import java.util.List;
 
+
+    /**
+    * @ClassName: MyPage
+    * @Description: TODO(这里用一句话描述这个类的作用)
+    * @author zpj
+    * @date 2018年4月11日
+    *
+    */
+    
 public class MyPage {
+	private int code=0;
+	private String msg="";
+	public List<?> data;
+	
+	public int count;
 
 	
-	public List<?> d;
 	
-	public int total;
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	
+
 	
-	public List<?> getD() {
-		return d;
+	public List<?> getData() {
+		return data;
 	}
 
-	public void setD(List<?> d) {
-		this.d = d;
+	public void setData(List<?> data) {
+		this.data = data;
 	}
 
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
 	public MyPage(){
 		
 	}
-	public MyPage(List<?> d, int total) {
+	public MyPage(List<?> data, int count) {
 		super();
-		this.d = d;
-		this.total = total;
+		this.data = data;
+		this.count = count;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 	
 	
