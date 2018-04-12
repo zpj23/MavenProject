@@ -71,7 +71,7 @@ public class UserController extends BaseController{
 	 * @author zpj
 	 * @Date 2018年4月6日 上午10:15:34
 	 */
-	@RequestMapping("doAdd")
+	@RequestMapping("/doAdd")
 	@ResponseBody
 	public void doAddUser(User user){
 		user.setCreateTime(new Date());
@@ -81,6 +81,13 @@ public class UserController extends BaseController{
 		jsonWrite2(map);
 	}
 	
-	
+	@RequestMapping("/doDel")
+	@ResponseBody
+	public void doDel(String ids){
+		userService.deleteUser(ids);
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
+	}
 	
 }

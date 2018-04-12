@@ -12,6 +12,8 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	
 	<link rel="stylesheet" href="${ctx}/plugin/layui/css/font_eolqem241z66flxr.css" media="all" />
 	<link rel="stylesheet" href="${ctx}/css/user/user.css" media="all" />
 </head>
@@ -20,7 +22,7 @@
 	
 		<div class="layui-inline">
 		    <div class="layui-input-inline">
-		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" value="" id="searchName"  placeholder="请输入关键字" class="layui-input search_input">
 		    </div>
 		    <a class="layui-btn search_btn"><i class="layui-icon">&#xe615;</i>查询</a>
 		</div>
@@ -31,35 +33,13 @@
 			<a class="layui-btn batchDel"><i class="layui-icon">&#xe640;</i>删除</a>
 		</div>
 	</blockquote>
-	<table class="layui-hide" id="t_userlist"></table>
-<!-- 	<div class="layui-form news_list"> -->
-<!-- 	  	<table class="layui-table"> -->
-<!-- 		    <colgroup> -->
-<!-- 				<col width="50"> -->
-<!-- 				<col> -->
-<!-- 				<col width="18%"> -->
-<!-- 				<col width="8%"> -->
-<!-- 				<col width="12%"> -->
-<!-- 				<col width="12%"> -->
-<!-- 				<col width="18%"> -->
-<!-- 				<col width="15%"> -->
-<!-- 		    </colgroup> -->
-<!-- 		    <thead> -->
-<!-- 				<tr> -->
-<!-- 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th> -->
-<!-- 					<th>登录名</th> -->
-<!-- 					<th>邮箱</th> -->
-<!-- 					<th>性别</th> -->
-<!-- 					<th>会员等级</th> -->
-<!-- 					<th>会员状态</th> -->
-<!-- 					<th>最后登录时间</th> -->
-<!-- 					<th>操作</th> -->
-<!-- 				</tr>  -->
-<!-- 		    </thead> -->
-<!-- 		    <tbody class="users_content"></tbody> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
-	<div id="pageDiv"></div>
+	
+	<div style="padding: 10px;">
+		<table class="layui-hide" id="t_userlist" lay-filter="t_userlist" ></table>
+	</div>
+	<div style="position: fix;bottom: 10px;">
+		<div id="pageDiv" ></div>
+	</div>
 	<script type="text/javascript" src="${ctx}/js/user/allUsers.js"></script>
 </body>
 </html>

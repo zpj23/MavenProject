@@ -4,6 +4,7 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
+	var searchName="";
 	//当前页
 	var page=1;
 	//每页限制条数
@@ -15,31 +16,59 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 		    elem: '#t_userlist'
 		    ,url:basePath+'userInfo/initList?page='+page+'&limit='+limit
 		    ,where: {param: ''}
-		  	//,request: {pageName:'currentPage',limitName: 'limitNum'}
 		    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 		    ,page: false //开启分页
-//		    ,limit:limitNum
 		    ,cols: [[
-		      {field:'id', title: 'ID', sort: true}
-		      ,{field:'loginName', title: '登录名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'name', title: '真实姓名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'sex', title: '性别', sort: true}
+		      {field:'id', type:'checkbox' }
+		      ,{field:'loginName',minWidth:'50', title: '登录名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'name', minWidth:'50',title: '真实姓名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'sex', title: '性别',
+		    	 templet: function(d){
+		    		 var str="";
+		    		 if(d.sex=="0"){
+		    			 str='男';
+		    		 }else if(d.sex=="1"){
+		    			 str="女";
+		    		 }else{
+		    			 str="保密"
+		    		 }
+		    		 return str;
+		    	  }
+		      }
 		      ,{field:'email', title: '电子邮箱'}
-		      ,{field:'priority', title: '等级'}
-		      ,{field:'state', title: '状态', align: 'center'} //单元格内容水平居中
+		      ,{field:'priority', title: '等级',
+			    	 templet: function(d){
+			    		 var str="";
+			    		 if(d.priority=="0"){
+			    			 str='注册用户';
+			    		 }else if(d.priority=="1"){
+			    			 str="中级用户";
+			    		 }else if(d.priority=="2"){
+			    			 str="中级用户"
+			    		 }else if(d.priority=="3"){
+			    			 str="高级用户"
+			    		 }else if(d.priority=="4"){
+			    			 str="超级用户"
+			    		 }
+			    		 return str;
+			    	  }}
+		      ,{field:'state', title: '状态',
+			    	 templet: function(d){
+			    		 var str="";
+			    		 if(d.state=="0"){
+			    			 str='正常';
+			    		 }else if(d.priority=="1"){
+			    			 str="禁用";
+			    		 }else{
+			    			 str="无";
+			    		 }
+			    		 return str;
+			    	  }} 
 		     
 		    ]]
 		    , done: function(res, curr, count){
 		        //如果是异步请求数据方式，res即为你接口返回的信息。
 		        //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-//		        console.log(res);
-//		        
-//		        //得到当前页码
-//		        console.log(curr); 
-//		       
-//		        //得到数据总量
-//		        console.log(count);
-		        
 		        totalNum =count; 
 		        initLayPage(); 	
 		      }
@@ -65,9 +94,10 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
   	  	  }); 	
   	}
   	function reloadTable(){
+  		searchName=$("#searchName").val();
   		ctable.reload({
              where:{
-              	param:''
+              	param:searchName
              },
              url:basePath+'userInfo/initList?page='+page+'&limit='+limit
              ,page: false //开启分页
@@ -75,83 +105,10 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
          });
   	}
 	  	
-	//加载页面数据
-//	var usersData = '';
-//	$.get(basePath+"plugin/layui/json/usersList.json", function(data){
-//		usersData = data;
-//		if(window.sessionStorage.getItem("addUser")){
-//			var addUsers = window.sessionStorage.getItem("addUser");
-//			usersData = JSON.parse(addUsers).concat(usersData);
-//		}
-//		//执行加载数据的方法
-//		usersList();
-//	})
 
 	//查询
 	$(".search_btn").click(function(){
-//		var userArray = [];
-//		if($(".search_input").val() != ''){
-//			var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
-//            setTimeout(function(){
-//            	
-//            	$.ajax({
-//					url : basePath+"plugin/layui/json/usersList.json",
-//					type : "get",
-//					dataType : "json",
-//					success : function(data){
-//						if(window.sessionStorage.getItem("addUsers")){
-//							var addUsers = window.sessionStorage.getItem("addUsers");
-//							usersData = JSON.parse(addUsers).concat(data);
-//						}else{
-//							usersData = data;
-//						}
-//						for(var i=0;i<usersData.length;i++){
-//							var usersStr = usersData[i];
-//							var selectStr = $(".search_input").val();
-//		            		function changeStr(data){
-//		            			var dataStr = '';
-//		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;
-//		            			if(showNum > 1){
-//									for (var j=0;j<showNum;j++) {
-//		            					dataStr += data.split(eval("/"+selectStr+"/ig"))[j] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>";
-//		            				}
-//		            				dataStr += data.split(eval("/"+selectStr+"/ig"))[showNum];
-//		            				return dataStr;
-//		            			}else{
-//		            				dataStr = data.split(eval("/"+selectStr+"/ig"))[0] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>" + data.split(eval("/"+selectStr+"/ig"))[1];
-//		            				return dataStr;
-//		            			}
-//		            		}
-//		            		//用户名
-//		            		if(usersStr.userName.indexOf(selectStr) > -1){
-//			            		usersStr["userName"] = changeStr(usersStr.userName);
-//		            		}
-//		            		//用户邮箱
-//		            		if(usersStr.userEmail.indexOf(selectStr) > -1){
-//			            		usersStr["userEmail"] = changeStr(usersStr.userEmail);
-//		            		}
-//		            		//性别
-//		            		if(usersStr.userSex.indexOf(selectStr) > -1){
-//			            		usersStr["userSex"] = changeStr(usersStr.userSex);
-//		            		}
-//		            		//会员等级
-//		            		if(usersStr.userGrade.indexOf(selectStr) > -1){
-//			            		usersStr["userGrade"] = changeStr(usersStr.userGrade);
-//		            		}
-//		            		if(usersStr.userName.indexOf(selectStr)>-1 || usersStr.userEmail.indexOf(selectStr)>-1 || usersStr.userSex.indexOf(selectStr)>-1 || usersStr.userGrade.indexOf(selectStr)>-1){
-//		            			userArray.push(usersStr);
-//		            		}
-//		            	}
-//		            	usersData = userArray;
-//		            	usersList(usersData);
-//					}
-//				})
-//            	
-//                layer.close(index);
-//            },2000);
-//		}else{
-//			layer.msg("请输入需要查询的内容");
-//		}
+		reloadTable();
 	})
 
 	//添加会员
@@ -172,88 +129,44 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 //			layui.layer.full(index);
 //		})
 //		layui.layer.full(index);
-	})
-
-    //全选
-	form.on('checkbox(allChoose)', function(data){
-		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
-		child.each(function(index, item){
-			item.checked = data.elem.checked;
-		});
-		form.render('checkbox');
 	});
+	
 
-	//通过判断文章是否全部选中来确定全选按钮是否选中
-	form.on("checkbox(choose)",function(data){
-		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
-		var childChecked = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"]):checked')
-		if(childChecked.length == child.length){
-			$(data.elem).parents('table').find('thead input#allChoose').get(0).checked = true;
-		}else{
-			$(data.elem).parents('table').find('thead input#allChoose').get(0).checked = false;
-		}
-		form.render('checkbox');
-	})
 
-	//操作
-	$("body").on("click",".users_edit",function(){  //编辑
-		layer.alert('您点击了会员编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
-	})
-
-	$("body").on("click",".users_del",function(){  //删除
+//	//操作
+//	$("body").on("click",".users_edit",function(){  //编辑
+//		layer.alert('您点击了会员编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
+//	})
+	$("body").on("click",".batchDel",function(){  //删除
 		var _this = $(this);
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-			//_this.parents("tr").remove();
-			for(var i=0;i<usersData.length;i++){
-				if(usersData[i].usersId == _this.attr("data-id")){
-					usersData.splice(i,1);
-					usersList(usersData);
-				}
-			}
+		      var checkStatus = table.checkStatus('t_userlist')  
+		      ,data = checkStatus.data;  
+		      console.log(data);
+		      var ids="";
+		      for(var i=0;i<data.length;i++){    //循环筛选出id  
+		    	  if(i>0)
+		    		  ids+=",";
+		    	  ids+=data[i].id;
+		      }  
+		      $.ajax({
+	                type: "POST",//方法类型
+	                dataType: "json",//预期服务器返回的数据类型
+	                url: basePath+"/userInfo/doDel?ids="+ids ,//url
+	                success: function (result) {
+	                    if (result.flag) {
+	            			layer.msg("用户删除成功！",{time:3000});
+	            	 		//刷新父页面
+	            			reloadTable();
+	                    }else{
+	            			layer.msg("用户删除失败！",{time:3000});
+	                    }
+	                    
+	                }
+	            });
+		       
 			layer.close(index);
 		});
 	})
 
-	function usersList(){
-		//渲染数据
-		function renderDate(data,curr){
-			var dataHtml = '';
-			currData = usersData.concat().splice(curr*nums-nums, nums);
-			if(currData.length != 0){
-				for(var i=0;i<currData.length;i++){
-					dataHtml += '<tr>'
-			    	+  '<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+  '<td>'+currData[i].userName+'</td>'
-			    	+  '<td>'+currData[i].userEmail+'</td>'
-			    	+  '<td>'+currData[i].userSex+'</td>'
-			    	+  '<td>'+currData[i].userGrade+'</td>'
-			    	+  '<td>'+currData[i].userStatus+'</td>'
-			    	+  '<td>'+currData[i].userEndTime+'</td>'
-			    	+  '<td>'
-					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
-					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+data[i].usersId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
-			        +  '</td>'
-			    	+'</tr>';
-				}
-			}else{
-				dataHtml = '<tr><td colspan="8">暂无数据</td></tr>';
-			}
-		    return dataHtml;
-		}
-
-		//分页
-//		var nums = 13; //每页出现的数据量
-//		laypage.render({
-//			elem : "page",
-//			count : usersData.length,
-//			jump : function(obj){
-//				$(".users_content").html(renderDate(usersData,obj.curr));
-//				$('.users_list thead input[type="checkbox"]').prop("checked",false);
-//		    	form.render();
-//			}
-//		})
-		
-		
-	}
-        
 })

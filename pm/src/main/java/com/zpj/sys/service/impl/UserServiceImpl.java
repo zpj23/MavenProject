@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 //		if(json.size()>0){
 //		  for(int i=0;i<json.size();i++){
 //		    JSONObject job = json.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-//		    px.put("FL_TableID+Fl_Hypocorism", "ASC");
+		    px.put("createtime", "desc");
 //		  }
 //		}
 		
@@ -53,8 +53,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(String deleteID) {
-		// TODO Auto-generated method stub
-		
+		String[] ids=deleteID.split(",");
+		StringBuffer sb=new StringBuffer(500);
+		for (int m=0;m<ids.length;m++) {
+			if(m>0){
+				sb.append(",");
+			}
+			sb.append("'"+ids[m]+"'");
+		}
+		userDao.executeSql(" delete from sys_userinfo where id in ("+sb+")");
 	}
 
 	@Override

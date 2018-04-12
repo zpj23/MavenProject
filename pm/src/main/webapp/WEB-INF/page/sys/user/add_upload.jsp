@@ -31,7 +31,14 @@
 		<div class="layui-form-item" style="padding-top:10px;">
 			<label class="layui-form-label">用户名</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " name="loginName" value="${loginName}" lay-verify="required" placeholder="请输入用户名,例如：zxj" class="layui-input">
+				<input type="text" class="layui-input layui-input-inline" name="loginName" value="${loginName}" lay-verify="required" placeholder="请输入用户名,例如：zxj" class="layui-input">
+				<div class="layui-upload" style="padding-left: 100px;">
+				  <div class="layui-upload-list">
+				    <img class="layui-upload-img" id="demo1">
+				    <p id="demoText" ></p>
+<!-- 					<button type="button" class="layui-btn" id="test1">上传照片</button> -->
+				  </div>
+				</div>
 			</div>
 		</div>
 		<div class="layui-form-item" >
@@ -89,6 +96,15 @@
 			<div class="layui-input-block">
 				<textarea placeholder="描述信息" class="layui-textarea linksDesc"></textarea>
 			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-upload" style="padding-left: 100px;">
+			  <div class="layui-upload-list">
+			    <img class="layui-upload-img" id="demo1">
+			    <p id="demoText"></p>
+			  </div>
+			  <button type="button" class="layui-btn" id="test1">上传照片</button>
+			</div>  
 		</div>
 		 
 		<div class="layui-form-item">
