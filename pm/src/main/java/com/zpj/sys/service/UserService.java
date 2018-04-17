@@ -11,4 +11,16 @@ public interface UserService {
 	void deleteUser(String deleteID);
 	
 	public User findById(String id);
+	
+	/**
+	 * 登陆验证
+	 * @Title checkLogin
+	 * @param username
+	 * @param password
+	 * @return
+	 * @author zpj
+	 * @time 2018年4月17日 下午2:32:12
+	 */
+	public User checkLogin(String username,String password);
+	
 }

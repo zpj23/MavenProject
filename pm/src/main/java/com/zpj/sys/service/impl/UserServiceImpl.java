@@ -1,6 +1,7 @@
 package com.zpj.sys.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -70,6 +71,17 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}	
 	
+	
+	public User checkLogin(String username,String password){
+		
+		StringBuffer sql=new StringBuffer("select * from sys_userinfo where loginName='"+username+"' and password='"+password+"'");
+		List<User> userlist=userDao.findBySqlT(sql.toString(), User.class);
+		if(null!=userlist&&userlist.size()>0){
+			return userlist.get(0);
+		}
+		return null;
+		
+	}
 	
 	
 }

@@ -1,3 +1,4 @@
+<%@page import="com.zpj.sys.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -5,12 +6,13 @@ String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
 		+ request.getServerName() + ":" + request.getServerPort()
 		+ path + "/";
+User USERINFO=(User)request.getSession().getAttribute("jluser");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
-	<title>layui后台管理模板</title>
+	<title>首页</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -24,6 +26,7 @@ String basePath = request.getScheme() + "://"
 	<link rel="stylesheet" href="${ctx}/plugin/layui/css/main.css" media="all" />
 <script type="text/javascript">
 var basePath="<%=basePath%>";
+var USERINFO="<%=USERINFO%>";
 </script>	
 </head>
 <body class="main_body">
@@ -31,7 +34,7 @@ var basePath="<%=basePath%>";
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
-				<a href="#" class="logo">layui后台管理</a>
+				<a href="#" class="logo">商品后台管理</a>
 				<!-- 搜索 -->
 				<div class="layui-form component">
 			        <select name="modules" lay-verify="required" lay-search="">
@@ -97,7 +100,7 @@ var basePath="<%=basePath%>";
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
 							<img src="${ctx}/plugin/layui/images/face.jpg" class="layui-circle" width="35" height="35">
-							<cite>卡尔哈哈</cite>
+							<cite>${USERINFO.name}</cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
@@ -112,7 +115,7 @@ var basePath="<%=basePath%>";
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="${ctx}/plugin/layui/images/face.jpg"></a>
-				<p>你好！<span class="userName">卡尔哈哈</span>, 欢迎登录</p>
+				<p>你好！<span class="userName">${USERINFO.name}</span>, 欢迎</p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
 		</div>
@@ -138,12 +141,12 @@ var basePath="<%=basePath%>";
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
 		<div class="admin-header-lock-img"><img src="${ctx}/plugin/layui/images/face.jpg"/></div>
-		<div class="admin-header-lock-name" id="lockUserName">卡尔哈哈</div>
+		<div class="admin-header-lock-name" id="lockUserName">${USERINFO.name}</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
 			<button class="layui-btn" id="unlock">解锁</button>
 		</div>
-		<p>请输入“123456”，否则不会解锁成功哦！！！</p>
+		<p>请输入密码，否则不会解锁成功哦！！！</p>
 	</div>
 	<!-- 移动导航 -->
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>

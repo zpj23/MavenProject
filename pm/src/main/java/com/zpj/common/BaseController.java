@@ -34,6 +34,11 @@ public class BaseController {
 	public Integer page = 1; // 当前页数
 	public Integer limit = 10; // 行数
 	
+	
+	  
+	//参数封装  
+	public Map<String,Object> param=new HashMap<String,Object>();
+	
 
 	public Integer getPage() {
 		return page;
@@ -99,29 +104,29 @@ public class BaseController {
 	
 
 
-//	public HashMap<String, String> getRequestMap() {  
-//        HashMap<String, String> conditions = new HashMap<String, String>();  
-//        Map map = request.getParameterMap();  
-//        for (Object o : map.keySet()) {  
-//            String key = (String) o;  
-//            if(key.equalsIgnoreCase("page")){
-//            	String val=((String[]) map.get(key))[0];
-//            	if(val!=null&&!"".equals(val)){
-//        			page=Integer.parseInt(val);
-//        		}
-//            	conditions.put(key, page+"");
-//            }if(key.equalsIgnoreCase("limit")){
-//            	String val=((String[]) map.get(key))[0];
-//            	if(val!=null&&!"".equals(val)){
-//            		limit=Integer.parseInt(val);
-//        		}
-//            	conditions.put(key, limit+"");
-//            }else{
-//            	conditions.put(key, ((String[]) map.get(key))[0]);  
-//            }
-//        }  
-//        return conditions;  
-//    }  
+	public HashMap<String, String> getRequestMap() {  
+        HashMap<String, String> conditions = new HashMap<String, String>();  
+        Map map = request.getParameterMap();  
+        for (Object o : map.keySet()) {  
+            String key = (String) o;  
+            if(key.equalsIgnoreCase("page")){
+            	String val=((String[]) map.get(key))[0];
+            	if(val!=null&&!"".equals(val)){
+        			page=Integer.parseInt(val);
+        		}
+            	conditions.put(key, page+"");
+            }if(key.equalsIgnoreCase("limit")){
+            	String val=((String[]) map.get(key))[0];
+            	if(val!=null&&!"".equals(val)){
+            		limit=Integer.parseInt(val);
+        		}
+            	conditions.put(key, limit+"");
+            }else{
+            	conditions.put(key, ((String[]) map.get(key))[0]);  
+            }
+        }  
+        return conditions;  
+    }  
 	
 	/**
 	 * 类转json
@@ -146,19 +151,6 @@ public class BaseController {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * 返回成功
-	 */
-	public void writetrue(){
-			write("{success:true}");
-	}
-	/**
-	 * 返回失败
-	 */
-	public void writefalse(){
-			write("{success:false}");
-	}
-	
 	/**
 	 * 传入json格式字符
 	 * @param str
@@ -195,6 +187,13 @@ public class BaseController {
 		}
 	}
 	
+	public boolean isNotNullObject(String str){
+		if(null!=str&&!"".equalsIgnoreCase(str)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
     
 }
