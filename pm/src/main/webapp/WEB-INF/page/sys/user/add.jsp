@@ -66,11 +66,10 @@
 			    <label class="layui-form-label">等级</label>
 				<div class="layui-input-block">
 					<select name="priority" class="priority" lay-filter="priority">
-						<option value="0">普通用户</option>
-						<option value="1">注册用户</option>
-						<option value="2">中级用户</option>
+						<option value="0">普通用户</option>
+						<option value="1">注册用户</option>
+						<option value="2">中级用户</option>
 				        <option value="3">高级用户</option>
-				        <option value="4">超级用户</option>
 				    </select>
 				</div>
 		    </div>
