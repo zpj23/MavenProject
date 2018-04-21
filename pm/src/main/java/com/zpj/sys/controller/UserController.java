@@ -26,7 +26,7 @@ import com.zpj.sys.service.UserService;
 public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
-	
+
 	@RequestMapping("/toList")
 	public String toUserList(){
 		return "sys/user/list";
@@ -55,13 +55,13 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping("/toAdd")
 	public String addUser(String id){
-		User user;
+		User u=new User();
 		if(null!=id&&!"".equalsIgnoreCase(id)){
-			user=userService.findById(id);
+			u=userService.findById(id);
 		}else{
-			user=new User();
+			u=new User();
 		}
-		request.setAttribute("user",user);
+		setRequstAttribute("userInfo", u);
 		return "sys/user/add";
 	}
 	/**

@@ -40,8 +40,29 @@ public class BaseDao<T extends Serializable> {
 	 * 创建一个Class的对象来获取泛型的class
 	 */
 	private Class<?> clz;
-
-
+	
+	
+//	public static Class getSuperClassGenricType(Class clazz) {  
+//        return getSuperClassGenricType(clazz, 0);  
+//    }  
+//	public static Class getSuperClassGenricType(Class clazz, int index) throws IndexOutOfBoundsException {  
+//		  
+//        Type genType = clazz.getGenericSuperclass();  
+//  
+//        if (!(genType instanceof ParameterizedType)) {  
+//            return Object.class;  
+//        }  
+//  
+//        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();  
+//  
+//        if (index >= params.length || index < 0) {  
+//            return Object.class;  
+//        }  
+//        if (!(params[index] instanceof Class)) {  
+//            return Object.class;  
+//        }  
+//        return (Class) params[index];  
+//    }  
 	public Class<?> getClz() {
 		if (clz == null) {
 			// 获取泛型的Class对象
@@ -87,6 +108,10 @@ public class BaseDao<T extends Serializable> {
 		getSession().merge(id, t);
 	}
 
+	public T get(Serializable id,Class<T> entityClass) {
+		return (T) getSession().get(entityClass, id);
+	}
+	
 	public T get(Serializable id) {
 		return (T) getSession().get(getClz(), id);
 	}

@@ -30,6 +30,9 @@
 			<a class="layui-btn  usersAdd_btn"><i class="layui-icon">&#xe608;</i>添加</a>
 		</div>
 		<div class="layui-inline">
+			<a class="layui-btn  usersEdit_btn"><i class="layui-icon">&#xe608;</i>编辑</a>
+		</div>
+		<div class="layui-inline">
 			<a class="layui-btn batchDel"><i class="layui-icon">&#xe640;</i>删除</a>
 		</div>
 	</blockquote>

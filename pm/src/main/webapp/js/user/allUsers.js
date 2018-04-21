@@ -134,9 +134,30 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 
 
 //	//操作
-//	$("body").on("click",".users_edit",function(){  //编辑
-//		layer.alert('您点击了会员编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
-//	})
+	$("body").on("click",".usersEdit_btn",function(){  //编辑
+		var checkStatus = table.checkStatus('t_userlist')  
+	      ,data = checkStatus.data;  
+	      var ids="";
+	      if(data.length>1){
+	    	  layer.msg("同时只能选择一项进行编辑！",{time:3000});
+	    	  return;
+	      }else if(data.length==0){
+	    	  layer.msg("请选择一项进行编辑！",{time:3000});
+	    	  return;
+	      }
+	      
+		var index = layui.layer.open({
+			title : "编辑用户",
+			type : 2,
+			area: ['700px','600px'],
+			content : basePath+"/userInfo/toAdd?id="+data[0].id,
+			success : function(layero, index){
+				layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
+					tips: 3
+				});
+			}
+		})
+	})
 	$("body").on("click",".batchDel",function(){  //删除
 		var _this = $(this);
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){

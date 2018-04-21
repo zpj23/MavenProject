@@ -27,30 +27,30 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form" id="form1"  method="post" style="width:80%;">
-		<input id="id" name="id" value="${id}" type="hidden" />
+		<input id="id" name="id" value="${userInfo.id}" type="hidden" />
 		<div class="layui-form-item" style="padding-top:10px;">
 			<label class="layui-form-label">用户名</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " name="loginName" value="${loginName}" lay-verify="required" placeholder="请输入用户名,例如：zxj" class="layui-input">
+				<input type="text" class="layui-input " name="loginName" value="${userInfo.loginName}" lay-verify="required" placeholder="请输入用户名,例如：zxj" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item" >
 			<label class="layui-form-label">真实姓名</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input" required value="${name}" name="name" lay-verify="required" placeholder="请输入姓名,例如：朱小军" class="layui-input">
+				<input type="text" class="layui-input" required value="${userInfo.name}" name="name" lay-verify="required" placeholder="请输入姓名,例如：朱小军" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
 		    <label class="layui-form-label">密码</label>
 		    <div class="layui-input-inline">
-		      <input type="password" name="password" value="${password}" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+		      <input type="password" name="password" value="${userInfo.password}" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 		    </div>
 		    <div class="layui-form-mid layui-word-aux">密码最好6位以上</div>
 		  </div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">电子邮箱</label>
 			<div class="layui-input-block">
-				<input type="text" name="email" value="${email}" class="layui-input" lay-verify="email" placeholder="请输入电子邮箱 ,例如：abc@163.com">
+				<input type="text" name="email" value="${userInfo.email}" class="layui-input" lay-verify="email" placeholder="请输入电子邮箱 ,例如：abc@163.com">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -64,8 +64,8 @@
 		    </div>
 		    <div class="layui-inline">
 			    <label class="layui-form-label">等级</label>
-				<div class="layui-input-block">
-					<select name="priority" class="priority" lay-filter="priority">
+				<div class="layui-input-block" >
+					<select name="priority" id="priority"  class="priority" lay-filter="priority" >
 						<option value="0">普通用户</option>
 						<option value="1">注册用户</option>
 						<option value="2">中级用户</option>
@@ -75,8 +75,8 @@
 		    </div>
 		    <div class="layui-inline">
 			    <label class="layui-form-label">状态</label>
-				<div class="layui-input-block">
-					<select name="state" class="state" lay-filter="state">
+				<div class="layui-input-block" >
+					<select name="state" id="state" class="state" lay-filter="state">
 						<option value="0">正常</option>
 						<option value="1">禁用</option>
 				    </select>
@@ -99,6 +99,11 @@
 		
 		
 	</form>
+	<script type="text/javascript">
+		var sex="${userInfo.sex}";
+		var priority="${userInfo.priority}";
+		var state="${userInfo.state}";
+	</script>
 	<script type="text/javascript" src="${ctx}/js/user/addUser.js"></script>
 </body>
 </html>
