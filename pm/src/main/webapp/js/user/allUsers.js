@@ -1,9 +1,14 @@
-
-layui.use(['form','layer','jquery','laypage','table'],function(){
+layui.config({
+    base: basePath+"js/util/"      //自定义layui组件的目录
+}).extend({ //设定组件别名
+    common:   'common',
+});
+layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	var form = layui.form,
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
+	var common=layui.common;
 	var searchName="";
 	//当前页
 	var page=1;
@@ -57,13 +62,20 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 			    		 var str="";
 			    		 if(d.state=="0"){
 			    			 str='正常';
-			    		 }else if(d.priority=="1"){
+			    		 }else if(d.state=="1"){
 			    			 str="禁用";
 			    		 }else{
 			    			 str="无";
 			    		 }
 			    		 return str;
-			    	  }} 
+			    	  }
+		      },{
+		    	  field:'',title:'操作',templet: '#titleTpl'
+//		    	  templet:function(d){
+//		    		  alert(d.id);
+//		    		  return '<a class="layui-btn layui-btn-xs editOperation" name="'+d.id+'"><i class="iconfont icon-edit"></i> 编辑</a>';
+//		    	  }
+		      } 
 		     
 		    ]]
 		    , done: function(res, curr, count){
@@ -116,12 +128,10 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 		var index = layui.layer.open({
 			title : "添加用户",
 			type : 2,
+			anim:1,
 			area: ['700px','600px'],
 			content : basePath+"/userInfo/toAdd?id=",
 			success : function(layero, index){
-				layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
-					tips: 3
-				});
 			}
 		})
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -131,8 +141,40 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 //		layui.layer.full(index);
 	});
 	
-
-
+	table.on('tool(t_userlist)', function(obj){
+		console.log(obj);
+		var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+		  if(layEvent === 'detail'){ //查看
+		    //do somehing
+		  } else if(layEvent === 'del'){ //删除
+			  layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
+				  common.ajaxMethod(basePath+"/userInfo/doDel?ids="+obj.data.id,{},"POST",
+					function (result) {
+	                    if (result.flag) {
+	            			layer.msg("用户删除成功！",{time:3000});
+	            	 		//刷新父页面
+	            			reloadTable();
+	                    }else{
+	            			layer.msg("用户删除失败！",{time:3000});
+	                    }
+	                    
+	                });
+				  layer.close(index);
+			});
+		  } else if(layEvent === 'edit'){ //编辑
+			  var index=common.layerShow('编辑','700px','600px',basePath+"/userInfo/toAdd?id="+obj.data.id);
+//			   var index = layui.layer.open({
+//					title : "编辑用户",
+//					type : 2,
+//					anim:1,
+//					area: ['700px','600px'],
+//					content : basePath+"/userInfo/toAdd?id="+obj.data.id,
+//					success : function(layero, index){
+//					}
+//				})
+		  }
+	});
+	
 //	//操作
 	$("body").on("click",".usersEdit_btn",function(){  //编辑
 		var checkStatus = table.checkStatus('t_userlist')  
@@ -149,17 +191,14 @@ layui.use(['form','layer','jquery','laypage','table'],function(){
 		var index = layui.layer.open({
 			title : "编辑用户",
 			type : 2,
+			anim:1,
 			area: ['700px','600px'],
 			content : basePath+"/userInfo/toAdd?id="+data[0].id,
 			success : function(layero, index){
-				layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
-					tips: 3
-				});
 			}
 		})
 	})
 	$("body").on("click",".batchDel",function(){  //删除
-		var _this = $(this);
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
 		      var checkStatus = table.checkStatus('t_userlist')  
 		      ,data = checkStatus.data;  

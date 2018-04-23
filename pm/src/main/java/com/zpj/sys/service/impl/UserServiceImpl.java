@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void saveInfo(User info) {
-		if(null!=info.getId()&&!"".equalsIgnoreCase("")){
+		if(null!=info.getId()&&!"".equalsIgnoreCase(info.getId())){
 			User user=this.findById(info.getId());
 			if(null!=user){
 				userDao.merge(info, info.getId());

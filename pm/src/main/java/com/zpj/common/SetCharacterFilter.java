@@ -23,8 +23,8 @@ public class SetCharacterFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
-		String str_url=req.getRequestURI();
-		System.out.println(str_url);
+//		String str_url=req.getRequestURI();
+//		System.out.println(str_url);
 //		HttpServletResponse res = (HttpServletResponse)response;
 		req.setCharacterEncoding(endcoding);		
 		chain.doFilter(request, response);

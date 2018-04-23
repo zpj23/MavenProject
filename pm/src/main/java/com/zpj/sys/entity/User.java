@@ -10,7 +10,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -20,16 +22,28 @@ import io.swagger.annotations.ApiModel;
 @Table(name = "sys_userinfo")
 @ApiModel(value = "用户表", description = "用户信息表")
 public class User implements java.io.Serializable {
+	
+	@ApiModelProperty(value = "主键",name="id", required = true)
 	private String id;//id
+	@ApiModelProperty(value = "姓名",name="name", required =  false)
 	private String name;//名称
+	@ApiModelProperty(value = "登陆名称",name="loginName", required =  false)
 	private String loginName;
+	@ApiModelProperty(value = "密码",name="password", required =  false)
 	private String password;//密码
+	@ApiModelProperty(value = "邮箱",name="email", required =  false)
 	private String email;
-	private String sex;
+	@ApiModelProperty(value = "性别，0男，1女，2保密",name="sex", required =  false)
+	private String sex;//0男，女1,保密2
+	@ApiModelProperty(value = "会员等级，0普通，1注册，2中级，3高级",name="priority", required =  false)
 	private String priority;//优先级
+	@ApiModelProperty(value = "状态，0正常，1禁用",name="state", required =  false)
 	private String state;
+	@ApiModelProperty(value = "时间",name="createTime", required =  false)
 	private Date createTime;
 	private Date lastLoginTime;
+	@ApiModelProperty(value = "描述",name="descirption", required =  false)
+	private String description;//描述
 	
 	
 	@Id
@@ -96,6 +110,12 @@ public class User implements java.io.Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	

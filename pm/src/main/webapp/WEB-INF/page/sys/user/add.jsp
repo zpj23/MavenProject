@@ -86,7 +86,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">描述</label>
 			<div class="layui-input-block">
-				<textarea placeholder="描述信息" class="layui-textarea linksDesc"></textarea>
+				<textarea placeholder="描述信息" name="description" class="layui-textarea linksDesc">${userInfo.description}</textarea>
 			</div>
 		</div>
 		 

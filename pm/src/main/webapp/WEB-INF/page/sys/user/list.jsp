@@ -30,7 +30,7 @@
 			<a class="layui-btn  usersAdd_btn"><i class="layui-icon">&#xe608;</i>添加</a>
 		</div>
 		<div class="layui-inline">
-			<a class="layui-btn  usersEdit_btn"><i class="layui-icon">&#xe608;</i>编辑</a>
+			<a class="layui-btn  usersEdit_btn"><i class="layui-icon">&#xe642;</i>编辑</a>
 		</div>
 		<div class="layui-inline">
 			<a class="layui-btn batchDel"><i class="layui-icon">&#xe640;</i>删除</a>
@@ -44,5 +44,9 @@
 		<div id="pageDiv" ></div>
 	</div>
 	<script type="text/javascript" src="${ctx}/js/user/allUsers.js"></script>
+	<script type="text/html" id="titleTpl">
+  		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+ 		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
 </body>
 </html>
