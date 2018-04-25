@@ -31,7 +31,7 @@ layui.define(["element","jquery"],function(exports){
 				$("#"+id).html(val);
 			},
 			ajaxMethod:function(url,data,method,success){
-				layer.msg("调用封装的ajax啦！",{time:1000});
+//				layer.msg("调用封装的ajax啦！",{time:1000});
 				//ajax请求数据
 		        $.ajax({
 		            type: method,
@@ -50,12 +50,13 @@ layui.define(["element","jquery"],function(exports){
 		        });
 			},
 			layerShow:function(title,width,height,url,type,animate){
-				//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）。 若你采用layer.open({type: 1})方式调用，则type为必填项（信息框除外）
-				var currentLayer = layui.layer.open({
+				//type:   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）。 若你采用layer.open({type: 1})方式调用，则type为必填项（信息框除外）
+				//animate:
+				var currentLayer = top.layer.open({
 					title : title,
 					type : type==undefined?2:type,
 					anim:animate==undefined?1:animate,
-					area: [width,hieght],
+					area: [width,height],
 					content : url,
 					success : function(layero, index){
 					}

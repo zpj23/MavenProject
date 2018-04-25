@@ -125,15 +125,8 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 
 	//添加会员
 	$(".usersAdd_btn").click(function(){
-		var index = layui.layer.open({
-			title : "添加用户",
-			type : 2,
-			anim:1,
-			area: ['700px','600px'],
-			content : basePath+"/userInfo/toAdd?id=",
-			success : function(layero, index){
-			}
-		})
+
+		common.layerShow('添加','700px','600px',basePath+"/userInfo/toAdd?id=");
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 //		$(window).resize(function(){
 //			layui.layer.full(index);
@@ -142,7 +135,6 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	});
 	
 	table.on('tool(t_userlist)', function(obj){
-		console.log(obj);
 		var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		  if(layEvent === 'detail'){ //查看
 		    //do somehing
@@ -163,15 +155,6 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 			});
 		  } else if(layEvent === 'edit'){ //编辑
 			  var index=common.layerShow('编辑','700px','600px',basePath+"/userInfo/toAdd?id="+obj.data.id);
-//			   var index = layui.layer.open({
-//					title : "编辑用户",
-//					type : 2,
-//					anim:1,
-//					area: ['700px','600px'],
-//					content : basePath+"/userInfo/toAdd?id="+obj.data.id,
-//					success : function(layero, index){
-//					}
-//				})
 		  }
 	});
 	
