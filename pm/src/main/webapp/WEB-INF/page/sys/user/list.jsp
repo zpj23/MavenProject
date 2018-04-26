@@ -22,7 +22,7 @@
 	
 		<div class="layui-inline">
 		    <div class="layui-input-inline">
-		    	<input type="text" value="" id="searchName"  placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="text" value="" id="searchName"  placeholder="请输入姓名" class="layui-input search_input">
 		    </div>
 		    <a class="layui-btn search_btn"><i class="layui-icon">&#xe615;</i>查询</a>
 		</div>

@@ -147,9 +147,9 @@ var navs = [{
 	"href" : "page/main.html",
 	"spread" : false
 },{
-	"title" : "文章列表",
+	"title" : "字典管理",
 	"icon" : "icon-text",
-	"href" : "page/news/newsList.html",
+	"href" : basePath+"dictionary/toList",
 	"spread" : false
 },{
 	"title" : "友情链接",
