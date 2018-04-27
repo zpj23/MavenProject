@@ -123,9 +123,8 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		reloadTable();
 	})
 
-	//添加会员
+	//添加
 	$(".usersAdd_btn").click(function(){
-
 		common.layerShow('添加','700px','600px',basePath+"/userInfo/toAdd?id=");
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 //		$(window).resize(function(){
@@ -170,16 +169,17 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	    	  layer.msg("请选择一项进行编辑！",{time:3000});
 	    	  return;
 	      }
-	      
-		var index = layui.layer.open({
-			title : "编辑用户",
-			type : 2,
-			anim:1,
-			area: ['700px','600px'],
-			content : basePath+"/userInfo/toAdd?id="+data[0].id,
-			success : function(layero, index){
-			}
-		})
+	      var index=common.layerShow('编辑','700px','600px',basePath+"/userInfo/toAdd?id="+data[0].id);
+		    
+//		var index = layui.layer.open({
+//			title : "编辑用户",
+//			type : 2,
+//			anim:1,
+//			area: ['700px','600px'],
+//			content : basePath+"/userInfo/toAdd?id="+data[0].id,
+//			success : function(layero, index){
+//			}
+//		})
 	})
 	$("body").on("click",".batchDel",function(){  //删除
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){

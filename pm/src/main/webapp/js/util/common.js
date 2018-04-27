@@ -52,9 +52,10 @@ layui.define(["element","jquery"],function(exports){
 			layerShow:function(title,width,height,url,type,animate){
 				//type:   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）。 若你采用layer.open({type: 1})方式调用，则type为必填项（信息框除外）
 				//animate:
-				var currentLayer = top.layer.open({
+				var currentLayer = layui.layer.open({
 					title : title,
-					type : type==undefined?2:type,
+					//type : type==undefined?2:type,
+					type : 2,//iframe层
 					anim:animate==undefined?1:animate,
 					area: [width,height],
 					content : url,
@@ -64,7 +65,28 @@ layui.define(["element","jquery"],function(exports){
 				return currentLayer;
 			},
 			layerClose:function(currentLayer){
-				top.layer.close(currentLayer);
+				layer.close(currentLayer);
+			},
+			layerCloseAll:function(){
+				layer.closeAll();//所有
+			},
+			layerCloseAllDialog:function(){
+				layer.closeAll('dialog'); //关闭信息框
+			},
+			layerCloseAllPage:function(){
+				layer.closeAll('page'); //关闭所有页面层
+			},
+			layerCloseAllIframe:function(){
+				layer.closeAll('iframe'); //关闭所有的iframe层
+			},
+			layerCloseAllLoading:function(){
+				layer.closeAll('loading'); //关闭加载层
+			},
+			layerCloseAllTip:function(){
+				layer.closeAll('tips'); //关闭所有的tips层   
+			},
+			layerMsg:function(msg){
+				top.layer.msg(msg);
 			}
 		};
 		

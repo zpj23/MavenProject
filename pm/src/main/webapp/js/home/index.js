@@ -147,6 +147,11 @@ var navs = [{
 	"href" : "page/main.html",
 	"spread" : false
 },{
+	"title" : "供应商管理",
+	"icon" : "icon-text",
+	"href" : basePath+"supplierInfo/toList",
+	"spread" : false
+},{
 	"title" : "字典管理",
 	"icon" : "icon-text",
 	"href" : basePath+"dictionary/toList",
