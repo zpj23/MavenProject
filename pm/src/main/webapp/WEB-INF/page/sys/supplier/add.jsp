@@ -29,7 +29,7 @@
 	<form class="layui-form" id="form1"  method="post" style="width:80%;">
 		<input id="id" name="id" value="${info.id}" type="hidden" />
 		<div class="layui-form-item" style="padding-top:10px;">
-			<label class="layui-form-label">供应商/维修商</label>
+			<label class="layui-form-label">供应商</label>
 			<div class="layui-input-block">
 				<input type="text" class="layui-input " name="name" value="${info.name}" lay-verify="required" placeholder="请输入供应商名称或维修商" class="layui-input">
 			</div>
@@ -49,13 +49,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">电话号码</label>
 			<div class="layui-input-block">
-				<input type="text" name="phone" value="${info.phone}" class="layui-input"  placeholder="请输入电话号码">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">电话号码</label>
-			<div class="layui-input-block">
-				<input type="text" name="phone" value="${info.phone}" class="layui-input"  placeholder="请输入电话号码">
+				<input type="text" name="phone" value="${info.phone}" class="layui-input" lay-verify="phone"   placeholder="请输入电话号码">
 			</div>
 		</div>
 		<div class="layui-form-item">

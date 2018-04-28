@@ -38,7 +38,7 @@
 	</blockquote>
 	
 	<div style="padding: 10px;">
-		<table class="layui-hide" id="t_goodslist" lay-filter="t_goodslist" ></table>
+		<table class="layui-hide" id="t_list" lay-filter="t_list" ></table>
 	</div>
 	<div style="position: fix;bottom: 10px;">
 		<div id="pageDiv" ></div>

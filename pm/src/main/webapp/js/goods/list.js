@@ -18,63 +18,24 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	var totalNum=0;
 	var table = layui.table;
 	var ctable=table.render({
-		    elem: '#t_goodslist'
+		    elem: '#t_list'
 		    ,url:basePath+'goodsInfo/initList?page='+page+'&limit='+limit
 		    ,where: {param: ''}
 		    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 		    ,page: false //开启分页
 		    ,cols: [[
 		      {field:'id', type:'checkbox' }
-		      ,{field:'loginName',minWidth:'50', title: '登录名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'name', minWidth:'50',title: '真实姓名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'sex', title: '性别',
-		    	 templet: function(d){
-		    		 var str="";
-		    		 if(d.sex=="0"){
-		    			 str='男';
-		    		 }else if(d.sex=="1"){
-		    			 str="女";
-		    		 }else{
-		    			 str="保密"
-		    		 }
+		      ,{field:'name',minWidth:'50', title: '商品名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'type', minWidth:'50',title: '规格型号'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'unit', title: '单位'}
+		      ,{field:'sellingPrice', title: '价格'}
+		      ,{field:'supplierName', title: '供应商',templet: function(d){
+		    		 var str=d.supplierName;
 		    		 return str;
-		    	  }
-		      }
-		      ,{field:'email', title: '电子邮箱'}
-		      ,{field:'priority', title: '等级',
-			    	 templet: function(d){
-			    		 var str="";
-			    		 if(d.priority=="0"){
-			    			 str='注册用户';
-			    		 }else if(d.priority=="1"){
-			    			 str="中级用户";
-			    		 }else if(d.priority=="2"){
-			    			 str="中级用户"
-			    		 }else if(d.priority=="3"){
-			    			 str="高级用户"
-			    		 }else if(d.priority=="4"){
-			    			 str="超级用户"
-			    		 }
-			    		 return str;
-			    	  }}
-		      ,{field:'state', title: '状态',
-			    	 templet: function(d){
-			    		 var str="";
-			    		 if(d.state=="0"){
-			    			 str='正常';
-			    		 }else if(d.state=="1"){
-			    			 str="禁用";
-			    		 }else{
-			    			 str="无";
-			    		 }
-			    		 return str;
-			    	  }
-		      },{
+		    	  }}
+		      ,{field:'remark', title: '备注'}
+			  ,{
 		    	  field:'',title:'操作',templet: '#titleTpl'
-//		    	  templet:function(d){
-//		    		  alert(d.id);
-//		    		  return '<a class="layui-btn layui-btn-xs editOperation" name="'+d.id+'"><i class="iconfont icon-edit"></i> 编辑</a>';
-//		    	  }
 		      } 
 		     
 		    ]]
@@ -111,7 +72,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
              where:{
               	param:searchName
              },
-             url:basePath+'userInfo/initList?page='+page+'&limit='+limit
+             url:basePath+'goodsInfo/initList?page='+page+'&limit='+limit
              ,page: false //开启分页
              
          });
@@ -126,7 +87,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	//添加会员
 	$(".usersAdd_btn").click(function(){
 
-		common.layerShow('添加','700px','600px',basePath+"/userInfo/toAdd?id=");
+		common.layerShow('添加','700px','600px',basePath+"/goodsInfo/toAdd?id=");
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 //		$(window).resize(function(){
 //			layui.layer.full(index);
@@ -134,33 +95,33 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 //		layui.layer.full(index);
 	});
 	
-	table.on('tool(t_goodslist)', function(obj){
+	table.on('tool(t_list)', function(obj){
 		var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		  if(layEvent === 'detail'){ //查看
 		    //do somehing
 		  } else if(layEvent === 'del'){ //删除
-			  layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-				  common.ajaxMethod(basePath+"/userInfo/doDel?ids="+obj.data.id,{},"POST",
+			  layer.confirm('确定删除此项？',{icon:3, title:'提示信息'},function(index){
+				  common.ajaxMethod(basePath+"/goodsInfo/doDel?ids="+obj.data.id,{},"POST",
 					function (result) {
 	                    if (result.flag) {
-	            			layer.msg("用户删除成功！",{time:3000});
+	            			layer.msg("删除成功！",{time:3000});
 	            	 		//刷新父页面
 	            			reloadTable();
 	                    }else{
-	            			layer.msg("用户删除失败！",{time:3000});
+	            			layer.msg("删除失败！",{time:3000});
 	                    }
 	                    
 	                });
 				  layer.close(index);
 			});
 		  } else if(layEvent === 'edit'){ //编辑
-			  var index=common.layerShow('编辑','700px','600px',basePath+"/userInfo/toAdd?id="+obj.data.id);
+			  var index=common.layerShow('编辑','700px','600px',basePath+"/goodsInfo/toAdd?id="+obj.data.id);
 		  }
 	});
 	
 //	//操作
 	$("body").on("click",".usersEdit_btn",function(){  //编辑
-		var checkStatus = table.checkStatus('t_goodslist')  
+		var checkStatus = table.checkStatus('t_list')  
 	      ,data = checkStatus.data;  
 	      var ids="";
 	      if(data.length>1){
@@ -170,20 +131,11 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	    	  layer.msg("请选择一项进行编辑！",{time:3000});
 	    	  return;
 	      }
-	      
-		var index = layui.layer.open({
-			title : "编辑用户",
-			type : 2,
-			anim:1,
-			area: ['700px','600px'],
-			content : basePath+"/userInfo/toAdd?id="+data[0].id,
-			success : function(layero, index){
-			}
-		})
+	    var index=common.layerShow('编辑','700px','600px',basePath+"/goodsInfo/toAdd?id="+data[0].id);
 	})
 	$("body").on("click",".batchDel",function(){  //删除
-		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-		      var checkStatus = table.checkStatus('t_goodslist')  
+		layer.confirm('确定删除此项？',{icon:3, title:'提示信息'},function(index){
+		      var checkStatus = table.checkStatus('t_list')  
 		      ,data = checkStatus.data;  
 		      console.log(data);
 		      var ids="";
@@ -192,22 +144,17 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		    		  ids+=",";
 		    	  ids+=data[i].id;
 		      }  
-		      $.ajax({
-	                type: "POST",//方法类型
-	                dataType: "json",//预期服务器返回的数据类型
-	                url: basePath+"/userInfo/doDel?ids="+ids ,//url
-	                success: function (result) {
-	                    if (result.flag) {
-	            			layer.msg("用户删除成功！",{time:3000});
-	            	 		//刷新父页面
-	            			reloadTable();
-	                    }else{
-	            			layer.msg("用户删除失败！",{time:3000});
-	                    }
-	                    
-	                }
-	            });
-		       
+		      common.ajaxMethod(basePath+"/goodsInfo/doDel?ids="+ids,{},"POST",
+						function (result) {
+		                    if (result.flag) {
+		            			layer.msg("删除成功！",{time:3000});
+		            	 		//刷新父页面
+		            			reloadTable();
+		                    }else{
+		            			layer.msg("删除失败！",{time:3000});
+		                    }
+		                    
+		                });
 			layer.close(index);
 		});
 	})

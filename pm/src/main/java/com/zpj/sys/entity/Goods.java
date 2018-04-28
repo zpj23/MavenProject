@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@Table(name = "sys_goods_info")
+@Table(name = "jl_material_goods_info")
 @ApiModel(value = "商品表", description = "商品信息表")
 public class Goods implements java.io.Serializable{
 	

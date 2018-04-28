@@ -1,5 +1,7 @@
 package com.zpj.sys.service;
 
+import java.util.List;
+
 import com.zpj.common.MyPage;
 import com.zpj.sys.entity.Supplier;
 
@@ -11,4 +13,7 @@ public interface SupplierService {
 	void delete(String deleteID);
 	
 	public Supplier findById(int id);
+	
+	
+	public List findSupplier();
 }

@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
  *
  */
 @Entity
-@Table(name = "sys_supplier_info")
+@Table(name = "jl_material_supplier_info")
 public class Supplier implements java.io.Serializable{
 	@ApiModelProperty(value = "主键",name="id", required = true)
 	private int id;//表的主键id

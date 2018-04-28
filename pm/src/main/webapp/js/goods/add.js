@@ -12,18 +12,37 @@ layui.use(['form','layer','jquery','common'],function(){
 		initData();  
 	}, 0);
 	function initData(){
-		common.initSelect("state",state);
-		//重新渲染样式
-		form.render(); 
+		
+		common.ajaxMethod(basePath+"/supplierInfo/initSupplierSelect",{},"POST",
+				function (result) {
+                    if (result.flag) {
+                    	var arr=result.list;
+                    	var str="<option value='' selected>请选择</option>";
+                    	for(var i=0;i<arr.length;i++){
+                    		str+="<option value="+arr[i].id+">"+arr[i].name+"</option>";
+                    	}
+                    	$("#supplierId").append(str); 
+                    	common.initSelect("supplierId",state);
+                    }else{
+            			layer.msg("初始化下拉框失败！",{time:3000});
+                    }
+                    //重新渲染样式
+            		form.render(); 
+                });
+		
 	}
-	
+	//监听select框
+	form.on('select(supplierId)', function(data){
+		$("#supplierName").val(data.elem[data.elem.selectedIndex].text);
+	});
  	var addUserArray = [],addUser;
  	form.on("submit(addInfo)",function(data){
  		console.log(data);
+ 		
  		$.ajax({
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
-                url: basePath+"supplierInfo/doAdd" ,//url
+                url: basePath+"goodsInfo/doAdd" ,//url
                 data: data.field,
                 success: function (result) {
                     if (result.flag) {

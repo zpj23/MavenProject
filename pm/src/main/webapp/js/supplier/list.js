@@ -133,7 +133,6 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		layer.confirm('确定删除此项？',{icon:3, title:'提示信息'},function(index){
 		      var checkStatus = table.checkStatus('t_list')  
 		      ,data = checkStatus.data;  
-		      console.log(data);
 		      var ids="";
 		      for(var i=0;i<data.length;i++){    //循环筛选出id  
 		    	  if(i>0)

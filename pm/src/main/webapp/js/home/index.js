@@ -152,6 +152,11 @@ var navs = [{
 	"href" : basePath+"supplierInfo/toList",
 	"spread" : false
 },{
+	"title" : "商品信息管理",
+	"icon" : "icon-text",
+	"href" : basePath+"goodsInfo/toList",
+	"spread" : false
+},{
 	"title" : "字典管理",
 	"icon" : "icon-text",
 	"href" : basePath+"dictionary/toList",

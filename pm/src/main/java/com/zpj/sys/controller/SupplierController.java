@@ -2,6 +2,7 @@ package com.zpj.sys.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class SupplierController  extends BaseController{
 		}else{
 			sup=new Supplier();
 		}
-		setRequstAttribute("supplierInfo", sup);
+		setRequstAttribute("info", sup);
 		return "sys/supplier/add";
 	}
 	/**
@@ -65,7 +66,7 @@ public class SupplierController  extends BaseController{
 	 * @author zpj
 	 * @Date 2018年4月6日 上午10:15:34
 	 */
-	@RequestMapping("/doAdd")
+	@RequestMapping("doAdd")
 	@ResponseBody
 	public void doAdd(Supplier sup){
 		supplierService.saveInfo(sup);
@@ -80,6 +81,21 @@ public class SupplierController  extends BaseController{
 		supplierService.delete(ids);
 		Map map=new HashMap();
 		map.put("flag", true);
+		jsonWrite2(map);
+	}
+	/**
+	 * 初始化供应商select
+	 * @Title initSupplierSelect
+	 * @author zpj
+	 * @time 2018年4月28日 下午2:04:49
+	 */
+	@RequestMapping("/initSupplierSelect")
+	@ResponseBody
+	public void initSupplierSelect(){
+		List list=supplierService.findSupplier();
+		Map map=new HashMap();
+		map.put("flag", true);
+		map.put("list", list);
 		jsonWrite2(map);
 	}
 	
