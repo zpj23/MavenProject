@@ -18,11 +18,6 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>   
 	</context:component-scan> 
     <mvc:annotation-driven />
-    
-    <!-- 处理请求时返回json字符串的中文乱码问题 -->
-    <!-- <mvc:annotation-driven> <mvc:message-converters> <bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
-        <property name="supportedMediaTypes"> <list> <value>application/json;charset=UTF-8</value> 
-        </list> </property> </bean> </mvc:message-converters> </mvc:annotation-driven> -->
 	<!-- 使用默认的静态资源处理Servlet处理静态资源(涉及spring-mvc.xml, web.xml) -->
 	<mvc:default-servlet-handler/>
     <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->

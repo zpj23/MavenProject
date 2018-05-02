@@ -1,4 +1,4 @@
-package com.zpj.sys.service.impl;
+package com.zpj.materials.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
-import com.zpj.sys.entity.Goods;
-import com.zpj.sys.service.GoodsService;
+import com.zpj.materials.entity.Goods;
+import com.zpj.materials.service.GoodsService;
 @Service
 public class GoodsServiceImpl implements GoodsService {
 

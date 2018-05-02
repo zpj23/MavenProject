@@ -1,7 +1,7 @@
-package com.zpj.sys.service;
+package com.zpj.materials.service;
 
 import com.zpj.common.MyPage;
-import com.zpj.sys.entity.Goods;
+import com.zpj.materials.entity.Goods;
 
 public interface GoodsService {
 	

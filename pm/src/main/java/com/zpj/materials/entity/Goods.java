@@ -1,4 +1,4 @@
-package com.zpj.sys.entity;
+package com.zpj.materials.entity;
 
 import java.util.Date;
 

@@ -1,9 +1,9 @@
-package com.zpj.sys.service;
+package com.zpj.materials.service;
 
 import java.util.List;
 
 import com.zpj.common.MyPage;
-import com.zpj.sys.entity.Supplier;
+import com.zpj.materials.entity.Supplier;
 
 public interface SupplierService {
 	MyPage findPageData(String username, Integer page, Integer limit);

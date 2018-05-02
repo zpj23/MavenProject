@@ -94,9 +94,9 @@ layui.config({
 	    });
 	}
 	//判断是否处于锁屏状态(如果关闭以后则未关闭浏览器之前不再显示)
-	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
-		showNotice();
-	}
+//	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
+//		showNotice();
+//	}
 	$(".showNotice").on("click",function(){
 		showNotice();
 	})
@@ -161,22 +161,24 @@ var navs = [{
 	"icon" : "icon-text",
 	"href" : basePath+"dictionary/toList",
 	"spread" : false
-},{
-	"title" : "友情链接",
-	"icon" : "icon-text",
-	"href" : "page/links/linksList.html",
-	"spread" : false
-},{
-	"title" : "404页面",
-	"icon" : "&#xe61c;",
-	"href" : "page/404.html",
-	"spread" : false
-},{
-	"title" : "系统基本参数",
-	"icon" : "&#xe631;",
-	"href" : "page/systemParameter/systemParameter.html",
-	"spread" : false
-},{
+},
+//{
+//	"title" : "友情链接",
+//	"icon" : "icon-text",
+//	"href" : "page/links/linksList.html",
+//	"spread" : false
+//},{
+//	"title" : "404页面",
+//	"icon" : "&#xe61c;",
+//	"href" : "page/404.html",
+//	"spread" : false
+//},{
+//	"title" : "系统基本参数",
+//	"icon" : "&#xe631;",
+//	"href" : "page/systemParameter/systemParameter.html",
+//	"spread" : false
+//},
+{
 	"title" : "系统管理",
 	"icon" : "&#xe61c;",
 	"href" : "",
@@ -187,11 +189,25 @@ var navs = [{
 			"icon" : "&#xe631;",
 			"href" : basePath+"userInfo/toList",
 			"spread" : false
-		},
+		}
+//		,
+//		{
+//			"title" : "二级菜单2",
+//			"icon" : "&#xe631;",
+//			"href" : "",
+//			"spread" : false
+//		}
+	]
+},{
+	"title" : "物资管理",
+	"icon" : "&#xe61c;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
 		{
-			"title" : "二级菜单2",
+			"title" : "维修登记列表",
 			"icon" : "&#xe631;",
-			"href" : "",
+			"href" : basePath+"maintainInfo/toList",
 			"spread" : false
 		}
 	]

@@ -486,6 +486,9 @@ public class BaseDao<T extends Serializable> {
 							}
 						}
 						sql.append(" ) "); 
+					}else if(key.endsWith("-self")){
+						//自定义的条件， 单条件传入
+						sql.append(" and "+value);						
 					}else{
 						sql.append(" and ").append(key).append(" = '").append(value).append("' ");
 					}

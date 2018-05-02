@@ -29,64 +29,50 @@
 	<form class="layui-form" id="form1"  method="post" style="width:80%;">
 		<input id="id" name="id" value="${info.id}" type="hidden" />
 		<div class="layui-form-item" style="padding-top:10px;">
-			<label class="layui-form-label">商品名称</label>
+			<label class="layui-form-label">登记日期</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input " name="name" value="${info.name}" lay-verify="required" placeholder="请输入商品名称" class="layui-input">
+				<input type="text" class="layui-input " id="registertime" name="registertime" value="${info.registertime}"  placeholder="日期" >
 			</div>
 		</div>
-		<div class="layui-form-item" >
-			<label class="layui-form-label">规格型号</label>
+		<div class="layui-form-item" style="padding-top:10px;">
+			<label class="layui-form-label">维修用户</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input"  value="${info.type}" name="type"  placeholder="规格型号" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-form-item">
-		    <label class="layui-form-label">单位</label>
-		    <div class="layui-input-inline">
-		      <input type="text" name="unit" value="${info.unit}"  placeholder="请输入单位"  class="layui-input">
-		    </div>
-		  </div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">进价</label>
-			<div class="layui-input-block">
-				<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
+				<input type="text" class="layui-input " name="username" value="${info.username}"  placeholder="修理人的姓名" >
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">卖价</label>
+			<label class="layui-form-label">内容</label>
 			<div class="layui-input-block">
-				<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
+				<textarea placeholder="内容" name="remark" class="layui-textarea linksDesc">${info.remark}</textarea>
 			</div>
 		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">金额</label>
+			<div class="layui-input-block">
+				<input type="text" name="jine" lay-verify="number" value="${info.jine}" class="layui-input"  placeholder="金额">
+			</div>
+		</div> 
 		<div class="layui-form-item">
 		    <div class="layui-inline">
-			    <label class="layui-form-label">供应商</label>
+			    <label class="layui-form-label">是否付款</label>
 				<div class="layui-input-block" >
-					<select name="supplierId" id="supplierId"  lay-filter="supplierId">
+					<select name="isPay" id="isPay"  lay-filter="isPay">
+						<option value="0">已付款</option>
+						<option value="1">欠账</option>
 				    </select>
 				</div>
 		    </div>
-		    <input type="hidden" name="supplierName" value="${info.supplierName}" class="layui-input" >
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">备注</label>
-			<div class="layui-input-block">
-				<textarea placeholder="备注" name="remark" class="layui-textarea linksDesc">${info.remark}</textarea>
-			</div>
-		</div>
-		 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit="" lay-filter="addInfo">提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">取消</button>
 		    </div>
 		</div>
-		
-		
 	</form>
 	<script type="text/javascript">
-		var state="${info.supplierId}";
+		var state="${info.isPay}";
 	</script>
-	<script type="text/javascript" src="${ctx}/js/goods/add.js"></script>
+	<script type="text/javascript" src="${ctx}/js/maintain/add.js"></script>
 </body>
 </html>

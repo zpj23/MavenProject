@@ -77,6 +77,7 @@
         <property name="packagesToScan" >
 		    <list>
 				<value>com.zpj.sys.entity</value>
+				<value>com.zpj.materials.entity</value>
 			</list>
 		</property>
     </bean>
