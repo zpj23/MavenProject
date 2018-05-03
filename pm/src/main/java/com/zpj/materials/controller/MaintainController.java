@@ -36,7 +36,12 @@ public class MaintainController extends BaseController{
 	@RequestMapping("initList")
 	@ResponseBody
 	public void initList(String param,String starttime,String endtime,int page,int limit){
-		MyPage pagedata =maintainService.findPageData(param,starttime,endtime,page,limit);		
+		Map params=new HashMap();
+		params.put("username", param);
+		params.put("starttime", starttime);
+		params.put("endtime", endtime);
+		params.put("ispay", "");
+		MyPage pagedata =maintainService.findPageData(params,page,limit);		
 		this.jsonWrite2(pagedata);
 	}
 	

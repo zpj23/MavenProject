@@ -57,8 +57,8 @@
 			    <label class="layui-form-label">是否付款</label>
 				<div class="layui-input-block" >
 					<select name="isPay" id="isPay"  lay-filter="isPay">
-						<option value="0">已付款</option>
-						<option value="1">欠账</option>
+						<option value="1">已付款</option>
+						<option value="0">欠账</option>
 				    </select>
 				</div>
 		    </div>

@@ -20,14 +20,17 @@ public class MaintainServiceImpl implements MaintainService {
 	private String tablename="jl_material_maintain_info";
 
 	@Override
-	public MyPage findPageData(String username,String starttime,String endtime, Integer page, Integer limit) {
+	public MyPage findPageData(Map params, Integer page, Integer limit) {
 		Map<String,Object> param=new HashMap<String,Object>();
-		param.put("username-like", username);
-		if(null!=starttime&&!"".equalsIgnoreCase(starttime)){
-			param.put("registertime-self", " registertime >='"+starttime+"' ");
+		param.put("username-like", params.get("username"));
+		if(null!=params.get("starttime")&&!"".equalsIgnoreCase((String)params.get("starttime"))){
+			param.put("registertime-self", " registertime >='"+params.get("starttime")+"' ");
 		}
-		if(null!=endtime&&!"".equalsIgnoreCase(endtime)){
-			param.put("registertime-self", " registertime <='"+endtime+"' ");
+		if(null!=params.get("endtime")&&!"".equalsIgnoreCase((String)params.get("endtime"))){
+			param.put("registertime-self", " registertime <='"+params.get("endtime")+"' ");
+		}
+		if(null!=params.get("ispay")&&!"".equalsIgnoreCase((String)params.get("ispay"))){
+			param.put("isPay-eq", params.get("ispay"));
 		}
 		Map px=new HashMap();
 	    px.put("createtime", "desc");

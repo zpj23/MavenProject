@@ -30,8 +30,8 @@ public class SwaggerConfig {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("社管项目接口文档")
-                .description("社管项目接口测试")
+                .title("")
+                .description("")
                 .version("1.0.0")
                 .termsOfServiceUrl("")
                 .license("")

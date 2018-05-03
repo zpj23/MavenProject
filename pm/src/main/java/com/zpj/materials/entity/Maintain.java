@@ -36,7 +36,7 @@ public class Maintain implements java.io.Serializable{
 	private String remark;//备注
 	@ApiModelProperty(value = "金额",name="jine", required = false)
 	private Double jine;
-	@ApiModelProperty(value = "是否付款，0已付款，1未付款",name="isPay", required = false)
+	@ApiModelProperty(value = "是否付款，1已付款，0未付款",name="isPay", required = false)
 	private String isPay;
 	@ApiModelProperty(value = "修理的人的名称",name="username", required = false)
 	private String username;
