@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
+import com.zpj.common.aop.Log;
 import com.zpj.materials.entity.Goods;
 import com.zpj.materials.service.GoodsService;
 @Service
@@ -27,7 +28,7 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.findPageDateSqlT(tablename, param,px , page, limit, Goods.class);
 	}
 
-	@Override
+	@Log(type="保存",remark="保存商品信息")
 	public void saveInfo(Goods info) {
 		if(info.getId()!=0){
 			Goods user=this.findById(info.getId());
@@ -42,7 +43,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 	}
 
-	@Override
+	@Log(type="删除",remark="删除商品信息")
 	public void delete(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);

@@ -33,7 +33,7 @@ public class MaintainController extends BaseController{
 	 * @author zpj
 	 * @Date 2018年4月6日 上午10:12:51
 	 */
-	@RequestMapping("initList")
+	@RequestMapping("/initList")
 	@ResponseBody
 	public void initList(String param,String starttime,String endtime,int page,int limit){
 		Map params=new HashMap();
@@ -41,10 +41,10 @@ public class MaintainController extends BaseController{
 		params.put("starttime", starttime);
 		params.put("endtime", endtime);
 		params.put("ispay", "");
-		MyPage pagedata =maintainService.findPageData(params,page,limit);		
+		MyPage pagedata =maintainService.findPageData(params,page,limit);	
+		pagedata.setMsg("success");
 		this.jsonWrite2(pagedata);
-	}
-	
+	}	
 	/**
 	 * @Description (跳转供应商添加编辑页面)
 	 * @title add

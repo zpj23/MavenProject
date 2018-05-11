@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
+import com.zpj.common.aop.Log;
 import com.zpj.materials.entity.Supplier;
 import com.zpj.materials.service.SupplierService;
 @Service
@@ -28,7 +29,7 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplierDao.findPageDateSqlT(tablename, param,px , page, limit, Supplier.class);
 	}
 
-	@Override
+	@Log(type="保存",remark="保存供货商信息")
 	public void saveInfo(Supplier info) {
 		if(info.getId()!=0){
 			Supplier user=this.findById(info.getId());
@@ -43,7 +44,7 @@ public class SupplierServiceImpl implements SupplierService {
 		
 	}
 
-	@Override
+	@Log(type="删除",remark="删除供货商信息")
 	public void delete(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);

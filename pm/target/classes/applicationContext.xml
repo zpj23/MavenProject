@@ -77,6 +77,7 @@
         <property name="packagesToScan" >
 		    <list>
 				<value>com.zpj.sys.entity</value>
+				<value>com.zpj.materials.entity</value>
 			</list>
 		</property>
     </bean>
@@ -105,11 +106,17 @@
         </tx:attributes>
     </tx:advice>
     <!-- Spring aop事务管理 -->
-    <aop:config>
+    <!-- 打开aop 注解 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 强制使用cglib代理，如果不设置，将默认使用jdk的代理，但是jdk的代理是基于接口的 -->  
+    <aop:config proxy-target-class="true" >
         <!-- 配置切入点 -->
         <aop:pointcut id="transactionPointcut"
             expression="execution(* com.*.service.*.*(..))"  />
         <!-- 指定在txAdvice切入点应用txAdvice事务增强处理 -->
         <aop:advisor pointcut-ref="transactionPointcut"    advice-ref="transactionAdvice" />
+   
     </aop:config>
+    
+    
 </beans>

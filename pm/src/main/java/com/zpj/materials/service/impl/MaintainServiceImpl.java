@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
+import com.zpj.common.aop.Log;
 import com.zpj.materials.entity.Maintain;
 import com.zpj.materials.service.MaintainService;
 @Service
@@ -37,7 +38,7 @@ public class MaintainServiceImpl implements MaintainService {
 		return maintainDao.findPageDateSqlT(tablename, param,px , page, limit, Maintain.class);
 	}
 
-	@Override
+	@Log(type="保存",remark="保存修理信息")
 	public void saveInfo(Maintain info) {
 		if(null!=info.getId()&&!"".equalsIgnoreCase(info.getId())){
 			Maintain user=this.findById(info.getId());
@@ -52,7 +53,7 @@ public class MaintainServiceImpl implements MaintainService {
 		
 	}
 
-	@Override
+	@Log(type="删除",remark="删除维修信息")
 	public void delete(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);

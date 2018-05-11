@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
+import com.zpj.common.aop.Log;
 import com.zpj.sys.entity.User;
 import com.zpj.sys.service.UserService;
 
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.findPageDateSqlT("sys_userinfo", param,px , page, limit, User.class);
 	}
 
-	@Override
+	@Log(type="保存",remark="保存用户信息")
 	public void saveInfo(User info) {
 		if(null!=info.getId()&&!"".equalsIgnoreCase(info.getId())){
 			User user=this.findById(info.getId());
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	@Override
+	@Log(type="删除",remark="删除用户信息")
 	public void deleteUser(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);

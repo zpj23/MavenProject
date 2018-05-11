@@ -1,15 +1,50 @@
 layui.config({
-	base : "js/"
-}).use(['form','element','layer','jquery'],function(){
+    base: basePath+"js/util/"      //自定义layui组件的目录
+}).extend({ //设定组件别名
+    common:   'common',
+});
+
+layui.use(['form','element','layer','jquery','common'],function(){
 	var form = layui.form,
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		element = layui.element,
 		$ = layui.jquery;
-
+	var common=layui.common;
 	$(".panel a").on("click",function(){
 		window.parent.addTab($(this));
 	})
-
+	initSJZ();
+	function initSJZ(){
+		common.ajaxMethod(basePath+'maintainInfo/initList?page=1&limit=10',{},"POST",
+				function (result) {
+			if(result.msg=="success"){
+				const arr=result.data;
+				var str='';
+				for(var i=0;i<arr.length;i++){
+					str+='<li class="layui-timeline-item">';
+					str+='<i class="layui-icon layui-timeline-axis"></i>';
+					str+='<div class="layui-timeline-content layui-text">';
+					str+='<h3 class="layui-timeline-title">'+(arr[i].registertime).substring(0,10)+'</h3>';
+					str+='<p style="font-size:20px;line-height:30px;">';
+					str+=arr[i].username;
+					str+='<br/>'+arr[i].remark;
+					str+='<br/>'+arr[i].jine+'元';
+					if(arr[i].isPay=="0"){
+						str+='<br/><span style="color:red;">未付款</span>';
+					}else if(arr[i].isPay=="1"){
+						str+='<br/><span style="color:green;">已付款</span>';
+					}
+				}
+				str+='</p>';
+				str+='</div>';
+				str+='</li>';
+				$("#sjz").html(str);
+			}
+                    
+         });
+	}
+	
+	
 	//动态获取文章总数和待审核文章数量,最新文章
 	$.get("../plugin/layui/json/newsList.json",
 		function(data){
@@ -56,43 +91,5 @@ layui.config({
 	)
 
 
-	//数字格式化
-	$(".panel span").each(function(){
-		$(this).html($(this).text()>9999 ? ($(this).text()/10000).toFixed(2) + "<em>万</em>" : $(this).text());	
-	})
-
-	//系统基本参数
-	if(window.sessionStorage.getItem("systemParameter")){
-		var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
-		fillParameter(systemParameter);
-	}else{
-		$.ajax({
-			url : "../plugin/layui/json/systemParameter.json",
-			type : "get",
-			dataType : "json",
-			success : function(data){
-				fillParameter(data);
-			}
-		})
-	}
-
-	//填充数据方法
- 	function fillParameter(data){
- 		//判断字段数据是否存在
- 		function nullData(data){
- 			if(data == '' || data == "undefined"){
- 				return "未定义";
- 			}else{
- 				return data;
- 			}
- 		}
- 		$(".version").text(nullData(data.version));      //当前版本
-		$(".author").text(nullData(data.author));        //开发作者
-		$(".homePage").text(nullData(data.homePage));    //网站首页
-		$(".server").text(nullData(data.server));        //服务器环境
-		$(".dataBase").text(nullData(data.dataBase));    //数据库版本
-		$(".maxUpload").text(nullData(data.maxUpload));    //最大上传限制
-		$(".userRights").text(nullData(data.userRights));//当前用户权限
- 	}
 
 })
