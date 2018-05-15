@@ -31,11 +31,11 @@ public class LoginAppController extends BaseController {
 		if(!isNotNullObject(username)){
 			username="";
 		}
-		if(isNotNullObject(password)){
+		if(!isNotNullObject(password)){
 			password="";
 		}
 		if(null==user){
-			if(!username.equalsIgnoreCase("")&&password.equalsIgnoreCase(""))
+			if(!username.equalsIgnoreCase("")&&!password.equalsIgnoreCase(""))
 				user=userService.checkLogin(username,password);
 		}
 		Map map1=new HashMap();
