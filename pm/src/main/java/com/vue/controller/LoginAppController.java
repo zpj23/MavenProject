@@ -40,6 +40,7 @@ public class LoginAppController extends BaseController {
 		}
 		Map map1=new HashMap();
 		if(null!=user){
+			user.setIsAdmin("1");
 			getSession().setAttribute("jluser", user);
 			map1.put("msg", true);
 			map1.put("data", user);

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.persistence.Transient;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,6 +45,7 @@ public class User implements java.io.Serializable {
 	@ApiModelProperty(value = "描述",name="descirption", required =  false)
 	private String description;//描述
 	
+	private String isAdmin;//1是，0不是
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false ,length=36)
@@ -118,7 +119,14 @@ public class User implements java.io.Serializable {
 		this.description = description;
 	}
 
-	
+	@Transient
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	
 
 }

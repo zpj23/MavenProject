@@ -1,5 +1,6 @@
 package com.vue.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -42,6 +43,8 @@ public class MaintainAppController extends BaseController{
 			Maintain mt =new Maintain();
 			if(null==id||id.equalsIgnoreCase("")){
 				mt.setId(UUID.randomUUID().toString());
+			}else{
+				mt.setId(id);
 			}
 			mt.setRegistertime(DateHelper.getDateFromString(registertime, "yyyy-MM-dd"));
 			mt.setUsername(username);
@@ -61,6 +64,7 @@ public class MaintainAppController extends BaseController{
 	@RequestMapping("/findList")
 	@ResponseBody
 	public void findList(String datemin,String datemax,String username,String ispay,String cpage,String pagerow,String loginId,String isAdmin ){
+		
 		Map param=new HashMap();
 		param.put("username", username);
 		param.put("starttime", datemin);
@@ -74,6 +78,29 @@ public class MaintainAppController extends BaseController{
 		map.put("totalPage", totalPage);
 		this.jsonWrite2(map);
 	}
+	
+	@RequestMapping("/delInfoById")
+	@ResponseBody
+	public void delInfoById(String delId,String loginId,String isAdmin){
+		if(null!=delId&&!delId.equalsIgnoreCase("")){
+			maintainService.delete(delId);
+			Map map =new HashMap();
+			map.put("msg", true);
+			this.jsonWrite2(map);
+		}
+	}
+	
+//	public UserInfo getCurrentUser(HttpServletRequest request){
+//		UserInfo user = (UserInfo)request.getSession().getAttribute("jluserinfo");
+//		if(user==null){
+//			String id= request.getParameter("loginId");
+//			user=jlUserInfoService.findById(Integer.parseInt(id));
+//			String isAdmin=request.getParameter("isAdmin");
+//			user.setIsAdmin(isAdmin);
+//			request.getSession().setAttribute("jluserinfo",user);
+//		}
+//		return user;
+//	}
 	
 	
 }

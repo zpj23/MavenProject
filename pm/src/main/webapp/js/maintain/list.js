@@ -3,12 +3,22 @@ layui.config({
 }).extend({ //设定组件别名
     common:   'common',
 });
-layui.use(['form','layer','jquery','laypage','table','common'],function(){
+layui.use(['form','layer','jquery','laypage','table','common','laydate'],function(){
 	var form = layui.form,
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
 	var common=layui.common;
+	var laydate = layui.laydate;
+	
+	laydate.render({
+	    elem: '#starttime' //开始时间
+	});
+	
+	laydate.render({
+	    elem: '#endtime' //结束时间
+	});
+	
 	var searchName="";
 	//当前页
 	var page=1;

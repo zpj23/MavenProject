@@ -25,10 +25,10 @@ public class MaintainServiceImpl implements MaintainService {
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("username-like", params.get("username"));
 		if(null!=params.get("starttime")&&!"".equalsIgnoreCase((String)params.get("starttime"))){
-			param.put("registertime-self", " registertime >='"+params.get("starttime")+"' ");
+			param.put("starttime-self", " registertime >='"+params.get("starttime")+"' ");
 		}
 		if(null!=params.get("endtime")&&!"".equalsIgnoreCase((String)params.get("endtime"))){
-			param.put("registertime-self", " registertime <='"+params.get("endtime")+"' ");
+			param.put("endtime-self", " registertime <='"+params.get("endtime")+"' ");
 		}
 		if(null!=params.get("ispay")&&!"".equalsIgnoreCase((String)params.get("ispay"))){
 			param.put("isPay-eq", params.get("ispay"));
