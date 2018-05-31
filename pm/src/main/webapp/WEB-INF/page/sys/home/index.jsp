@@ -1,11 +1,9 @@
 <%@page import="com.zpj.sys.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/common/header.jsp"%>    
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-		+ request.getServerName() + ":" + request.getServerPort()
-		+ path + "/";
+
 User USERINFO=(User)request.getSession().getAttribute("jluser");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,11 +19,12 @@ User USERINFO=(User)request.getSession().getAttribute("jluser");
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
-	<link rel="stylesheet" href="${ctx}/plugin/layui/css/layui.css">
-	<link rel="stylesheet" href="${ctx}/plugin/layui/css/font_eolqem241z66flxr.css" media="all" />
-	<link rel="stylesheet" href="${ctx}/plugin/layui/css/main.css" media="all" />
+	<link rel="stylesheet" href="${basePath}/plugin/layui/css/layui.css">
+	<link rel="stylesheet" href="${basePath}/plugin/layui/css/font_eolqem241z66flxr.css" media="all" />
+	<link rel="stylesheet" href="${basePath}/plugin/layui/css/main.css" media="all" />
 <script type="text/javascript">
-var basePath="<%=basePath%>";
+// alert("${basePath}");
+// alert(basePath);
 var USERINFO="<%=USERINFO%>";
 </script>	
 </head>
@@ -99,7 +98,7 @@ var USERINFO="<%=USERINFO%>";
 					</li>
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="${ctx}/plugin/layui/images/face.jpg" class="layui-circle" width="35" height="35">
+							<img src="${basePath}/plugin/layui/images/face.jpg" class="layui-circle" width="35" height="35">
 							<cite>${USERINFO.name},你好</cite>
 						</a>
 						<dl class="layui-nav-child">
@@ -114,7 +113,7 @@ var USERINFO="<%=USERINFO%>";
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="${ctx}/plugin/layui/images/face.jpg"></a>
+				<a class="img" title="我的头像" ><img src="${basePath}/plugin/layui/images/face.jpg"></a>
 				<p>你好！<span class="userName">${USERINFO.name}</span>, 欢迎</p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
@@ -127,7 +126,7 @@ var USERINFO="<%=USERINFO%>";
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="${ctx}/home/toMain"></iframe>
+						<iframe src="${basePath}/home/toMain"></iframe>
 					</div>
 				</div>
 			</div>
@@ -140,7 +139,7 @@ var USERINFO="<%=USERINFO%>";
 
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
-		<div class="admin-header-lock-img"><img src="${ctx}/plugin/layui/images/face.jpg"/></div>
+		<div class="admin-header-lock-img"><img src="${basePath}/plugin/layui/images/face.jpg"/></div>
 		<div class="admin-header-lock-name" id="lockUserName">${USERINFO.name}</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
@@ -151,8 +150,8 @@ var USERINFO="<%=USERINFO%>";
 	<!-- 移动导航 -->
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
-	<script type="text/javascript" src="${ctx}/plugin/layui/layui.js"></script>
-	<script type="text/javascript" src="${ctx}/js/home/index.js">
+	<script type="text/javascript" src="${basePath}/plugin/layui/layui.js"></script>
+	<script type="text/javascript" src="${basePath}/js/home/index.js">
 
 </script>
 </body>

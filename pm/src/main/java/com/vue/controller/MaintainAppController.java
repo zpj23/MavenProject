@@ -37,7 +37,7 @@ public class MaintainAppController extends BaseController{
 	
 	@RequestMapping("/saveInfo")
 	@ResponseBody
-	public void saveInfo(String id,String registertime,String username,String jine,String remark ,String loginId,String isAdmin){
+	public void saveInfo(String id,String registertime,String username,String jine,String remark ,String isPayCode,String loginId,String isAdmin){
 		Map map=new HashMap();
 		try{
 			Maintain mt =new Maintain();
@@ -50,6 +50,7 @@ public class MaintainAppController extends BaseController{
 			mt.setUsername(username);
 			mt.setJine(Double.valueOf(jine));
 			mt.setRemark(remark);
+			mt.setIsPay(isPayCode);
 			maintainService.saveInfo(mt);
 			map.put("msg", true);
 //			map.put("data", mt);
