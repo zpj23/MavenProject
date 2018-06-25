@@ -66,7 +66,7 @@ public class TestAspect {
 	 */
 	@Before("haha()")
 	public void before(JoinPoint jp){
-		System.out.println("before:"+jp);
+//		System.out.println("before:"+jp);
 	}
 	/**
 	 * 配置环绕通知，使用在方法aspect()上注册的切入点

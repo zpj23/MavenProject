@@ -1,6 +1,7 @@
 package com.vue.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -73,7 +74,11 @@ public class MaintainAppController extends BaseController{
 		param.put("ispay", ispay);
 		MyPage pagedata =maintainService.findPageData(param,Integer.parseInt(cpage),Integer.parseInt(pagerow));		
 		Map map=new HashMap();
-		map.put("list", pagedata.getData());
+		if(null==pagedata.getData()){
+			map.put("list", new ArrayList());
+		}else{
+			map.put("list", pagedata.getData());
+		}
 		int tot=(Integer)pagedata.getCount();
 		double totalPage=Math.ceil((float)tot/Integer.parseInt(pagerow));
 		map.put("totalPage", totalPage);
