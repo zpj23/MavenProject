@@ -2,6 +2,7 @@ package com.vue.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -52,6 +53,7 @@ public class MaintainAppController extends BaseController{
 			mt.setJine(Double.valueOf(jine));
 			mt.setRemark(remark);
 			mt.setIsPay(isPayCode);
+			mt.setCreatetime(new Date());
 			maintainService.saveInfo(mt);
 			map.put("msg", true);
 //			map.put("data", mt);
