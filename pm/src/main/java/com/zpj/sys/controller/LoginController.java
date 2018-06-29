@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zpj.common.BaseController;
 import com.zpj.sys.entity.User;
@@ -39,11 +40,11 @@ public class LoginController extends BaseController{
 		if(!isNotNullObject(username)){
 			username="";
 		}
-		if(isNotNullObject(password)){
+		if(!isNotNullObject(password)){
 			password="";
 		}
 		if(null==user){
-			if(!username.equalsIgnoreCase("")&&password.equalsIgnoreCase(""))
+			if(!username.equalsIgnoreCase("")&&!password.equalsIgnoreCase(""))
 				user=userService.checkLogin(username,password);
 		}
 		modelMap.addAttribute("url", "/");
@@ -57,6 +58,11 @@ public class LoginController extends BaseController{
 //					+ path + "/";
 			return "forward:/login.jsp";
 		}
+	}
+	@RequestMapping("/logOut")
+	public String exitLogin(){
+		getSession().removeAttribute("jluser");
+		return "forward:/login.jsp";
 	}
 	
 }

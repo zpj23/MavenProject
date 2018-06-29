@@ -29,6 +29,7 @@ var USERINFO="<%=USERINFO%>";
 </script>	
 </head>
 <body class="main_body">
+	<form action="" id="form1" ></form>
 	<div class="layui-layout layui-layout-admin">
 		<!-- 顶部 -->
 		<div class="layui-header header">
@@ -91,7 +92,7 @@ var USERINFO="<%=USERINFO%>";
 			    		<a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>设置</cite></a>
 			    	</li>
 			    	<li class="layui-nav-item" mobile>
-			    		<a href="javascript:;"><i class="iconfont icon-loginout"></i> 退出</a>
+			    		<a href="javascript:;" id="exitUser"><i class="iconfont icon-loginout"></i> 退出</a>
 			    	</li>
 					<li class="layui-nav-item lockcms" pc>
 						<a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>

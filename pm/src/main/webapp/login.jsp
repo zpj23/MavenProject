@@ -26,7 +26,6 @@
 // 		  checkLogin();
 		});
 		function checkLogin() {
-			alert(1111);
 			form1.action = "login/checkLogin";
 			form1.submit();
 		}

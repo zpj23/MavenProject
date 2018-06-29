@@ -58,7 +58,12 @@ layui.config({
 	shadeMobile.on('click', function(){
 		$('body').removeClass('site-mobile');
 	});
-
+	//退出
+	$("#exitUser").on("click",function(){
+		$("#form1").action="login/logOut";
+		$("#form1").submit();
+	});
+	
 	// 添加新窗口
 	$(".layui-nav .layui-nav-item a").on("click",function(){
 		addTab($(this));
@@ -147,16 +152,6 @@ var navs = [{
 	"href" : "page/main.html",
 	"spread" : false
 },{
-	"title" : "供应商管理",
-	"icon" : "icon-text",
-	"href" : basePath+"supplierInfo/toList",
-	"spread" : false
-},{
-	"title" : "商品信息管理",
-	"icon" : "icon-text",
-	"href" : basePath+"goodsInfo/toList",
-	"spread" : false
-},{
 	"title" : "字典管理",
 	"icon" : "icon-text",
 	"href" : basePath+"dictionary/toList",
@@ -190,13 +185,6 @@ var navs = [{
 			"href" : basePath+"userInfo/toList",
 			"spread" : false
 		}
-//		,
-//		{
-//			"title" : "二级菜单2",
-//			"icon" : "&#xe631;",
-//			"href" : "",
-//			"spread" : false
-//		}
 	]
 },{
 	"title" : "物资管理",
@@ -208,6 +196,16 @@ var navs = [{
 			"title" : "维修登记列表",
 			"icon" : "&#xe631;",
 			"href" : basePath+"maintainInfo/toList",
+			"spread" : false
+		},{
+			"title" : "供应商管理",
+			"icon" : "icon-text",
+			"href" : basePath+"supplierInfo/toList",
+			"spread" : false
+		},{
+			"title" : "商品信息管理",
+			"icon" : "icon-text",
+			"href" : basePath+"goodsInfo/toList",
 			"spread" : false
 		}
 	]
