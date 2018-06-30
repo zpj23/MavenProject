@@ -37,7 +37,7 @@ public class SupplierAppController extends BaseController{
 	
 	@RequestMapping("/saveInfo")
 	@ResponseBody
-	public void saveInfo(String id,String registertime,String username,String jine,String remark ,String isPayCode,String loginId,String isAdmin){
+	public void saveInfo(String id,String name,String address,String contactname,String remark ,String phone,String loginId,String isAdmin){
 		Map map=new HashMap();
 		try{
 			Supplier mt =new Supplier();
@@ -45,11 +45,11 @@ public class SupplierAppController extends BaseController{
 			}else{
 				mt.setId(Integer.parseInt(id));
 			}
-//			mt.setRegistertime(DateHelper.getDateFromString(registertime, "yyyy-MM-dd"));
-//			mt.setUsername(username);
-//			mt.setJine(Double.valueOf(jine));
-//			mt.setRemark(remark);
-//			mt.setIsPay(isPayCode);
+			mt.setName(name);
+			mt.setAddress(address);
+			mt.setContactname(contactname);
+			mt.setRemark(remark);
+			mt.setPhone(phone);
 			mt.setCreatetime(new Date());
 			supplierService.saveInfo(mt);
 			map.put("msg", true);
