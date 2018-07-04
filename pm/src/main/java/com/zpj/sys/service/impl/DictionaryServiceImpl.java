@@ -69,4 +69,34 @@ public class DictionaryServiceImpl implements DictionaryService {
 		List<Map> list=dtDao.findMapObjBySql(sql.toString(), null, 1, 100);
 		return list;
 	}
+	
+	public DictionaryType findDicTypeId(String id){
+		if(null!=id&&!id.equalsIgnoreCase("")){
+			return dtDao.get(Integer.parseInt(id),DictionaryType.class);
+		}else{
+			return null;
+		}
+	}
+	public void saveDictionaryType(DictionaryType dt){
+		if(null==dt.getId()){
+			dtDao.add(dt);
+		}else{
+			DictionaryType temp=findDicTypeId(String.valueOf(dt.getId()));
+			if(null!=temp){
+				dtDao.merge(dt, String.valueOf(dt.getId()));
+			}else{
+				dtDao.add(dt);
+			}
+		}
+	}
+	
+	public void delDictionaryType(String id){
+		if(null!=id){
+			DictionaryType temp=findDicTypeId(String.valueOf(id));
+			dtDao.delete(temp);
+			dtDao.executeSql(" delete from sys_dictionary_type where parentTypeid='"+id+"'");
+			
+		}
+	}
+	
 }

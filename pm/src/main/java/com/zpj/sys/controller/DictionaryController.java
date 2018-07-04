@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zpj.common.BaseController;
+import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
 
 
@@ -22,6 +23,18 @@ public class DictionaryController extends BaseController{
 	public String toList(){
 		return "sys/dictionary/list";
 	}
+	/**
+	 * 跳转item列表页面
+	 * @Title toListItem
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月4日 下午4:36:43
+	 */
+	@RequestMapping("/toListItem")
+	public String toListItem(){
+		return "sys/dictionary/list_item";
+	}
+	
 	/**
 	 * 跳转类型tree页面
 	 * @Title toTree
@@ -54,4 +67,58 @@ public class DictionaryController extends BaseController{
 		}
 		this.jsonWrite(jsonData);
 	}
+	/**
+	 * 跳转字典类型编辑页面
+	 * @Title toSave
+	 * @param pid
+	 * @param cid
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月4日 下午4:36:13
+	 */
+	@RequestMapping("/toSave")
+	public String toSave(String pid,String cid){
+		DictionaryType dt=	dictionaryService.findDicTypeId(pid);
+		DictionaryType info=dictionaryService.findDicTypeId(cid);
+//		DictionaryType pdt=dictionaryService.findDicTypeId(String.valueOf(dt.getParentTypeid()));
+		
+		if(null==info){
+			info=new DictionaryType();
+		}
+		info.setParentTypeName(dt.getTypeName());
+		info.setParentTypeid(dt.getId()); 
+		request.setAttribute("dt", info);
+		return "sys/dictionary/save";
+	}
+	/**
+	 * 保存字典类型
+	 * @Title doAddDictionaryType
+	 * @param dt
+	 * @author zpj
+	 * @time 2018年7月4日 下午4:36:02
+	 */
+	@RequestMapping("/doAddDictionaryType")
+	@ResponseBody
+	public void doAddDictionaryType(DictionaryType dt){
+		dictionaryService.saveDictionaryType(dt);
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
+	}
+	/**
+	 * 删除字典类型
+	 * @Title doDelDictionaryType
+	 * @param id
+	 * @author zpj
+	 * @time 2018年7月4日 下午4:35:52
+	 */
+	@RequestMapping("/doDelDictionaryType")
+	@ResponseBody
+	public void doDelDictionaryType(String id){
+		dictionaryService.delDictionaryType(id);
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
+	}
+	
 }

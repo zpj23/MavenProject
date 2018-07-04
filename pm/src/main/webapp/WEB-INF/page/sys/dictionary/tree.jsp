@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-		+ request.getServerName() + ":" + request.getServerPort()
-		+ path + "/";
-pageContext.setAttribute("basePath", basePath); 
-%>    
+    <%@ include file="/common/header.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +14,8 @@ pageContext.setAttribute("basePath", basePath);
 <script type="text/javascript" src="${ctx}/plugin/EasyUI/EasyUI1.3.6/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${ctx}/plugin/EasyUI/EasyUI1.3.6/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/plugin/EasyUI/EasyUI1.3.6/themes/blue/style.css" />
-
+<%-- <link rel="stylesheet" href="${ctx}/plugin/layui/css/layui.css" media="all" /> --%>
+<%-- <script type="text/javascript" src="${ctx}/plugin/layui/layui.all.js"></script>	 --%>
 <script type="text/javascript">
 var basePath="<%=basePath%>";
 
@@ -46,8 +41,8 @@ $(document).ready(function(){
 		     onDblClick:function(){
 		    	 var cnode = $("#tt").tree('getSelected');
 		    	 if(cnode!=null){
-		    		 var pnode=$("#tt").tree('getParent',cnode.target);
-			    	 toEdit(pnode,cnode);
+// 		    		 var pnode=$("#tt").tree('getParent',cnode.target);
+			    	 listItem(cnode);
 		    	 }
 		     },
 
@@ -72,6 +67,13 @@ $(document).ready(function(){
 				text: '新建菜单'
 			}]
 		});
+	}
+	function editit(){
+		 var cnode = $("#tt").tree('getSelected');
+	   	 if(cnode!=null){
+	   		 var pnode=$("#tt").tree('getParent',cnode.target);
+		    	 toEdit(pnode,cnode);
+	   	 }
 	}
 	//删除
 	function removeit(){
@@ -107,6 +109,27 @@ function toRefreshTree(){
 		$('#tt').tree("reload",node);
 	}
 }
+
+function toEdit(pnode,cnode){
+	var cpk="";
+	var ppk="";
+	if(cnode.attributes!=null){
+		cpk=cnode.attributes.pk;
+	}
+	if(pnode!=null&&pnode.attributes!=null){
+		ppk=pnode.attributes.pk;
+	}
+	if(cpk=="1"||cpk==1){
+		alert("根节点不能修改");
+	}else{
+		parent.openTypeDialog(cpk,ppk);
+	}
+	
+}
+
+function listItem(cnode){
+	parent.toListItem(cnode.attributes.pk);
+}
 </script>
 </head>
 <body>
@@ -115,6 +138,7 @@ function toRefreshTree(){
 	</div>
 	<div id="mm" class="easyui-menu" style="width:120px;">
 		<div onclick="append()" data-options="iconCls:'icon-add'">新增</div>
+		<div onclick="editit()" data-options="iconCls:'icon-edit'">编辑</div>
 		<div onclick="removeit()" data-options="iconCls:'icon-remove'">删除</div>
 		<div class="menu-sep"></div>
 		<div onclick="expand()">打开</div>

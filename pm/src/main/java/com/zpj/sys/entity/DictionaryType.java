@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import io.swagger.annotations.ApiModel;
 
@@ -19,6 +20,7 @@ public class DictionaryType implements java.io.Serializable{
 	private Integer parentTypeid=0;
 	private int orderNum=1;
 	
+	private String parentTypeName;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -53,6 +55,15 @@ public class DictionaryType implements java.io.Serializable{
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
 	}
+	
+	@Transient
+	public String getParentTypeName() {
+		return parentTypeName;
+	}
+	public void setParentTypeName(String parentTypeName) {
+		this.parentTypeName = parentTypeName;
+	}
+	
 	
 	
 }

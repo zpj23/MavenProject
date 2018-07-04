@@ -52,7 +52,11 @@ public class MaintainAppController extends BaseController{
 			mt.setUsername(username);
 			mt.setJine(Double.valueOf(jine));
 			mt.setRemark(remark);
-			mt.setIsPay(isPayCode);
+			if(isPayCode.equalsIgnoreCase("undefined")||isPayCode.equalsIgnoreCase("")){
+				mt.setIsPay("0");
+			}else{
+				mt.setIsPay(isPayCode);
+			}
 			mt.setCreatetime(new Date());
 			maintainService.saveInfo(mt);
 			map.put("msg", true);
