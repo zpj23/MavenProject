@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
+import com.zpj.common.MyPage;
+import com.zpj.materials.entity.Goods;
+import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
 @Service
@@ -15,6 +18,11 @@ public class DictionaryServiceImpl implements DictionaryService {
 	
 	@Autowired
 	private BaseDao<DictionaryType> dtDao;
+	@Autowired
+	private BaseDao<DictionaryItem> diDao;
+	
+	private String tablename_item="sys_dictionary_item";
+	
 	
 	public String findJson(Map<String, String> params) {
 		StringBuffer s=new StringBuffer();
@@ -44,7 +52,16 @@ public class DictionaryServiceImpl implements DictionaryService {
 		  return "[]";
 		}
 	}
-
+	
+	public List<DictionaryType> findAllDictionaryType(){
+		Map<String,Object> condition=new HashMap();
+		condition.put("parentTypeid-self", "parentTypeid<>0");
+		Map<String,Object> px=new HashMap();
+		px.put("orderNum", "asc");
+		MyPage mp= dtDao.findPageDateSqlT("sys_dictionary_type", condition, px, 1, 500, DictionaryType.class);
+		return (List<DictionaryType>)mp.getData();
+	}
+	
 	@Override
 	public String findTopJson() {
 		StringBuffer s=new StringBuffer();
@@ -78,16 +95,26 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 	}
 	public void saveDictionaryType(DictionaryType dt){
-		if(null==dt.getId()){
-			dtDao.add(dt);
-		}else{
-			DictionaryType temp=findDicTypeId(String.valueOf(dt.getId()));
-			if(null!=temp){
-				dtDao.merge(dt, String.valueOf(dt.getId()));
-			}else{
+		try{
+			if(null==dt.getId()){
 				dtDao.add(dt);
+			}else{
+				DictionaryType temp=findDicTypeId(String.valueOf(dt.getId()));
+				if(null!=temp){
+					String oldType=temp.getTypeCode();
+					dtDao.merge(dt, String.valueOf(dt.getId()));
+					if(!oldType.equalsIgnoreCase(dt.getTypeCode())){
+						dtDao.executeSql(" update "+tablename_item+" set typeCode='"+dt.getTypeCode()+"' where typeCode='"+oldType+"'");
+					}
+				}else{
+					dtDao.add(dt);
+				}
 			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
 		}
+		
 	}
 	
 	public void delDictionaryType(String id){
@@ -99,4 +126,46 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 	}
 	
+	
+	/***************item******************/
+	
+	public MyPage findPageData(String typeCode, Integer page, Integer limit){
+		Map<String,Object> param=new HashMap<String,Object>();
+		param.put("typeCode-eq", typeCode);
+		Map px=new HashMap();
+	    px.put("itemOrder", "asc");
+		return diDao.findPageDateSqlT(tablename_item, param,px , page, limit, DictionaryItem.class);
+	}
+	
+	public List<DictionaryItem> findAllDictionaryItem(){
+		Map<String,Object> param=new HashMap<String,Object>();
+		Map px=new HashMap();
+	    px.put("itemOrder", "asc");
+	    MyPage mp=diDao.findPageDateSqlT(tablename_item, param,px , 1, 1000, DictionaryItem.class);
+		return (List<DictionaryItem>)mp.getData();
+	}
+	
+	public void saveItem(DictionaryItem di){
+		if(null!=di.getId()&&di.getId()!=1){
+			diDao.merge(di, String.valueOf(di.getId()));
+		}else{
+			diDao.add(di);
+		}
+	}
+	
+	public DictionaryItem findItem(String id){
+		return diDao.get(Integer.parseInt(id), DictionaryItem.class);
+	}
+	
+	public void delItem(String id){
+		String[] ids=id.split(",");
+		StringBuffer sb=new StringBuffer(500);
+		for (int m=0;m<ids.length;m++) {
+			if(m>0){
+				sb.append(",");
+			}
+			sb.append("'"+ids[m]+"'");
+		}
+		diDao.executeSql(" delete from "+tablename_item+" where id in ("+sb+")");
+	}
 }

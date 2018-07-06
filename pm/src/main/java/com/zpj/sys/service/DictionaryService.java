@@ -1,7 +1,10 @@
 package com.zpj.sys.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.zpj.common.MyPage;
+import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
 
 public interface DictionaryService {
@@ -27,6 +30,15 @@ public interface DictionaryService {
 	 */
 	public String findTopJson();
 	
+	
+	/**
+	 * 初始化字典时查询所有类型数据
+	 * @Title findAllDictionaryType
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月6日 下午4:25:50
+	 */
+	public List<DictionaryType> findAllDictionaryType();
 	/**
 	 * 根据id查询分类类型
 	 * @Title findDicTypeId
@@ -54,4 +66,55 @@ public interface DictionaryService {
 	 * @time 2018年7月4日 下午4:06:13
 	 */
 	public void delDictionaryType(String id);
+	
+	
+	/**
+	 * 初始化item列表页面
+	 * @Title findPageData
+	 * @param typeCode
+	 * @param page
+	 * @param limit
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月5日 下午5:20:30
+	 */
+	MyPage findPageData(String typeCode, Integer page, Integer limit);
+	
+	/**
+	 * 保存item
+	 * @Title saveItem
+	 * @param di
+	 * @author zpj
+	 * @time 2018年7月6日 下午1:45:28
+	 */
+	public void saveItem(DictionaryItem di);
+	
+	/**
+	 * 查找id
+	 * @Title findItem
+	 * @param id
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月6日 下午1:49:45
+	 */
+	public DictionaryItem findItem(String id);
+	
+	/**
+	 * 删除item
+	 * @Title doDelItem
+	 * @param ids
+	 * @author zpj
+	 * @time 2018年7月6日 下午3:07:06
+	 */
+	public void delItem(String ids);
+	
+	/**
+	 * 初始化查询所有字典item数据
+	 * @Title findAllDictionaryItem
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月6日 下午4:34:14
+	 */
+	public List<DictionaryItem> findAllDictionaryItem();
+	
 }

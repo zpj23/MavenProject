@@ -18,8 +18,8 @@ public class DictionaryItem implements java.io.Serializable{
 	private Integer id;//item主键
 	private String itemCode;//编码
 	private String itemName;//名称
-	private Integer typeid;//所属类型
-	private Integer parentItemid;//父项id
+	private String typeCode;//所属类型编码
+	private Integer parentItemid=0;//父项id
 	private Integer itemOrder;//排序
 	private String remark;
 	private Integer isEnable=1;//1可用，0禁用
@@ -46,11 +46,12 @@ public class DictionaryItem implements java.io.Serializable{
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public Integer getTypeid() {
-		return typeid;
+	
+	public String getTypeCode() {
+		return typeCode;
 	}
-	public void setTypeid(Integer typeid) {
-		this.typeid = typeid;
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
 	}
 	public Integer getParentItemid() {
 		return parentItemid;

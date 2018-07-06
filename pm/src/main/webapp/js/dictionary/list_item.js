@@ -10,28 +10,32 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		$ = layui.jquery;
 	var common=layui.common;
 	var searchName="";
+	var typeCode=$("#typeCode").val();
 	//当前页
 	var page=1;
 	//每页限制条数
-	var limit=10;
+	var limit=15;
 	//总数
 	var totalNum=0;
 	var table = layui.table;
 	var ctable=table.render({
 		    elem: '#t_list'
-		    ,url:basePath+'goodsInfo/initList?page='+page+'&limit='+limit
+		    ,url:basePath+'dictionary/initItemList?page='+page+'&limit='+limit+'&typeCode='+typeCode
 		    ,where: {param: ''}
 		    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 		    ,page: false //开启分页
 		    ,cols: [[
 		      {field:'id', type:'checkbox' }
-		      ,{field:'name',minWidth:'50', title: '商品名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'type', minWidth:'50',title: '规格型号'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-		      ,{field:'unit', title: '单位'}
-		      ,{field:'sellingPrice', title: '价格'}
-		      ,{field:'supplierName', title: '供应商',templet: function(d){
-		    		 var str=d.supplierName;
-		    		 return str;
+		      ,{field:'itemName',minWidth:'50', title: '名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'itemCode', minWidth:'50',title: '编码'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+		      ,{field:'typeCode', title: '所属类型编码'}
+		      ,{field:'itemOrder', title: '排序'}
+		      ,{field:'isEnable', title: '可用',templet: function(d){
+		    		 if(1==d.isEnable){
+		    			 return "可用";
+		    		 }else{
+		    			 return "禁用";
+		    		 }
 		    	  }}
 		      ,{field:'remark', title: '备注'}
 			  ,{
@@ -72,7 +76,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
              where:{
               	param:searchName
              },
-             url:basePath+'goodsInfo/initList?page='+page+'&limit='+limit
+             url:basePath+'dictionary/initItemList?page='+page+'&limit='+limit+'&typeCode='+typeCode
              ,page: false //开启分页
              
          });
@@ -84,10 +88,9 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		reloadTable();
 	})
 
-	//添加会员
 	$(".usersAdd_btn").click(function(){
 
-		common.layerShow('添加','700px','600px',basePath+"/goodsInfo/toAdd?id=");
+		common.layerShow('添加','450px','480px',basePath+"/dictionary/toAddItem?typeCode="+typeCode+"&id=");
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 //		$(window).resize(function(){
 //			layui.layer.full(index);
@@ -101,7 +104,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		    //do somehing
 		  } else if(layEvent === 'del'){ //删除
 			  layer.confirm('确定删除此项？',{icon:3, title:'提示信息'},function(index){
-				  common.ajaxMethod(basePath+"/goodsInfo/doDel?ids="+obj.data.id,{},"POST",
+				  common.ajaxMethod(basePath+"/dictionary/doDelItem?ids="+obj.data.id,{},"POST",
 					function (result) {
 	                    if (result.flag) {
 	            			layer.msg("删除成功！",{time:3000});
@@ -115,7 +118,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 				  layer.close(index);
 			});
 		  } else if(layEvent === 'edit'){ //编辑
-			  var index=common.layerShow('编辑','700px','600px',basePath+"/goodsInfo/toAdd?id="+obj.data.id);
+			  var index=common.layerShow('编辑','450px','480px',basePath+"/dictionary/toAddItem?id="+obj.data.id+"&typeCode="+typeCode);
 		  }
 	});
 	
@@ -131,7 +134,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 	    	  layer.msg("请选择一项进行编辑！",{time:3000});
 	    	  return;
 	      }
-	    var index=common.layerShow('编辑','700px','600px',basePath+"/goodsInfo/toAdd?id="+data[0].id);
+	    var index=common.layerShow('编辑','450px','480px',basePath+"/dictionary/toAddItem?id="+data[0].id+"&typeCode="+typeCode);
 	})
 	$("body").on("click",".batchDel",function(){  //删除
 		layer.confirm('确定删除此项？',{icon:3, title:'提示信息'},function(index){
@@ -144,7 +147,7 @@ layui.use(['form','layer','jquery','laypage','table','common'],function(){
 		    		  ids+=",";
 		    	  ids+=data[i].id;
 		      }  
-		      common.ajaxMethod(basePath+"/goodsInfo/doDel?ids="+ids,{},"POST",
+		      common.ajaxMethod(basePath+"/dictionary/doDelItem?ids="+ids,{},"POST",
 						function (result) {
 		                    if (result.flag) {
 		            			layer.msg("删除成功！",{time:3000});

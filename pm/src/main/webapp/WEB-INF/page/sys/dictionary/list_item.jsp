@@ -23,6 +23,7 @@
 		<div class="layui-inline">
 		    <div class="layui-input-inline">
 		    	<input type="text" value="" id="searchName"  placeholder="请输入关键字" class="layui-input search_input">
+		    	<input type="hidden" name="typeCode" id="typeCode" value="${typeCode}" />
 		    </div>
 		    <a class="layui-btn search_btn"><i class="layui-icon">&#xe615;</i>查询</a>
 		</div>
@@ -43,7 +44,7 @@
 	<div style="position: fix;bottom: 10px;">
 		<div id="pageDiv" ></div>
 	</div>
-	<script type="text/javascript" src="${ctx}/js/goods/list.js"></script>
+	<script type="text/javascript" src="${ctx}/js/dictionary/list_item.js"></script>
 	<script type="text/html" id="titleTpl">
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
  		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>

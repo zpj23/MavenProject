@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zpj.common.BaseController;
+import com.zpj.common.MyPage;
+import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
 
@@ -31,8 +33,44 @@ public class DictionaryController extends BaseController{
 	 * @time 2018年7月4日 下午4:36:43
 	 */
 	@RequestMapping("/toListItem")
-	public String toListItem(){
+	public String toListItem(String id){
+		DictionaryType dt= dictionaryService.findDicTypeId(id);
+		request.setAttribute("typeCode",dt.getTypeCode());
 		return "sys/dictionary/list_item";
+	}
+	@RequestMapping("/initItemList")
+	@ResponseBody
+	public void initItemList(String typeCode,int page,int limit){
+		MyPage pagedata =dictionaryService.findPageData(typeCode,page,limit);		
+		this.jsonWrite2(pagedata);
+	}
+	@RequestMapping("/saveItem")
+	@ResponseBody
+	public void saveItem(DictionaryItem di){
+		dictionaryService.saveItem(di);
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
+	}
+	@RequestMapping("/toAddItem")
+	public String toAddItem(String id,String typeCode){
+		DictionaryItem di;
+		if(null!=id&&!id.equalsIgnoreCase("")){
+			di=dictionaryService.findItem(id);
+		}else{
+			di=new DictionaryItem();
+			di.setTypeCode(typeCode);
+		}
+		request.setAttribute("info", di);
+		return "sys/dictionary/add_item";
+	}
+	@RequestMapping("/doDelItem")
+	@ResponseBody
+	public void doDelItem(String ids){
+		dictionaryService.delItem(ids);
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
 	}
 	
 	/**

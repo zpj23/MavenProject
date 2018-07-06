@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>新增</title>
+	<title>字典添加item</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,56 +28,48 @@
 <body class="childrenBody">
 	<form class="layui-form" id="form1"  method="post" style="width:80%;">
 		<input id="id" name="id" value="${info.id}" type="hidden" />
-		<div class="layui-form-item" style="padding-top:10px;">
-			<label class="layui-form-label">商品名称</label>
-			<div class="layui-input-block">
-				<input type="text" class="layui-input " name="name" value="${info.name}" lay-verify="required" placeholder="请输入商品名称" class="layui-input">
-			</div>
+		<input id="typeCode" name="typeCode" value="${info.typeCode}" type="hidden" />
+		<div class="layui-form-item" >
 		</div>
 		<div class="layui-form-item" >
-			<label class="layui-form-label">规格型号</label>
+			<label class="layui-form-label">名称</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input"  value="${info.type}" name="type"  placeholder="规格型号" class="layui-input">
+				<input type="text" class="layui-input"  value="${info.itemName}" name="itemName" lay-verify="required" placeholder="" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" style="padding-top:10px;">
+			<label class="layui-form-label">编码</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input " name="itemCode" value="${info.itemCode}" lay-verify="required" placeholder="" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
-		    <label class="layui-form-label">单位</label>
-		    <div class="layui-input-inline">
-		      <input type="text" name="unit" value="${info.unit}"  placeholder="请输入单位"  class="layui-input">
-		    </div>
-		  </div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">进价</label>
+			<label class="layui-form-label">排序</label>
 			<div class="layui-input-block">
-				<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">卖价</label>
-			<div class="layui-input-block">
-				<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
+				<input type="text" name="itemOrder" lay-verify="number" value="${info.itemOrder}" class="layui-input"  placeholder="">
 			</div>
 		</div>
 		<div class="layui-form-item">
 		    <div class="layui-inline">
-			    <label class="layui-form-label">供应商</label>
+			    <label class="layui-form-label">是否可用</label>
 				<div class="layui-input-block" >
-					<select name="supplierId" id="supplierId"  lay-filter="supplierId">
+					<select name="isEnable" id="isEnable"  lay-filter="isEnable">
+						<option value="1">可用</option>
+						<option value="2">禁用</option>
 				    </select>
 				</div>
 		    </div>
-		    <input type="hidden"  id="supplierName" name="supplierName" value="${info.supplierName}" class="layui-input" >
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">备注</label>
 			<div class="layui-input-block">
-				<textarea placeholder="备注" name="remark" class="layui-textarea linksDesc">${info.remark}</textarea>
+				<textarea placeholder="" name="remark" class="layui-textarea linksDesc">${info.remark}</textarea>
 			</div>
 		</div>
 		 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit="" lay-filter="addInfo">提交</button>
+				<button class="layui-btn" lay-submit="" lay-filter="addItemInfo">提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">取消</button>
 		    </div>
 		</div>
@@ -85,8 +77,8 @@
 		
 	</form>
 	<script type="text/javascript">
-		var state="${info.supplierId}";
+		var isEnable="${info.isEnable}";
 	</script>
-	<script type="text/javascript" src="${ctx}/js/goods/add.js"></script>
+	<script type="text/javascript" src="${ctx}/js/dictionary/add_item.js"></script>
 </body>
 </html>

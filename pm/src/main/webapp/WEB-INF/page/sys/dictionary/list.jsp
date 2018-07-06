@@ -76,6 +76,8 @@ pageContext.setAttribute("basePath", basePath);
 		function toListItem(id){
 			document.getElementById("listInfo").src=basePath+"dictionary/toListItem?id="+id;
 		}
+		
+		
 	</script>
 </head>
 <body >
@@ -83,33 +85,11 @@ pageContext.setAttribute("basePath", basePath);
 	<div style="padding: 10px;">
 	 <div class="layui-row" >
 	 	<div class="layui-col-md3">
-<!-- 	 	<blockquote class="layui-elem-quote"> -->
-<!-- 	 		<div class="layui-inline"> -->
-<!-- 				<a class="layui-btn  usersAdd_btn"><i class="layui-icon">&#xe608;</i>添加</a> -->
-<!-- 			</div> -->
-<!-- 			<div class="layui-inline"> -->
-<!-- 				<a class="layui-btn  usersEdit_btn"><i class="layui-icon">&#xe642;</i>编辑</a> -->
-<!-- 			</div> -->
-<!-- 			<div class="layui-inline"> -->
-<!-- 				<a class="layui-btn batchDel"><i class="layui-icon">&#xe640;</i>删除</a> -->
-<!-- 			</div> -->
-<!-- 	 	</blockquote>	 -->
-		<iframe id="treeIframe" src="${ctx}/dictionary/toTree" frameborder="1" height="550px"> </iframe>
+		<iframe id="treeIframe" src="${ctx}/dictionary/toTree" frameborder="0" height="580px"> </iframe>
 	    </div>
 	    <div class="layui-col-md9">
-<!-- 	    	<blockquote class="layui-elem-quote"> -->
-<!-- 						<div class="layui-inline"> -->
-<!-- 							<a class="layui-btn  usersAdd_btn"><i class="layui-icon">&#xe608;</i>添加</a> -->
-<!-- 						</div> -->
-<!-- 						<div class="layui-inline"> -->
-<!-- 							<a class="layui-btn  usersEdit_btn"><i class="layui-icon">&#xe642;</i>编辑</a> -->
-<!-- 						</div> -->
-<!-- 						<div class="layui-inline"> -->
-<!-- 							<a class="layui-btn batchDel"><i class="layui-icon">&#xe640;</i>删除</a> -->
-<!-- 						</div> -->
-<!-- 			</blockquote> -->
 			<div style="padding: 10px;">
-				<iframe id="listInfo" src="" frameborder="1" height="550px" width="100%"> </iframe>
+				<iframe id="listInfo" src="" frameborder="0" height="570px" width="100%"> </iframe>
 			</div>
 	    </div>
 	  </div>
