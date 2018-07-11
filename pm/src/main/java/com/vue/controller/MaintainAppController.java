@@ -71,13 +71,14 @@ public class MaintainAppController extends BaseController{
 	
 	@RequestMapping("/findList")
 	@ResponseBody
-	public void findList(String datemin,String datemax,String username,String ispay,String cpage,String pagerow,String loginId,String isAdmin ){
+	public void findList(String datemin,String datemax,String username,String ispay,String remark,String cpage,String pagerow,String loginId,String isAdmin ){
 		
 		Map param=new HashMap();
 		param.put("username", username);
 		param.put("starttime", datemin);
 		param.put("endtime", datemax);
 		param.put("ispay", ispay);
+		param.put("remark", remark);
 		MyPage pagedata =maintainService.findPageData(param,Integer.parseInt(cpage),Integer.parseInt(pagerow));		
 		Map map=new HashMap();
 		if(null==pagedata.getData()){

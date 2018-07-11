@@ -24,6 +24,7 @@ public class MaintainServiceImpl implements MaintainService {
 	public MyPage findPageData(Map params, Integer page, Integer limit) {
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("username-like", params.get("username"));
+		param.put("remark-like", params.get("remark"));
 		if(null!=params.get("starttime")&&!"".equalsIgnoreCase((String)params.get("starttime"))){
 			param.put("starttime-self", " registertime >='"+params.get("starttime")+"' ");
 		}
@@ -33,6 +34,7 @@ public class MaintainServiceImpl implements MaintainService {
 		if(null!=params.get("ispay")&&!"".equalsIgnoreCase((String)params.get("ispay"))){
 			param.put("isPay-eq", params.get("ispay"));
 		}
+		
 		Map px=new HashMap();
 	    px.put("registertime", "desc");
 		return maintainDao.findPageDateSqlT(tablename, param,px , page, limit, Maintain.class);
