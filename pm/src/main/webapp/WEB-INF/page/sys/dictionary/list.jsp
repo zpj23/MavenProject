@@ -38,6 +38,7 @@ pageContext.setAttribute("basePath", basePath);
             success: function (result) {
                 if (result.flag) {
         			top.layer.msg("删除成功！");
+        			toListItem("");
         			toRefreshTree();
                 }else{
 //                	top.layer.close(index);

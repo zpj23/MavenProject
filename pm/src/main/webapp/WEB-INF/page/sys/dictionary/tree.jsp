@@ -41,8 +41,9 @@ $(document).ready(function(){
 		     onDblClick:function(){
 		    	 var cnode = $("#tt").tree('getSelected');
 		    	 if(cnode!=null){
-// 		    		 var pnode=$("#tt").tree('getParent',cnode.target);
-			    	 listItem(cnode);
+		    		 var pnode=$("#tt").tree('getParent',cnode.target);
+// 			    	 listItem(cnode);
+		    		 toEdit(pnode,cnode);
 		    	 }
 		     },
 
@@ -72,7 +73,8 @@ $(document).ready(function(){
 		 var cnode = $("#tt").tree('getSelected');
 	   	 if(cnode!=null){
 	   		 var pnode=$("#tt").tree('getParent',cnode.target);
-		    	 toEdit(pnode,cnode);
+	   		 listItem(cnode);
+// 	   		toEdit(pnode,cnode);
 	   	 }
 	}
 	//删除

@@ -66,11 +66,6 @@ public class SupplierAppController extends BaseController{
 	@ResponseBody
 	public void findList(String datemin,String datemax,String username,String ispay,String cpage,String pagerow,String loginId,String isAdmin ){
 		
-//		Map param=new HashMap();
-//		param.put("username", username);
-//		param.put("starttime", datemin);
-//		param.put("endtime", datemax);
-//		param.put("ispay", ispay);
 		MyPage pagedata =supplierService.findPageData(username,Integer.parseInt(cpage),Integer.parseInt(pagerow));		
 		Map map=new HashMap();
 		if(null==pagedata.getData()){
@@ -83,6 +78,27 @@ public class SupplierAppController extends BaseController{
 		map.put("totalPage", totalPage);
 		this.jsonWrite2(map);
 	}
+	/**
+	 * 下拉框列表数据
+	 * @Title findSupplierList
+	 * @author zpj
+	 * @time 2018年7月14日 下午4:31:20
+	 */
+	@RequestMapping("/findSupplierList")
+	@ResponseBody
+	public void findSupplierList(){
+		MyPage pagedata =supplierService.findPageData("",1,100);		
+		Map map=new HashMap();
+		map.put("msg", true);
+		if(null==pagedata.getData()){
+			map.put("list", new ArrayList());
+		}else{
+			map.put("list", pagedata.getData());
+			
+		}
+		this.jsonWrite2(map);
+	}
+	
 	
 	@RequestMapping("/delInfoById")
 	@ResponseBody

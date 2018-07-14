@@ -117,6 +117,5 @@
         <aop:advisor pointcut-ref="transactionPointcut"    advice-ref="transactionAdvice" />
    
     </aop:config>
-    
-    
+     <bean class="com.zpj.common.ResourceCodeUtil"/>  
 </beans>

@@ -21,6 +21,9 @@
 	<blockquote class="layui-elem-quote news_search">
 	
 		<div class="layui-inline">
+		<div class="layui-input-inline" style="width: 200px;font-size: 16px;">
+			${typeName}  ( ${typeCode} )
+		</div>
 		    <div class="layui-input-inline">
 		    	<input type="text" value="" id="searchName"  placeholder="请输入关键字" class="layui-input search_input">
 		    	<input type="hidden" name="typeCode" id="typeCode" value="${typeCode}" />

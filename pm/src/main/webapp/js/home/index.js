@@ -151,11 +151,6 @@ var navs = [{
 	"icon" : "icon-computer",
 	"href" : "page/main.html",
 	"spread" : false
-},{
-	"title" : "字典管理",
-	"icon" : "icon-text",
-	"href" : basePath+"dictionary/toList",
-	"spread" : false
 },
 //{
 //	"title" : "友情链接",
@@ -183,6 +178,11 @@ var navs = [{
 			"title" : "用户管理",
 			"icon" : "&#xe631;",
 			"href" : basePath+"userInfo/toList",
+			"spread" : false
+		},{
+			"title" : "字典管理",
+			"icon" : "icon-text",
+			"href" : basePath+"dictionary/toList",
 			"spread" : false
 		}
 	]

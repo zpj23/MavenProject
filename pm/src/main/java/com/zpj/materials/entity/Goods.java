@@ -35,6 +35,9 @@ public class Goods implements java.io.Serializable{
 	private String supplierId;//供应商id
 	@ApiModelProperty(value = "供应商名称",name="supplierName", required = false)
 	private String supplierName;//供应商名称
+	@ApiModelProperty(value = "商品类别",name="goodsType", required = false)
+	private String goodsType;
+	
 	private Date createtime=new Date();//创建时间
 	@ApiModelProperty(value = "备注",name="remark", required = false)
 	private String remark;
@@ -108,6 +111,12 @@ public class Goods implements java.io.Serializable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getGoodsType() {
+		return goodsType;
+	}
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
 	}
 	
 	

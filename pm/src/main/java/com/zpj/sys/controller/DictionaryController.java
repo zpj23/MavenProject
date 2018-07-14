@@ -36,6 +36,7 @@ public class DictionaryController extends BaseController{
 	public String toListItem(String id){
 		DictionaryType dt= dictionaryService.findDicTypeId(id);
 		request.setAttribute("typeCode",dt.getTypeCode());
+		request.setAttribute("typeName", dt.getTypeName());
 		return "sys/dictionary/list_item";
 	}
 	@RequestMapping("/initItemList")

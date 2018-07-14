@@ -35,7 +35,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 				if(i>0){
 					s.append(",");
 				}
-				s.append("{\"id\":\""+list.get(i).get("id")+"\",\"text\":\""+list.get(i).get("typeName")+"\",\"attributes\":{\"pk\":\""+list.get(i).get("id")+"\"},");
+				s.append("{\"id\":\""+list.get(i).get("id")+"\",\"text\":\""+list.get(i).get("typeName")+"("+list.get(i).get("typeCode")+")\",\"attributes\":{\"pk\":\""+list.get(i).get("id")+"\"},");
 				String id=String.valueOf((list.get(i).get("id")));
 				Map temp= new HashMap();
 				temp.put("id", id);

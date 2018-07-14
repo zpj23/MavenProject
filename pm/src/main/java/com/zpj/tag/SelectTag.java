@@ -15,7 +15,7 @@ import com.zpj.common.ResourceCodeUtil;
 public class SelectTag extends TagSupport {
 
     private String type;
-    private String no;
+    private String selectValue;
     private String id;
     private String name;
     private String style;
@@ -78,15 +78,17 @@ public class SelectTag extends TagSupport {
         this.type = type;
     }
 
-    public String getNo() {
-        return no;
-    }
+    
 
-    public void setNo(String no) {
-        this.no = no;
-    }
+    public String getSelectValue() {
+		return selectValue;
+	}
 
-    public String getReadonly() {
+	public void setSelectValue(String selectValue) {
+		this.selectValue = selectValue;
+	}
+
+	public String getReadonly() {
         return readonly;
     }
 
@@ -147,8 +149,8 @@ public class SelectTag extends TagSupport {
 
 	@Override
 	public int doStartTag() throws JspException {
-        if (null == this.no) {
-            this.no = "";
+        if (null == this.selectValue) {
+            this.selectValue = "";
         }
         if(null == this.required){
         	this.required = "";
@@ -175,7 +177,7 @@ public class SelectTag extends TagSupport {
             while(iterator.hasNext()) {
                 entry = iterator.next();
                 option.append("<option value='" + entry.getKey() + "'");
-                if(this.no.equals(entry.getKey())) {
+                if(this.selectValue.equals(entry.getKey())) {
                     option.append(" selected");
                 }
                 option.append(">" + entry.getValue() + "</option>");

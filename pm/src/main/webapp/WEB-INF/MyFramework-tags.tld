@@ -16,7 +16,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>no</name>
+			<name>selectValue</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -90,7 +90,7 @@
 	
 	<tag>
 		<name>lableCoder</name>
-		<tag-class>com.goldenweb.sys.util.tag.LaberTag</tag-class>
+		<tag-class>com.zpj.tag.LaberTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>
@@ -106,7 +106,7 @@
 	
 	<tag>
 		<name>lableCoder2</name>
-		<tag-class>com.goldenweb.sys.util.tag.Laber2Tag</tag-class>
+		<tag-class>com.zpj.tag.Laber2Tag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>key</name>
@@ -117,7 +117,7 @@
 	
 	<tag>
 		<name>radioCoder</name>
-		<tag-class>com.goldenweb.sys.util.tag.RadioTag</tag-class>
+		<tag-class>com.zpj.tag.RadioTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>
@@ -183,7 +183,7 @@
 	
 	<tag>
 		<name>checkboxCoder</name>
-		<tag-class>com.goldenweb.sys.util.tag.CheckboxTag</tag-class>
+		<tag-class>com.zpj.tag.CheckboxTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>
@@ -269,7 +269,7 @@
 	</tag>
 	<tag>
 		<name>fileupload</name>
-		<tag-class>com.goldenweb.sys.util.tag.FileUploadTag2</tag-class>
+		<tag-class>com.zpj.tag.FileUploadTag2</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>id</name>
@@ -295,7 +295,7 @@
 	
 	<tag>
 		<name>orgNameCoder</name>
-		<tag-class>com.goldenweb.sys.util.tag.orgNameTag</tag-class>
+		<tag-class>com.zpj.tag.orgNameTag</tag-class>
 		<body-content>JSP</body-content>		
 		<attribute>
 			<name>code</name>
@@ -306,7 +306,7 @@
 	
 	<tag>
 		<name>orgNameidCoder</name>
-		<tag-class>com.goldenweb.sys.util.tag.orgNameidTag</tag-class>
+		<tag-class>com.zpj.tag.orgNameidTag</tag-class>
 		<body-content>JSP</body-content>		
 		<attribute>
 			<name>code</name>
@@ -317,7 +317,7 @@
 	
 	<tag>
 		<name>orgDept</name>
-		<tag-class>com.goldenweb.sys.util.tag.OrgDeptTag</tag-class>
+		<tag-class>com.zpj.tag.OrgDeptTag</tag-class>
 		<body-content>JSP</body-content>		
 		<attribute>
 			<name>orgId</name>
@@ -368,7 +368,7 @@
 	
 	<tag>
 		<name>buttonManager</name>
-		<tag-class>com.goldenweb.sys.util.tag.ButtonManagerTag</tag-class>
+		<tag-class>com.zpj.tag.ButtonManagerTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>url</name>
@@ -399,7 +399,7 @@
 	
 	<tag>
 		<name>selectLink</name>
-		<tag-class>com.goldenweb.sys.util.tag.SelectLinkTag</tag-class>
+		<tag-class>com.zpj.tag.SelectLinkTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>
@@ -460,7 +460,7 @@
 	
 	<tag>
 		<name>orgLink</name>
-		<tag-class>com.goldenweb.sys.util.tag.SelectOrgTag</tag-class>
+		<tag-class>com.zpj.tag.SelectOrgTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>

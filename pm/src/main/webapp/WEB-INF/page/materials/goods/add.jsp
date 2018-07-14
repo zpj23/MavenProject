@@ -42,22 +42,26 @@
 		</div>
 		<div class="layui-form-item">
 		    <label class="layui-form-label">单位</label>
-		    <div class="layui-input-inline">
+		    <div class="layui-input-block">
 		      <input type="text" name="unit" value="${info.unit}"  placeholder="请输入单位"  class="layui-input">
 		    </div>
 		  </div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">进价</label>
-			<div class="layui-input-block">
-				<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
+			<div class="layui-inline">
+				<label class="layui-form-label">进价</label>
+				<div class="layui-input-inline">
+					<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
+				</div>
+			</div>	
+			<div class="layui-inline">
+				<label class="layui-form-label">卖价</label>
+				<div class="layui-input-inline">
+					<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
+				</div>
+				
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">卖价</label>
-			<div class="layui-input-block">
-				<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
-			</div>
-		</div>
+		
 		<div class="layui-form-item">
 		    <div class="layui-inline">
 			    <label class="layui-form-label">供应商</label>
@@ -66,7 +70,17 @@
 				    </select>
 				</div>
 		    </div>
-		    <input type="hidden"  id="supplierName" name="supplierName" value="${info.supplierName}" class="layui-input" >
+		    <input type="hidden"  id="supplierName"  name="supplierName" value="${info.supplierName}" class="layui-input" >
+		</div>
+		<div class="layui-form-item">
+		<div>
+			<div class="layui-inline">
+			    <label class="layui-form-label">商品类别</label>
+				<div class="layui-input-block" >
+					<mf:selectCoder type="CS001" selectValue="${info.goodsType}"  headerKey="" headerValue="请选择" id="goodsType" name="goodsType"></mf:selectCoder>
+				</div>
+		    </div>
+		</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">备注</label>
