@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
+import com.zpj.common.PingyinTool;
 import com.zpj.materials.entity.Goods;
 import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
@@ -94,7 +95,29 @@ public class DictionaryServiceImpl implements DictionaryService {
 			return null;
 		}
 	}
+	/**
+	 * 根据code查询对象
+	 * @Title findDicTypeByCode
+	 * @param code
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月16日 下午4:42:00
+	 */
+	public DictionaryType findDicTypeByCode(String code){
+		List<DictionaryType> list=dtDao.findBySqlT("select * from sys_dictionary_type where typeCode='"+code+"'", DictionaryType.class);
+		if(null!=list&&list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+	
 	public void saveDictionaryType(DictionaryType dt){
+		
+//		DictionaryType cdt = this.findDicTypeByCode(dt.getTypeCode());
+//		if(null!=cdt){
+//			dt.setTypeCode(PingyinTool.cn2Spell(dt.getTypeName()));
+//		}
+		
 		try{
 			if(null==dt.getId()){
 				dtDao.add(dt);
@@ -122,7 +145,6 @@ public class DictionaryServiceImpl implements DictionaryService {
 			DictionaryType temp=findDicTypeId(String.valueOf(id));
 			dtDao.delete(temp);
 			dtDao.executeSql(" delete from sys_dictionary_type where parentTypeid='"+id+"'");
-			
 		}
 	}
 	
