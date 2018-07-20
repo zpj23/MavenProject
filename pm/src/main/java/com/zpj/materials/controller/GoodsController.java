@@ -1,6 +1,7 @@
 package com.zpj.materials.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zpj.common.BaseController;
 import com.zpj.common.MyPage;
+import com.zpj.common.ResourceCodeUtil;
 import com.zpj.materials.service.GoodsService;
+import com.zpj.sys.entity.DictionaryType;
 import com.zpj.materials.entity.Goods;
 
 @Controller
@@ -77,6 +80,16 @@ public class GoodsController extends BaseController{
 		goodsService.delete(ids);
 		Map map=new HashMap();
 		map.put("flag", true);
+		jsonWrite2(map);
+	}
+	
+	@RequestMapping("initFenlei")
+	@ResponseBody
+	public void initFenlei(String type){
+		List<DictionaryType> list=ResourceCodeUtil.getTypeList(type);
+		Map map=new HashMap();
+		map.put("flag", true);
+		map.put("list", list);
 		jsonWrite2(map);
 	}
 	

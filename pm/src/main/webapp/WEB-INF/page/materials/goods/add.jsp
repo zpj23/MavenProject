@@ -49,17 +49,14 @@
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label">进价</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-inline" style="width: 140px">
 					<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
 				</div>
-			</div>	
-			<div class="layui-inline">
 				<label class="layui-form-label">卖价</label>
-				<div class="layui-input-inline">
+				<div class="layui-input-inline" style="width: 140px">
 					<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
 				</div>
-				
-			</div>
+			</div>	
 		</div>
 		
 		<div class="layui-form-item">
@@ -73,14 +70,23 @@
 		    <input type="hidden"  id="supplierName"  name="supplierName" value="${info.supplierName}" class="layui-input" >
 		</div>
 		<div class="layui-form-item">
-		<div>
-			<div class="layui-inline">
-			    <label class="layui-form-label">商品类别</label>
-				<div class="layui-input-block" >
-					<mf:selectCoder type="CS001" selectValue="${info.goodsType}"  headerKey="" headerValue="请选择" id="goodsType" name="goodsType"></mf:selectCoder>
-				</div>
-		    </div>
-		</div>
+				<label class="layui-form-label">商品类别</label>
+                <div class="layui-input-inline" style="width: 140px" >
+                    <select name="fenlei1" id="fenlei1"  lay-filter="fenlei1">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width: 140px">
+                    <select name="fenlei2" id="fenlei2"   lay-filter="fenlei2">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width: 140px">
+                    <select name="fenlei3" id="fenlei3" lay-filter="fenlei3" >
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                 <input type="hidden"  id="goodsType"  name="goodsType" value="${info.goodsType}" class="layui-input" />
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">备注</label>
@@ -100,6 +106,7 @@
 	</form>
 	<script type="text/javascript">
 		var state="${info.supplierId}";
+// 		var goodsType="${info.goodsType}";
 	</script>
 	<script type="text/javascript" src="${ctx}/js/goods/add.js"></script>
 </body>

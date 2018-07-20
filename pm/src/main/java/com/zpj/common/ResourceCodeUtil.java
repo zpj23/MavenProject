@@ -30,6 +30,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	
 	public static Map<String,List<DictionaryType>> typeMap=new HashMap();
 	public static Map<String,List<DictionaryItem>> itemMap=new HashMap();
+	
 	@Autowired
 	public DictionaryService dictionaryService;
 	
@@ -59,6 +60,8 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 		typeMap.put("ROOT", topList);
 		
 		
+		
+		
 		DictionaryType dt;
 		for(int j=0;j<typeList.size();j++){
 			dt=typeList.get(j);
@@ -73,6 +76,29 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 				itemMap.put(itemList.get(m).getTypeCode(), temp);
 			}
 		}
+		
+	}
+	
+	
+	
+	public static Map<String,String> getTypeListByTypeCode(String typeCode){
+		List<DictionaryType> list=typeMap.get(typeCode);
+		Map<String,String> retMap=new HashMap();
+		for(int k=0;k<list.size();k++){
+			retMap.put(list.get(k).getTypeCode(),list.get(k).getTypeName());
+		}
+		return retMap;
+	}
+	/**
+	 * 返回 type 的list
+	 * @Title getTypeList
+	 * @param typeCode
+	 * @return
+	 * @author zpj
+	 * @time 2018年7月19日 下午5:11:48
+	 */
+	public static List<DictionaryType>  getTypeList(String typeCode){
+		return typeMap.get(typeCode);
 	}
 	
 
