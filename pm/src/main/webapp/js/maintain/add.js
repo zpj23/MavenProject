@@ -1,8 +1,3 @@
-layui.config({
-    base: basePath+"js/util/"      //自定义layui组件的目录
-}).extend({ //设定组件别名
-    common:   'common',
-});
 layui.use(['form','layer','jquery','laydate','common'],function(){
 	var form = layui.form,
 		layer = parent.layer === undefined ? layui.layer : parent.layer;

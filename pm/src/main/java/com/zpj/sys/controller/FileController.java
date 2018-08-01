@@ -15,6 +15,7 @@ import com.zpj.common.BaseController;
 import com.zpj.common.FileHelper;
 import com.zpj.sys.service.UploadfileService;
 
+
 @Controller
 @RequestMapping("file")
 public class FileController extends BaseController{
@@ -48,6 +49,13 @@ public class FileController extends BaseController{
 		this.jsonWrite(jsonData);
 	}
 	
+	@RequestMapping("uploadMultiply")
+	@ResponseBody
+	public void uploadMultiply(HttpServletRequest request,MultipartFile file,String tableid,String modeltype) {				
+		Map map = uploadfileService.uploadMultiply(request,file,tableid,modeltype);
+		map.put("code", 0);
+		this.jsonWrite2(map);
+	}
 	
 	@RequestMapping("findFiles")
 	@ResponseBody

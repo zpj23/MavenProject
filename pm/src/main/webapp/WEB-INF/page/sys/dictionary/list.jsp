@@ -28,6 +28,30 @@ pageContext.setAttribute("basePath", basePath);
 	var basePath="<%=basePath%>";
 	$(document).ready(function(){
 		layer =layui.layer;
+		
+		$('.updateDic').on('click',function(){
+			$.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: basePath+"dictionary/updateDic" ,//url
+                data: {},
+                success: function (result) {
+                    if (result.flag) {
+            			
+                    }else{
+            			top.layer.msg("保存失败！");
+                    }
+                    
+                },error: function (XMLHttpRequest, textStatus, errorThrown) {
+                	console.log(textStatus);
+                	console.log(XMLHttpRequest);
+                	console.log(errorThrown);
+                },beforeSend: function () {
+                },
+                complete: function () {
+                }
+            });
+		});
 	});
 	//删除树节点
 	function removeDep(id){
@@ -86,6 +110,7 @@ pageContext.setAttribute("basePath", basePath);
 	<div style="padding: 10px;">
 	 <div class="layui-row" >
 	 	<div class="layui-col-md3">
+		<a class="layui-btn updateDic"><i class="layui-icon">&#xe608;</i>更新缓存中的字典信息</a>
 		<iframe id="treeIframe" src="${ctx}/dictionary/toTree" frameborder="0" height="580px"> </iframe>
 	    </div>
 	    <div class="layui-col-md9">

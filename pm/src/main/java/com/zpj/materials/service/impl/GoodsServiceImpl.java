@@ -20,9 +20,16 @@ public class GoodsServiceImpl implements GoodsService {
 	private String tablename="jl_material_goods_info";
 	
 	@Override
-	public MyPage findPageData(String username, Integer page, Integer limit) {
-		Map<String,Object> param=new HashMap<String,Object>();
-		param.put("name-like", username);
+	public MyPage findPageData(Map param, Integer page, Integer limit) {
+		if(null!=param.get("name")&&!"".equalsIgnoreCase((String)param.get("name"))){
+			param.put("name-like", param.get("name"));
+		}
+		if(null!=param.get("supplierId")&&!"".equalsIgnoreCase((String)param.get("supplierId"))){
+			param.put("supplierId-like", param.get("supplierId"));
+		}
+		if(null!=param.get("goodsType")&&!"".equalsIgnoreCase((String)param.get("goodsType"))){
+			param.put("goodsType-like", param.get("goodsType"));
+		}
 		Map px=new HashMap();
 	    px.put("createtime", "desc");
 		return goodsDao.findPageDateSqlT(tablename, param,px , page, limit, Goods.class);
@@ -30,17 +37,12 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Log(type="保存",remark="保存商品信息")
 	public void saveInfo(Goods info) {
-		if(info.getId()!=0){
 			Goods user=this.findById(info.getId());
 			if(null!=user){
 				goodsDao.merge(info, String.valueOf(info.getId()));
 			}else{
 				goodsDao.add(info);
 			}
-		}else{
-			goodsDao.add(info);
-		}
-		
 	}
 
 	@Log(type="删除",remark="删除商品信息")
@@ -56,7 +58,7 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
 	}
 
-	public Goods findById(int id) {
+	public Goods findById(String id) {
 		return goodsDao.get(id,Goods.class);
 	}	
 

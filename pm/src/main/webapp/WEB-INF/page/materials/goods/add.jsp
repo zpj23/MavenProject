@@ -26,34 +26,46 @@
 	</style>
 </head>
 <body class="childrenBody">
-	<form class="layui-form" id="form1"  method="post" style="width:80%;">
+	<form class="layui-form" id="form1"  method="post" style="width:90%;">
 		<input id="id" name="id" value="${info.id}" type="hidden" />
 		<div class="layui-form-item" style="padding-top:10px;">
-			<label class="layui-form-label">商品名称</label>
-			<div class="layui-input-block">
-				<input type="text" class="layui-input " name="name" value="${info.name}" lay-verify="required" placeholder="请输入商品名称" class="layui-input">
+			<div class="layui-inline">
+				<label class="layui-form-label">商品名称</label>
+				<div class="layui-input-inline" style="width: 180px;">
+					<input type="text" class="layui-input " name="name" value="${info.name}" lay-verify="required" placeholder="请输入商品名称" class="layui-input">
+				</div>
+				<label class="layui-form-label">规格型号</label>
+				<div class="layui-input-inline" style="width: 180px;">
+					<input type="text" class="layui-input"  value="${info.type}" name="type"  placeholder="规格型号" class="layui-input">
+				</div>
 			</div>
 		</div>
-		<div class="layui-form-item" >
-			<label class="layui-form-label">规格型号</label>
-			<div class="layui-input-block">
-				<input type="text" class="layui-input"  value="${info.type}" name="type"  placeholder="规格型号" class="layui-input">
-			</div>
-		</div>
+<!-- 		<div class="layui-form-item" > -->
+<!-- 			<div class="layui-inline"> -->
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="layui-form-item">
-		    <label class="layui-form-label">单位</label>
-		    <div class="layui-input-block">
-		      <input type="text" name="unit" value="${info.unit}"  placeholder="请输入单位"  class="layui-input">
-		    </div>
-		  </div>
+			<div class="layui-inline">
+			    <label class="layui-form-label">单位</label>
+			    <div class="layui-input-inline" style="width: 180px;">
+			      <input type="text" name="unit" value="${info.unit}"  placeholder="请输入单位"  class="layui-input">
+			    </div>
+			     <label class="layui-form-label">供应商</label>
+					<div class="layui-input-inline" style="width: 180px;" >
+						<select name="supplierId" id="supplierId"  lay-filter="supplierId">
+					    </select>
+					</div>
+			  </div>
+		 </div> 
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label">进价</label>
-				<div class="layui-input-inline" style="width: 140px">
+				<div class="layui-input-inline" style="width: 180px">
 					<input type="text" name="purchasePrice" lay-verify="number" value="${info.purchasePrice}" class="layui-input"  placeholder="请输入进价">
 				</div>
 				<label class="layui-form-label">卖价</label>
-				<div class="layui-input-inline" style="width: 140px">
+				<div class="layui-input-inline" style="width: 180px">
 					<input type="text" name="sellingPrice" lay-verify="number" value="${info.sellingPrice}" class="layui-input"  placeholder="请输入卖价">
 				</div>
 			</div>	
@@ -61,11 +73,7 @@
 		
 		<div class="layui-form-item">
 		    <div class="layui-inline">
-			    <label class="layui-form-label">供应商</label>
-				<div class="layui-input-block" >
-					<select name="supplierId" id="supplierId"  lay-filter="supplierId">
-				    </select>
-				</div>
+			   
 		    </div>
 		    <input type="hidden"  id="supplierName"  name="supplierName" value="${info.supplierName}" class="layui-input" >
 		</div>
@@ -94,7 +102,23 @@
 				<textarea placeholder="备注" name="remark" class="layui-textarea linksDesc">${info.remark}</textarea>
 			</div>
 		</div>
-		 
+		 <div class="layui-form-item">
+            <div class="layui-inline">
+		 		<label class="layui-form-label">图片：</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <input type="hidden" name="fujian" id="fujian" value="" />
+                        <button type="button" class="layui-btn layui-btn-normal" id="testList_fujian">选择多文件</button>&nbsp;<button type="button" class="layui-btn" id="testListAction_fujian">开始上传</button>
+                        <div class="layui-upload-list">
+                            <table class="layui-table" style="width: 500px;">
+                                <thead><tr><th>文件名</th><th>状态</th><th>操作</th></tr></thead>
+                                <tbody id="demoList_fujian"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit="" lay-filter="addInfo">提交</button>

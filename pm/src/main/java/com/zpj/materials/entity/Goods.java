@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Goods implements java.io.Serializable{
 	
 	@ApiModelProperty(value = "主键",name="id", required = true)
-	private int id;
+	private String id;
 	@ApiModelProperty(value = "商品名称",name="name", required = false)
 	private String name;
 	@ApiModelProperty(value = "规格型号",name="type", required = false)
@@ -37,18 +38,20 @@ public class Goods implements java.io.Serializable{
 	private String supplierName;//供应商名称
 	@ApiModelProperty(value = "商品类别",name="goodsType", required = false)
 	private String goodsType;
-	
+	private String goodsTypeName;
 	private Date createtime=new Date();//创建时间
 	@ApiModelProperty(value = "备注",name="remark", required = false)
 	private String remark;
 	
+	@ApiModelProperty(value = "附件路径已逗号分割",name="fujian", required = false)
+	private String fujian;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name = "id",  nullable = false, precision = 22, scale = 0)
-	public int getId() {
+	@Column(name = "id",  nullable = false, length=50)
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -117,6 +120,19 @@ public class Goods implements java.io.Serializable{
 	}
 	public void setGoodsType(String goodsType) {
 		this.goodsType = goodsType;
+	}
+	public String getFujian() {
+		return fujian;
+	}
+	public void setFujian(String fujian) {
+		this.fujian = fujian;
+	}
+	@Transient
+	public String getGoodsTypeName() {
+		return goodsTypeName;
+	}
+	public void setGoodsTypeName(String goodsTypeName) {
+		this.goodsTypeName = goodsTypeName;
 	}
 	
 	

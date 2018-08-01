@@ -21,4 +21,9 @@ pageContext.setAttribute("basePath", basePath);
 <script type="text/javascript">
 var CTX="${ctx}";
 var basePath="<%=basePath%>";
+layui.config({
+    base: basePath+"js/util/"      //自定义layui组件的目录
+}).extend({ //设定组件别名
+    common:   'common',
+});
 </script>

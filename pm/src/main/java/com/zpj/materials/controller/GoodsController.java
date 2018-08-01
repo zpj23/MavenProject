@@ -3,6 +3,7 @@ package com.zpj.materials.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,9 @@ public class GoodsController extends BaseController{
 	@RequestMapping("initList")
 	@ResponseBody
 	public void initList(String param,int page,int limit){
-		MyPage pagedata =goodsService.findPageData(param,page,limit);		
+		Map param1=new HashMap();
+		param1.put("name", param);
+		MyPage pagedata =goodsService.findPageData(param1,page,limit);		
 		this.jsonWrite2(pagedata);
 	}
 	
@@ -51,9 +54,10 @@ public class GoodsController extends BaseController{
 	public String add(String id){
 		Goods sup=new Goods();
 		if(null!=id&&!"".equalsIgnoreCase(id)){
-			sup=goodsService.findById(Integer.parseInt(id));
+			sup=goodsService.findById(id);
 		}else{
 			sup=new Goods();
+			sup.setId(UUID.randomUUID().toString());
 		}
 		setRequstAttribute("info", sup);
 		return "materials/goods/add";

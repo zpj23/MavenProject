@@ -17,16 +17,16 @@
 <![endif]-->
 <script type="text/javascript">
 	 $(document).ready(function(){
-		 document.onkeydown = function (e) {  
-	        if (!e) e = window.event;  
-	        if ((e.keyCode || e.which) == 13) {  
-	        	checkLogin();
-	        }  
-	     } 
-// 		  checkLogin();
+			document.onkeydown = function (event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == 13) {
+	                // enter 键
+	                checkLogin();
+	            }
+	        }
 		});
 		function checkLogin() {
-			form1.action = "login/checkLogin";
+			form1.action="checkLogin";
 			form1.submit();
 		}
 </script>

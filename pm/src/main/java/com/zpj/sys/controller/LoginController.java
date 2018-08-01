@@ -14,7 +14,6 @@ import com.zpj.sys.entity.User;
 import com.zpj.sys.service.UserService;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController extends BaseController{
 	@Autowired
 	private UserService userService;
@@ -31,7 +30,7 @@ public class LoginController extends BaseController{
 	}
 
 
-	@RequestMapping("/checkLogin")
+	@RequestMapping("checkLogin")
 	public String checkLogin(ModelMap modelMap ,String username, String password){
 //		String username=null, password=null;
 		Map map=getRequestMap();
@@ -50,6 +49,7 @@ public class LoginController extends BaseController{
 		modelMap.addAttribute("url", "/");
 		if(null!=user){
 			getSession().setAttribute("jluser", user);
+			getSession().setAttribute("userInfo",gson.toJson(user));
 			return "/sys/home/index";
 		}else{
 //			String path = request.getContextPath();
@@ -62,6 +62,7 @@ public class LoginController extends BaseController{
 	@RequestMapping("/logOut")
 	public String exitLogin(){
 		getSession().removeAttribute("jluser");
+		getSession().removeAttribute("userInfo");
 		return "forward:/login.jsp";
 	}
 	
