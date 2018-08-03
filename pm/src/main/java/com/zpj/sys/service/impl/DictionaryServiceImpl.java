@@ -95,6 +95,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 			return null;
 		}
 	}
+	
+	
 	/**
 	 * 根据code查询对象
 	 * @Title findDicTypeByCode
@@ -110,13 +112,24 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 		return null;
 	}
-	
-	public void saveDictionaryType(DictionaryType dt){
+public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
+		try{
+			if(null==dt.getId()||dt.getId()==0){
+				dtDao.add(dt);
+			}else{
+				dtDao.merge(dt, String.valueOf(dt.getId()));
+				if(!oldType.equalsIgnoreCase("")&&!oldType.equalsIgnoreCase(dt.getTypeCode())){
+					dtDao.executeSql(" update "+tablename_item+" set typeCode='"+dt.getTypeCode()+"' where typeCode='"+oldType+"'");
+				}
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 		
-//		DictionaryType cdt = this.findDicTypeByCode(dt.getTypeCode());
-//		if(null!=cdt){
-//			dt.setTypeCode(PingyinTool.cn2Spell(dt.getTypeName()));
-//		}
+	}
+	public void saveDictionaryType(DictionaryType dt){
 		
 		try{
 			if(null==dt.getId()){

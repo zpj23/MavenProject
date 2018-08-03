@@ -77,6 +77,10 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 		typeMap.clear();
 		dpspType.clear();
 		dpsp.clear();
+		first.clear();
+		second.clear();
+		third.clear();
+		
 		/********初始化所有type信息**开始*********/
 		List<DictionaryType> typeList=dictionaryService.findAllDictionaryType();
 		List<DictionaryType> topList=new ArrayList<DictionaryType>();

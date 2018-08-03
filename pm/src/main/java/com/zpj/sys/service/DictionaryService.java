@@ -49,6 +49,17 @@ public interface DictionaryService {
 	 */
 	public DictionaryType findDicTypeId(String id);
 	
+	
+	/**
+	 * 根据编码查询dictype对象
+	 * @Title findDicTypeByCode
+	 * @param code
+	 * @return
+	 * @author zpj
+	 * @time 2018年8月2日 下午4:07:52
+	 */
+	public DictionaryType findDicTypeByCode(String code);
+	
 	/**
 	 * 保存字典类型
 	 * @Title saveDictionaryType
@@ -58,6 +69,14 @@ public interface DictionaryService {
 	 */
 	public void saveDictionaryType(DictionaryType dt);
 	
+	/**
+	 * 手机上保存
+	 * @Title saveDictionaryTypeByPhone
+	 * @param dt
+	 * @author zpj
+	 * @time 2018年8月2日 下午4:27:20
+	 */
+	public void saveDictionaryTypeByPhone(DictionaryType dt,String oldCode);
 	/**
 	 * 删除字典类型
 	 * @Title delDictionaryType

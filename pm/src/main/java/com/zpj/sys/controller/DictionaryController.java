@@ -172,6 +172,9 @@ public class DictionaryController extends BaseController{
 		ResourceCodeUtil.typeMap.clear();
 		ResourceCodeUtil.dpsp.clear();
 		ResourceCodeUtil.dpspType.clear();
+		ResourceCodeUtil.first.clear();
+		ResourceCodeUtil.second.clear();
+		ResourceCodeUtil.third.clear();
 		/********初始化所有type信息**开始*********/
 		List<DictionaryType> typeList=dictionaryService.findAllDictionaryType();
 		List<DictionaryType> topList=new ArrayList<DictionaryType>();
