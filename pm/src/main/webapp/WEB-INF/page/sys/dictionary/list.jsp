@@ -37,9 +37,9 @@ pageContext.setAttribute("basePath", basePath);
                 data: {},
                 success: function (result) {
                     if (result.flag) {
-            			
+                    	top.layer.msg("更新成功！");
                     }else{
-            			top.layer.msg("保存失败！");
+            			top.layer.msg("更新失败！");
                     }
                     
                 },error: function (XMLHttpRequest, textStatus, errorThrown) {

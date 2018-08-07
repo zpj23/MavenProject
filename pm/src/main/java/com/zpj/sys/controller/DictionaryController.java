@@ -215,6 +215,10 @@ public class DictionaryController extends BaseController{
 			}
 		}
 		/********初始化字典值信息**结束**************************/
+		Map map=new HashMap();
+		map.put("flag", true);
+		jsonWrite2(map);
+		
 	}
 	
 }
