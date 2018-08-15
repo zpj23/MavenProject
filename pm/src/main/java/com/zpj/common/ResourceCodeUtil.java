@@ -220,10 +220,10 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 			map1.put("children", children1);
 			dpsp.add(map1);
 		}
-		System.out.println(dpsp);
-		System.out.println(first);
-		System.out.println(second);
-		System.out.println(third);
+//		System.out.println(dpsp);
+//		System.out.println(first);
+//		System.out.println(second);
+//		System.out.println(third);
 	}
 	
 	

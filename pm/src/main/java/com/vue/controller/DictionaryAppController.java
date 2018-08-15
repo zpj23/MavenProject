@@ -39,6 +39,44 @@ public class DictionaryAppController extends BaseController{
 		ResultData<Map> rd=new ResultData<Map>(temp,"查询成功", true);
 		this.jsonWrite2(rd);
 	}
+	
+	@RequestMapping("/getFirstType")
+	@ResponseBody
+	public void getFirstType(){
+		Map map=new HashMap();
+		map.put("first", ResourceCodeUtil.first);
+		Map param=new HashMap();
+		map.put("second", ResourceCodeUtil.second);
+		ResultData<Map> rd=new ResultData<Map>(map,"查询成功", true);
+		this.jsonWrite2(rd);
+	}
+	
+	@RequestMapping("/getSecondType")
+	@ResponseBody
+	public void getSecondType(String code){
+		Map map=new HashMap();
+		List<Map> third=new ArrayList<>() ;
+		StringBuilder sb=new StringBuilder(50);
+		for(int k=0;k<ResourceCodeUtil.third.size();k++){
+			sb=new StringBuilder(50);
+			sb.append(ResourceCodeUtil.third.get(k).get("pvalue")+"");
+			if(sb.toString().equalsIgnoreCase(code)){
+				third.add(ResourceCodeUtil.third.get(k));
+			}
+		}
+		map.put("third", third); 
+		Map param=new HashMap();
+		MyPage pagedata =goodsService.findPageData(param,1,500);		
+		if(null==pagedata.getData()){
+			map.put("goodslist", new ArrayList());
+		}else{
+			map.put("goodslist", pagedata.getData());
+		}
+		int tot=(Integer)pagedata.getCount();
+		ResultData<Map> rd=new ResultData<Map>(map,"查询成功", true);
+		this.jsonWrite2(rd);
+	}
+	
 	@RequestMapping("/getThirdType")
 	@ResponseBody
 	public void getThirdType(){
