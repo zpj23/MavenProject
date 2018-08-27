@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.chainsaw.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -59,11 +60,11 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	
 	
 	
-	
 	public static List<DictionaryType> findSon(DictionaryType cdt,List<DictionaryType> list){
 		List<DictionaryType> temp=new ArrayList<DictionaryType>();
+//		System.out.println(cdt.getId()+">>>>");
 		for(int k=0;k<list.size();k++){
-			if(list.get(k).getParentTypeid()==cdt.getId()){
+			if(list.get(k).getParentTypeid().intValue()==cdt.getId().intValue()){
 				temp.add(list.get(k));
 				typeMap.put(list.get(k).getTypeCode(),findSon(list.get(k),list));
 			}
@@ -224,6 +225,8 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 //		System.out.println(first);
 //		System.out.println(second);
 //		System.out.println(third);
+		/*****************/
+		System.out.println(typeMap);
 	}
 	
 	

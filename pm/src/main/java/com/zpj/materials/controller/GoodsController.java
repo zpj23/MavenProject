@@ -1,5 +1,6 @@
 package com.zpj.materials.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +94,11 @@ public class GoodsController extends BaseController{
 		List<DictionaryType> list=ResourceCodeUtil.getTypeList(type);
 		Map map=new HashMap();
 		map.put("flag", true);
-		map.put("list", list);
+		if(list!=null&&list.size()>1){
+			map.put("list", list);
+		}else{
+			map.put("list", new ArrayList<DictionaryType>());
+		}
 		jsonWrite2(map);
 	}
 	
