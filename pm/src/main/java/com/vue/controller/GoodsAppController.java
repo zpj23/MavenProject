@@ -102,6 +102,7 @@ public class GoodsAppController extends BaseController{
 		int tot=(Integer)pagedata.getCount();
 		double totalPage=Math.ceil((float)tot/Integer.parseInt(pagerow));
 		map.put("totalPage", totalPage);
+		map.put("count", tot);
 		this.jsonWrite2(map);
 	}
 	
