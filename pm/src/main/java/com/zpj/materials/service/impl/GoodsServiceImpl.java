@@ -20,15 +20,16 @@ public class GoodsServiceImpl implements GoodsService {
 	private String tablename="jl_material_goods_info";
 	
 	@Override
-	public MyPage findPageData(Map param, Integer page, Integer limit) {
-		if(null!=param.get("name")&&!"".equalsIgnoreCase((String)param.get("name"))){
-			param.put("name-like", param.get("name"));
+	public MyPage findPageData(Map canshu, Integer page, Integer limit) {
+		Map param=new HashMap();
+		if(null!=canshu.get("name")&&!"".equalsIgnoreCase((String)canshu.get("name"))){
+			param.put("name-like", canshu.get("name"));
 		}
-		if(null!=param.get("supplierId")&&!"".equalsIgnoreCase((String)param.get("supplierId"))){
-			param.put("supplierId-like", param.get("supplierId"));
+		if(null!=canshu.get("supplierId")&&!"".equalsIgnoreCase((String)canshu.get("supplierId"))){
+			param.put("supplierId-like", canshu.get("supplierId"));
 		}
-		if(null!=param.get("goodsType")&&!"".equalsIgnoreCase((String)param.get("goodsType"))){
-			param.put("goodsType-like", param.get("goodsType"));
+		if(null!=canshu.get("goodsType")&&!"".equalsIgnoreCase((String)canshu.get("goodsType"))){
+			param.put("goodsType-like", canshu.get("goodsType"));
 		}
 		Map px=new HashMap();
 	    px.put("createtime", "desc");
