@@ -28,7 +28,7 @@ public class SetCharacterFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		req.setCharacterEncoding(endcoding);
-		User curruser= (User) req.getSession().getAttribute("jluser");
+		
 		/*res.setHeader("Access-Control-Allow-Origin", "*"); 
 		res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
 		res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");*/
@@ -37,12 +37,15 @@ public class SetCharacterFilter implements Filter{
 		if(flag){
 			if(str_href.equalsIgnoreCase("/")||str_href.equalsIgnoreCase("/checkLogin")||str_href.equalsIgnoreCase("/logOut")){
 					chain.doFilter(request, response);
-	        }else if(null!=curruser){
-				chain.doFilter(request, response);
-			}else{
-//				System.out.println(str_href);
-				req.getRequestDispatcher("/404.jsp").forward(req, res);
-			}
+	        }else{
+	        	User curruser= (User) req.getSession().getAttribute("jluser");
+	        	if(null!=curruser){
+					chain.doFilter(request, response);
+				}else{
+//					System.out.println(str_href);
+					req.getRequestDispatcher("/404.jsp").forward(req, res);
+				}
+	        } 
 		}else{
 			chain.doFilter(request, response);
 		}
