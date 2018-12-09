@@ -15,21 +15,6 @@
 <!--[if IE]>
 <script src="${ctx}/js/login/html5.js"></script>
 <![endif]-->
-<script type="text/javascript">
-	 $(document).ready(function(){
-			document.onkeydown = function (event) {
-            var e = event || window.event || arguments.callee.caller.arguments[0];
-            if (e && e.keyCode == 13) {
-	                // enter 键
-	                checkLogin();
-	            }
-	        }
-		});
-		function checkLogin() {
-			form1.action="checkLogin";
-			form1.submit();
-		}
-</script>
 </head>
 <body>
 		<div class="container demo-1">
@@ -37,7 +22,7 @@
 				<div id="large-header" class="large-header">
 					<canvas id="demo-canvas"></canvas>
 					<div class="logo_box">
-						<h3>欢迎你</h3>
+						<h3>后台管理系统</h3>
 						<form action="${url}" name="form1" id="form1" method="post">
 							<div class="input_outer">
 								<span class="u_user"></span>
@@ -58,6 +43,21 @@
 		<script src="${ctx}/js/login/rAF.js"></script>
 		<script src="${ctx}/js/login/demo-1.js"></script>
 		<script src="${ctx}/js/jquery/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript">
+			 $(document).ready(function(){
+					document.onkeydown = function (event) {
+		            var e = event || window.event || arguments.callee.caller.arguments[0];
+		            if (e && e.keyCode == 13) {
+			                // enter 键
+			                checkLogin();
+			            }
+			        }
+				});
+				function checkLogin() {
+					form1.action="${basePath}checkLogin";
+					form1.submit();
+				}
+		</script>
 		<div style="text-align:center;">
 </div>
 	</body>

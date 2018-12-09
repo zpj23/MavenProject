@@ -123,6 +123,13 @@ public class DictionaryAppController extends BaseController{
 	}
 	
 	
+	/**
+	 * @Description (根据编码删除数据)
+	 * @title delByCode
+	 * @param code void
+	 * @author zpj
+	 * @Date 2018年12月9日 上午11:49:50
+	 */
 	@RequestMapping("/delByCode")
 	@ResponseBody
 	public void delByCode(String code){
@@ -133,5 +140,23 @@ public class DictionaryAppController extends BaseController{
 		ResultData<Map> rd=new ResultData<Map>(null,"删除成功", true);
 		this.jsonWrite2(rd);
 	}
+	/**
+	 * @Description (直接查询sys_dictionary_type展示数据列表)
+	 * @title findDataListInDataBaseByTypeCode
+	 * @param code void
+	 * @author zpj
+	 * @Date 2018年12月9日 上午11:28:13
+	 */
+	@RequestMapping("/findDataListInDataBaseByTypeCode")
+	@ResponseBody
+	public void findDataListInDataBaseByTypeCode(String typeCode){
+		List<DictionaryType> list=dictionaryService.findAllDictionaryType();
+		ResultData<List> rd=new ResultData<List>(list,"删除成功", true);
+		this.jsonWrite2(rd);
+	}
+	
+	
+	
+	
 	
 }

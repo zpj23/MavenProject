@@ -21,7 +21,11 @@
 <script type="text/javascript">
 // alert("${basePath}");
 // alert(basePath);
-var USERINFO=JSON.parse('${userInfo}');
+var USERINFO=JSON.parse('${USERINFO}');
+function loginOut(){
+	form1.action='loginOut';
+	form1.submit();
+}
 </script>	
 </head>
 <body class="main_body">
@@ -30,7 +34,7 @@ var USERINFO=JSON.parse('${userInfo}');
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
-				<a href="#" class="logo">商品后台管理</a>
+				<a href="javascript:;" class="logo">后台管理</a>
 				<!-- 搜索 -->
 				<div class="layui-form component">
 			        <select name="modules" lay-verify="required" lay-search="">
@@ -96,12 +100,12 @@ var USERINFO=JSON.parse('${userInfo}');
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
 							<img src="${basePath}/plugin/layui/images/face.jpg" class="layui-circle" width="35" height="35">
-							<cite>${USERINFO.name},你好</cite>
+							<cite>${jluser.name},你好</cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
 							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-							<dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+							<dd><a href="javascript:;" onclick="loginOut()"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
@@ -111,7 +115,7 @@ var USERINFO=JSON.parse('${userInfo}');
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="${basePath}/plugin/layui/images/face.jpg"></a>
-				<p>你好！<span class="userName">${USERINFO.name}</span>, 欢迎</p>
+				<p>你好！<span class="userName">${jluser.name}</span>, 欢迎</p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
 		</div>
@@ -137,7 +141,7 @@ var USERINFO=JSON.parse('${userInfo}');
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
 		<div class="admin-header-lock-img"><img src="${basePath}/plugin/layui/images/face.jpg"/></div>
-		<div class="admin-header-lock-name" id="lockUserName">${USERINFO.name}</div>
+		<div class="admin-header-lock-name" id="lockUserName">${jluser.name}</div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
 			<button class="layui-btn" id="unlock">解锁</button>

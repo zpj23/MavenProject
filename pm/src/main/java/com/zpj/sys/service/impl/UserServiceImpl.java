@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.get(id,User.class);
 	}	
 	
-	
+	@Log(type="登陆",remark="用户登陆")
 	public User checkLogin(String username,String password){
 		
 		StringBuffer sql=new StringBuffer("select * from sys_userinfo where loginName='"+username+"' and password='"+password+"'");

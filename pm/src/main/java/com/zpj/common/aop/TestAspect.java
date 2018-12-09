@@ -97,7 +97,7 @@ public class TestAspect {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		User userinfo=null;
         if(request!=null){
-	         userinfo = (User) request.getSession().getAttribute("iuser");
+	         userinfo = (User) request.getSession().getAttribute("jluser");
         }
 		Map tmap = getMthodRemark(pjp);
 		if(userinfo!=null){
