@@ -97,10 +97,10 @@ public class DictionaryAppController extends BaseController{
 	
 	@RequestMapping("/saveInfo")
 	@ResponseBody
-	public void saveInfo(String pCode,String pName,String code,String name,String bCode){
+	public void saveInfo(String pCode,String pName,String code,String name,String bCode,String orderNum){
 		DictionaryType dt= dictionaryService.findDicTypeByCode(bCode);
 		if(null!=dt){
-			dt.setOrderNum(1);
+			dt.setOrderNum(Integer.parseInt(orderNum));
 			dt.setTypeCode(code);
 			dt.setTypeName(name);
 			DictionaryType temp=dictionaryService.findDicTypeByCode(pCode);
@@ -109,7 +109,7 @@ public class DictionaryAppController extends BaseController{
 			dictionaryService.saveDictionaryTypeByPhone(dt,bCode);
 		}else{
 			DictionaryType cdt=new DictionaryType();
-			cdt.setOrderNum(1);
+			cdt.setOrderNum(Integer.parseInt(orderNum));
 			cdt.setTypeCode(code);
 			cdt.setTypeName(name);
 			DictionaryType temp=dictionaryService.findDicTypeByCode(pCode);
@@ -150,13 +150,9 @@ public class DictionaryAppController extends BaseController{
 	@RequestMapping("/findDataListInDataBaseByTypeCode")
 	@ResponseBody
 	public void findDataListInDataBaseByTypeCode(String typeCode){
-		List<DictionaryType> list=dictionaryService.findAllDictionaryType();
-		ResultData<List> rd=new ResultData<List>(list,"删除成功", true);
+		List list=dictionaryService.findChlidrenDictionaryTypeByCode(typeCode);
+		ResultData<List> rd=new ResultData<List>(list,"查询成功", true);
 		this.jsonWrite2(rd);
 	}
-	
-	
-	
-	
 	
 }

@@ -203,4 +203,11 @@ public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
 		}
 		diDao.executeSql(" delete from "+tablename_item+" where id in ("+sb+")");
 	}
+
+	@Override
+	public List findChlidrenDictionaryTypeByCode(String code) {
+		List<Map> list1=dtDao.findMapObjBySqlNoPage("select t.*,s.typeName as parentTypeName from sys_dictionary_type t INNER JOIN sys_dictionary_type s on t.parentTypeid=s.id where s.typeCode='"+code+"' ORDER BY t.orderNum asc ");
+//		List<DictionaryType> list=dtDao.findBySqlT("select t.*,s.typeName as parentTypeName from sys_dictionary_type t INNER JOIN sys_dictionary_type s on t.parentTypeid=s.id where s.typeCode='"+code+"'", DictionaryType.class);
+		return list1;
+	}
 }

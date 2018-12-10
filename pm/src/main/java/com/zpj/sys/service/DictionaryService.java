@@ -136,4 +136,16 @@ public interface DictionaryService {
 	 */
 	public List<DictionaryItem> findAllDictionaryItem();
 	
+	
+	
+	/**
+	 * 根据code编码查询当前节点下的子节点
+	 * @Title findDictionaryTypeByCode
+	 * @param code
+	 * @return
+	 * @author zpj
+	 * @time 2018年12月10日 下午1:13:56
+	 */
+	public List findChlidrenDictionaryTypeByCode(String code);
+	
 }
