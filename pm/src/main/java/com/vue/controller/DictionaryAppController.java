@@ -15,6 +15,7 @@ import com.zpj.common.MyPage;
 import com.zpj.common.ResourceCodeUtil;
 import com.zpj.common.ResultData;
 import com.zpj.materials.service.GoodsService;
+import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
 
@@ -98,14 +99,17 @@ public class DictionaryAppController extends BaseController{
 	@RequestMapping("/saveInfo")
 	@ResponseBody
 	public void saveInfo(String pCode,String pName,String code,String name,String bCode,String orderNum){
-		DictionaryType dt= dictionaryService.findDicTypeByCode(bCode);
+		DictionaryType dt=null;
+		if(null!=bCode&&!"".equalsIgnoreCase(bCode)){
+			dt= dictionaryService.findDicTypeByCode(bCode);
+		}
 		if(null!=dt){
 			dt.setOrderNum(Integer.parseInt(orderNum));
 			dt.setTypeCode(code);
 			dt.setTypeName(name);
 			DictionaryType temp=dictionaryService.findDicTypeByCode(pCode);
 			dt.setParentTypeid(temp.getId());
-			dt.setParentTypeName(temp.getTypeName());
+//			dt.setParentTypeName(temp.getTypeName());
 			dictionaryService.saveDictionaryTypeByPhone(dt,bCode);
 		}else{
 			DictionaryType cdt=new DictionaryType();
@@ -114,7 +118,7 @@ public class DictionaryAppController extends BaseController{
 			cdt.setTypeName(name);
 			DictionaryType temp=dictionaryService.findDicTypeByCode(pCode);
 			cdt.setParentTypeid(temp.getId());
-			cdt.setParentTypeName(temp.getTypeName());
+//			cdt.setParentTypeName(temp.getTypeName());
 			dictionaryService.saveDictionaryTypeByPhone(cdt,bCode);
 		}
 		
@@ -155,4 +159,33 @@ public class DictionaryAppController extends BaseController{
 		this.jsonWrite2(rd);
 	}
 	
+	@RequestMapping("/findInfoByTypeCode")
+	@ResponseBody
+	public void findInfoByTypeCode(String typeCode){
+		DictionaryType dt=dictionaryService.findDicTypeByCode(typeCode);
+		ResultData<DictionaryType> rd=new ResultData<DictionaryType>(dt,"查询成功", true);
+		this.jsonWrite2(rd);
+	}
+	
+	/**
+	 * 更新缓存
+	 * @Title updateCache
+	 * @author zpj
+	 * @time 2018年12月11日 下午4:27:35
+	 */
+	@RequestMapping("/updateCache")
+	@ResponseBody
+	public void updateCache(){
+		try{
+			dictionaryService.updateDictionaryCache();
+			ResultData rd=new ResultData<>(null,"更新缓存成功", true);
+			this.jsonWrite2(rd);
+		}catch (Exception e) {
+			e.printStackTrace();
+			ResultData rd=new ResultData<>(null,"更新缓存失败", true);
+			this.jsonWrite2(rd);
+		}
+		
+		
+	}
 }

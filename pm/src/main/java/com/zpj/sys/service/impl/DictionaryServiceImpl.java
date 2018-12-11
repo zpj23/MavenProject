@@ -1,5 +1,6 @@
 package com.zpj.sys.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.zpj.common.BaseDao;
 import com.zpj.common.MyPage;
 import com.zpj.common.PingyinTool;
+import com.zpj.common.ResourceCodeUtil;
 import com.zpj.materials.entity.Goods;
 import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
@@ -118,10 +120,9 @@ public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
 				dtDao.add(dt);
 			}else{
 				dtDao.merge(dt, String.valueOf(dt.getId()));
-				if(!oldType.equalsIgnoreCase("")&&!oldType.equalsIgnoreCase(dt.getTypeCode())){
-					dtDao.executeSql(" update "+tablename_item+" set typeCode='"+dt.getTypeCode()+"' where typeCode='"+oldType+"'");
-				}
-				
+//				if(!oldType.equalsIgnoreCase("")&&!oldType.equalsIgnoreCase(dt.getTypeCode())){
+//					dtDao.executeSql(" update "+tablename_item+" set typeCode='"+dt.getTypeCode()+"' where typeCode='"+oldType+"'");
+//				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -210,4 +211,56 @@ public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
 //		List<DictionaryType> list=dtDao.findBySqlT("select t.*,s.typeName as parentTypeName from sys_dictionary_type t INNER JOIN sys_dictionary_type s on t.parentTypeid=s.id where s.typeCode='"+code+"'", DictionaryType.class);
 		return list1;
 	}
+	
+	public void updateDictionaryCache(){
+		System.out.println("----初始化字典数据-----");
+		ResourceCodeUtil.itemMap.clear();
+		ResourceCodeUtil.typeMap.clear();
+		ResourceCodeUtil.dpsp.clear();
+		ResourceCodeUtil.dpspType.clear();
+		ResourceCodeUtil.first.clear();
+		ResourceCodeUtil.second.clear();
+		ResourceCodeUtil.third.clear();
+		/********初始化所有type信息**开始*********/
+		List<DictionaryType> typeList=this.findAllDictionaryType();
+		List<DictionaryType> topList=new ArrayList<DictionaryType>();
+		if(null==typeList||typeList.size()==0){
+			return ;
+		}
+		for(int i=0;i<typeList.size();i++){
+			if(typeList.get(i).getParentTypeid()==1){
+				topList.add(typeList.get(i));
+				ResourceCodeUtil.typeMap.put(typeList.get(i).getTypeCode(),ResourceCodeUtil.findSon(typeList.get(i),typeList));
+			}
+		}
+		ResourceCodeUtil.typeMap.put("ROOT", topList);
+		
+		/********初始化所有type信息**结束*********/
+		
+		
+		/********初始化商品分类信息**开始*********/
+		ResourceCodeUtil.initGoodsType("");
+		for(int q=0;q<typeList.size();q++){
+			ResourceCodeUtil.dpspType.put(typeList.get(q).getTypeCode(),typeList.get(q).getTypeName());
+		}
+		/********初始化商品分类信息**结束*********/
+		
+		/********初始化字典值信息**开始**************************/
+		DictionaryType dt;
+		for(int j=0;j<typeList.size();j++){
+			dt=typeList.get(j);
+			ResourceCodeUtil.itemMap.put(dt.getTypeCode(), new ArrayList<DictionaryItem>());
+		}
+		List<DictionaryItem> itemList=this.findAllDictionaryItem();
+		List<DictionaryItem> temp;
+		if(null!=itemList&&itemList.size()>0){
+			for(int m=0;m<itemList.size();m++){
+				temp=ResourceCodeUtil.itemMap.get(itemList.get(m).getTypeCode());
+				temp.add(itemList.get(m));
+				ResourceCodeUtil.itemMap.put(itemList.get(m).getTypeCode(), temp);
+			}
+		}
+		/********初始化字典值信息**结束**************************/
+	}
+	
 }

@@ -148,4 +148,13 @@ public interface DictionaryService {
 	 */
 	public List findChlidrenDictionaryTypeByCode(String code);
 	
+	
+	/**
+	 * 更新缓存
+	 * @Title updateDictionaryCache
+	 * @author zpj
+	 * @time 2018年12月11日 下午4:32:11
+	 */
+	public void updateDictionaryCache();
+	
 }
