@@ -1,10 +1,14 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@ page language="java"  pageEncoding="UTF-8"%>  <!-- errorPage="/error.jsp" -->
 
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-		+ request.getServerName() + ":" + request.getServerPort()
-		+ path + "/";
+
+// String path = request.getContextPath();
+// String basePath = request.getScheme() + "://"
+// 		+ request.getServerName() + ":" + request.getServerPort()
+// 		+ path + "/";
+//
+String basePath="http://47.101.146.253"+request.getContextPath()+"/";
 pageContext.setAttribute("basePath", basePath); 
 %>
 <%-- JSTL 标签 --%>
@@ -15,7 +19,6 @@ pageContext.setAttribute("basePath", basePath);
 <%-- <%@ taglib prefix="mf" uri="/MyFramework-tags"%> --%>
 <%-- 绝对路径 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-
 <link rel="stylesheet" href="${ctx}/plugin/layui/css/layui.css" media="all" />
 <script type="text/javascript" src="${ctx}/plugin/layui/layui.js"></script>	
 <script type="text/javascript">

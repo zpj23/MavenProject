@@ -54,7 +54,7 @@
 			        }
 				});
 				function checkLogin() {
-					form1.action="${basePath}checkLogin";
+					form1.action="checkLogin";
 					form1.submit();
 				}
 		</script>
