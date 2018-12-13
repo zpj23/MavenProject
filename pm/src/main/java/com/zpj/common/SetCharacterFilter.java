@@ -51,7 +51,7 @@ public class SetCharacterFilter implements Filter{
 		}
 	}
 	public boolean judgeIsPass(String spath){
-		String[] urls = {"controller.jsp","file","v2","swagger","druid","vue","404","500",".js",".css",".ico",".jpeg",".bmp",".jpg",".png",".gif",".htm",".html",".woff",".woff2",".ttf",".mp3",".mp4",".mov",".avi"};
+		String[] urls = {"downloadApp","controller.jsp","file","v2","swagger","druid","vue","404","500",".js",".css",".ico",".jpeg",".bmp",".jpg",".png",".gif",".htm",".html",".woff",".woff2",".ttf",".mp3",".mp4",".mov",".avi"};
         boolean flag = true;
     	for (String str : urls) {
             if (spath.indexOf(str) != -1) {

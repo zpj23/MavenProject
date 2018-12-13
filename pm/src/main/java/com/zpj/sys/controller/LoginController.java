@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,9 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.zpj.common.BaseController;
 import com.zpj.common.DateHelper;
+import com.zpj.common.FileHelper;
+import com.zpj.common.SpringContext;
+import com.zpj.common.SystemContext;
 import com.zpj.common.aop.Log;
 import com.zpj.sys.entity.LogInfo;
 import com.zpj.sys.entity.User;
@@ -117,6 +123,26 @@ public class LoginController extends BaseController{
 		getSession().removeAttribute("jluser");
 		getSession().removeAttribute("USERINFO");
 		return "forward:/login.jsp";
+	}
+	
+	
+	
+	@RequestMapping("downloadApp")
+	@ResponseBody
+	public void  downloadApp() throws Exception {
+		WebApplicationContext webApplicationContext = ContextLoader
+                .getCurrentWebApplicationContext();
+        ServletContext servletContext = webApplicationContext
+                .getServletContext();
+        // 得到文件绝对路径
+        String realPath = servletContext.getRealPath("/download")+"/店铺管理.apk";
+        System.out.println(realPath);
+		try{
+			boolean flag= FileHelper.downloadFile(realPath, "店铺管理.apk", response);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}
 	}
 	
 }
