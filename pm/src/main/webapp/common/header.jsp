@@ -8,7 +8,7 @@
 // 		+ request.getServerName() + ":" + request.getServerPort()
 // 		+ path + "/";
 //
-String basePath="http://47.101.146.253"+request.getContextPath()+"/";
+String basePath="http://127.0.0.1:8080"+request.getContextPath()+"/";
 pageContext.setAttribute("basePath", basePath); 
 %>
 <%-- JSTL 标签 --%>

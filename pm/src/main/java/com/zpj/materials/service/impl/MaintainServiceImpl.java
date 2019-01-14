@@ -1,17 +1,22 @@
 package com.zpj.materials.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zpj.common.BaseDao;
+import com.zpj.common.DateHelper;
 import com.zpj.common.MyPage;
 import com.zpj.common.aop.Log;
 import com.zpj.materials.entity.Maintain;
 import com.zpj.materials.service.MaintainService;
+import com.zpj.sys.entity.LogInfo;
+import com.zpj.sys.service.LogInfoService;
 @Service
 public class MaintainServiceImpl implements MaintainService {
 
@@ -19,7 +24,9 @@ public class MaintainServiceImpl implements MaintainService {
 	private BaseDao<Maintain> maintainDao;
 	
 	private String tablename="jl_material_maintain_info";
-
+	@Autowired
+	private BaseDao<LogInfo> logDao;
+	
 	@Override
 	public MyPage findPageData(Map params, Integer page, Integer limit) {
 		Map<String,Object> param=new HashMap<String,Object>();
@@ -40,7 +47,7 @@ public class MaintainServiceImpl implements MaintainService {
 		return maintainDao.findPageDateSqlT(tablename, param,px , page, limit, Maintain.class);
 	}
 
-	@Log(type="保存",remark="保存修理信息")
+//	@Log(type="保存",remark="保存修理信息")
 	public void saveInfo(Maintain info) {
 		if(null!=info.getId()&&!"".equalsIgnoreCase(info.getId())){
 			Maintain user=this.findById(info.getId());
@@ -52,10 +59,16 @@ public class MaintainServiceImpl implements MaintainService {
 		}else{
 			maintainDao.add(info);
 		}
-		
+		LogInfo loginfo=new LogInfo();
+		loginfo.setId(UUID.randomUUID().toString());
+    	loginfo.setUsername("朱培军");
+    	loginfo.setCreatetime(new Date());
+    	loginfo.setType("保存维修记录");
+    	loginfo.setDescription(DateHelper.getToday("yyyy-MM-dd HH:mm:ss")+"   "+info.toString());
+    	logDao.add(loginfo);
 	}
 
-	@Log(type="删除",remark="删除维修信息")
+//	@Log(type="删除",remark="删除维修信息")
 	public void delete(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);
@@ -65,7 +78,21 @@ public class MaintainServiceImpl implements MaintainService {
 			}
 			sb.append("'"+ids[m]+"'");
 		}
-		maintainDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
+		List list=maintainDao.findBySqlT(" select *  from "+tablename+" where id in ("+sb+")", Maintain.class);
+		Maintain mt=null;
+		if(null!=list&&list.size()>0){
+			for(int m=0;m<list.size();m++){
+				mt=(Maintain)list.get(m);
+				LogInfo loginfo=new LogInfo();
+				loginfo.setId(UUID.randomUUID().toString());
+				loginfo.setUsername("朱培军");
+				loginfo.setCreatetime(new Date());
+				loginfo.setType("删除维修记录");
+				loginfo.setDescription(DateHelper.getToday("yyyy-MM-dd HH:mm:ss")+"   "+mt.toString());
+				logDao.add(loginfo);
+			}
+			maintainDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
+		}
 	}
 
 	public Maintain findById(String id) {

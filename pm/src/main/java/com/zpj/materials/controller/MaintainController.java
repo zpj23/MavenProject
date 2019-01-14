@@ -1,9 +1,6 @@
 package com.zpj.materials.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,6 +71,7 @@ public class MaintainController extends BaseController{
 	@RequestMapping("/doAdd")
 	@ResponseBody
 	public void doAdd(Maintain sup){
+		sup.setCreatetime(new Date());
 		maintainService.saveInfo(sup);
 		Map map=new HashMap();
 		map.put("flag", true);

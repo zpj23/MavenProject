@@ -94,4 +94,8 @@ public class Maintain implements java.io.Serializable{
 		this.username = username;
 	}
 	
+	@Override
+	public String toString() {
+		return "id:"+this.getId()+",registertime:"+this.getRegistertime()+",remark:"+this.getRemark()+",jine:"+this.getJine()+",isPay:"+this.getIsPay()+",username:"+this.getUsername()+",createtime:"+this.getCreatetime();
+	}
 }
