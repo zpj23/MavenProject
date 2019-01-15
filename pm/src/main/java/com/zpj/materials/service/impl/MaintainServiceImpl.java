@@ -64,7 +64,7 @@ public class MaintainServiceImpl implements MaintainService {
     	loginfo.setUsername("朱培军");
     	loginfo.setCreatetime(new Date());
     	loginfo.setType("保存维修记录");
-    	loginfo.setDescription(DateHelper.getToday("yyyy-MM-dd HH:mm:ss")+"   "+info.toString());
+    	loginfo.setDescription(info.toString());
     	logDao.add(loginfo);
 	}
 
@@ -88,7 +88,7 @@ public class MaintainServiceImpl implements MaintainService {
 				loginfo.setUsername("朱培军");
 				loginfo.setCreatetime(new Date());
 				loginfo.setType("删除维修记录");
-				loginfo.setDescription(DateHelper.getToday("yyyy-MM-dd HH:mm:ss")+"   "+mt.toString());
+				loginfo.setDescription(mt.toString());
 				logDao.add(loginfo);
 			}
 			maintainDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");

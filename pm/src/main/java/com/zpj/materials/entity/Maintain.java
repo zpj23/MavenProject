@@ -96,6 +96,6 @@ public class Maintain implements java.io.Serializable{
 	
 	@Override
 	public String toString() {
-		return "id:"+this.getId()+",registertime:"+this.getRegistertime()+",remark:"+this.getRemark()+",jine:"+this.getJine()+",isPay:"+this.getIsPay()+",username:"+this.getUsername()+",createtime:"+this.getCreatetime();
+		return "id:"+this.getId()+",username:"+this.getUsername()+",registertime:"+this.getRegistertime()+",remark:"+this.getRemark()+",jine:"+this.getJine()+",isPay:"+this.getIsPay()+",createtime:"+this.getCreatetime();
 	}
 }

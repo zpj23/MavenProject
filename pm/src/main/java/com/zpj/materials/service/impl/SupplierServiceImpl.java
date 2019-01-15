@@ -1,9 +1,9 @@
 package com.zpj.materials.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.zpj.materials.entity.Goods;
+import com.zpj.sys.entity.LogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,9 @@ public class SupplierServiceImpl implements SupplierService {
 
 	@Autowired
 	private BaseDao<Supplier> supplierDao;
-	
+	@Autowired
+	private BaseDao<LogInfo> logDao;
+
 	private String tablename="jl_material_supplier_info";
 
 	@Override
@@ -41,7 +43,13 @@ public class SupplierServiceImpl implements SupplierService {
 		}else{
 			supplierDao.add(info);
 		}
-		
+		LogInfo loginfo=new LogInfo();
+		loginfo.setId(UUID.randomUUID().toString());
+		loginfo.setUsername("朱培军");
+		loginfo.setCreatetime(new Date());
+		loginfo.setType("保存供货商记录");
+		loginfo.setDescription(info.toString());
+		logDao.add(loginfo);
 	}
 
 	@Log(type="删除",remark="删除供货商信息")
@@ -54,6 +62,22 @@ public class SupplierServiceImpl implements SupplierService {
 			}
 			sb.append("'"+ids[m]+"'");
 		}
+		List list=supplierDao.findBySqlT(" select *  from "+tablename+" where id in ("+sb+")", Supplier.class);
+		Supplier info=null;
+		if(null!=list&&list.size()>0) {
+			for (int m = 0; m < list.size(); m++) {
+				info = (Supplier) list.get(m);
+				LogInfo loginfo = new LogInfo();
+				loginfo.setId(UUID.randomUUID().toString());
+				loginfo.setUsername("朱培军");
+				loginfo.setCreatetime(new Date());
+				loginfo.setType("删除商品记录");
+				loginfo.setDescription(info.toString());
+				logDao.add(loginfo);
+			}
+		}
+
+
 		supplierDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
 	}
 

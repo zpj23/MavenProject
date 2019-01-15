@@ -1,8 +1,9 @@
 package com.zpj.materials.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import com.zpj.materials.entity.Maintain;
+import com.zpj.sys.entity.LogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private BaseDao<Goods> goodsDao;
+	@Autowired
+	private BaseDao<LogInfo> logDao;
 
 	private String tablename="jl_material_goods_info";
 	
@@ -36,7 +39,7 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.findPageDateSqlT(tablename, param,px , page, limit, Goods.class);
 	}
 
-	@Log(type="保存",remark="保存商品信息")
+//	@Log(type="保存",remark="保存商品信息")
 	public void saveInfo(Goods info) {
 			Goods user=this.findById(info.getId());
 			if(null!=user){
@@ -44,9 +47,16 @@ public class GoodsServiceImpl implements GoodsService {
 			}else{
 				goodsDao.add(info);
 			}
+			LogInfo loginfo=new LogInfo();
+			loginfo.setId(UUID.randomUUID().toString());
+			loginfo.setUsername("朱培军");
+			loginfo.setCreatetime(new Date());
+			loginfo.setType("保存商品记录");
+			loginfo.setDescription(info.toString());
+			logDao.add(loginfo);
 	}
 
-	@Log(type="删除",remark="删除商品信息")
+//	@Log(type="删除",remark="删除商品信息")
 	public void delete(String deleteID) {
 		String[] ids=deleteID.split(",");
 		StringBuffer sb=new StringBuffer(500);
@@ -55,6 +65,21 @@ public class GoodsServiceImpl implements GoodsService {
 				sb.append(",");
 			}
 			sb.append("'"+ids[m]+"'");
+		}
+
+		List list=goodsDao.findBySqlT(" select *  from "+tablename+" where id in ("+sb+")", Goods.class);
+		Goods goods=null;
+		if(null!=list&&list.size()>0) {
+			for (int m = 0; m < list.size(); m++) {
+				goods = (Goods) list.get(m);
+				LogInfo loginfo = new LogInfo();
+				loginfo.setId(UUID.randomUUID().toString());
+				loginfo.setUsername("朱培军");
+				loginfo.setCreatetime(new Date());
+				loginfo.setType("删除商品记录");
+				loginfo.setDescription(goods.toString());
+				logDao.add(loginfo);
+			}
 		}
 		goodsDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
 	}

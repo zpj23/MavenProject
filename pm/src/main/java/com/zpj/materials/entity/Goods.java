@@ -134,6 +134,17 @@ public class Goods implements java.io.Serializable{
 	public void setGoodsTypeName(String goodsTypeName) {
 		this.goodsTypeName = goodsTypeName;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "id:"+this.getId()+
+				",name:"+this.getName()
+				+",type:"+this.getType()
+				+",unit:"+this.getUnit()
+				+",purchasePrice:"+this.getPurchasePrice()+
+				",sellingPrice:"+this.getSellingPrice()+
+				",supplierName:"+this.getSupplierName()+
+				",goodsType:"+this.getGoodsType()+
+				",remark:"+this.getRemark();
+	}
 }

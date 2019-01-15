@@ -88,7 +88,7 @@ public class Supplier implements java.io.Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-	@Column(name = "phone", length = 20)
+	@Column(name = "phone", length = 100)
 	public String getPhone() {
 		return phone;
 	}
@@ -110,5 +110,16 @@ public class Supplier implements java.io.Serializable{
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return "id:"+this.getId()+
+				",name:"+this.getName()
+				+",address:"+this.getAddress()
+				+",contactname:"+this.getContactname()
+				+",phone:"+this.getPhone()+
+				",remark:"+this.getRemark()+
+				",createtime:"+this.getCreatetime();
+	}
 }
