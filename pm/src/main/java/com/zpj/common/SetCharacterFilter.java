@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zpj.jwt.JwtUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -28,7 +29,8 @@ public class SetCharacterFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		req.setCharacterEncoding(endcoding);
-		
+
+
 		/*res.setHeader("Access-Control-Allow-Origin", "*"); 
 		res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
 		res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");*/
@@ -48,6 +50,19 @@ public class SetCharacterFilter implements Filter{
 	        } 
 		}else{
 			chain.doFilter(request, response);
+			//判断是否是手机传过来的请求
+//			if(str_href.indexOf("vue/login/checkLogin")>0){
+//				chain.doFilter(request, response);
+//			}else if(str_href.indexOf("vue")>0){
+//				String token =req.getParameter("token");
+//				User user=JwtUtil.getUserByJson(token);
+//				if(null!=user){
+//					req.getSession().setAttribute("jluser",user);
+//					chain.doFilter(request, response);
+//				}
+//			}else{
+//				chain.doFilter(request, response);
+//			}
 		}
 	}
 	public boolean judgeIsPass(String spath){

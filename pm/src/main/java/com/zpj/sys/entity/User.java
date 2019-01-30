@@ -46,7 +46,16 @@ public class User implements java.io.Serializable {
 	private String description;//描述
 	
 	private String isAdmin;//1是，0不是
-	
+
+	public User(){
+
+	}
+	public User(String id,String name,String password){
+		this.id=id;
+		this.name=name;
+		this.password=password;
+	}
+
 	@Id
 	@Column(name = "id", unique = true, nullable = false ,length=36)
 	public String getId() {

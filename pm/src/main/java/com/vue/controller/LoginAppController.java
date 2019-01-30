@@ -3,6 +3,9 @@ package com.vue.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.zpj.jwt.Constant;
+import com.zpj.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +47,7 @@ public class LoginAppController extends BaseController {
 			getSession().setAttribute("jluser", user);
 			map1.put("msg", true);
 			map1.put("data", user);
+			map1.put("token",JwtUtil.buildJsonByUser(user));
 		}else{
 			map1.put("msg", false);
 		}
