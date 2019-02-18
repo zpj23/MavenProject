@@ -502,13 +502,17 @@ public class BaseDao<T extends Serializable> {
 		if (lt != null) {
 			num=Integer.parseInt(((BigInteger) lt.get(0)[0]).toString());
 		}
-
+		int s=px.size();
 		// 结果集
-		if(px.size()>0){
+		if(s>0){
 			sql.append(" order by ");
+			int jsq=0;
 			for (Map.Entry<String, Object> entry : px.entrySet()) {
+				if(jsq>0){
+					sql.append(",");
+				}
 				sql.append(entry.getKey().toString()).append(" ").append(value = entry.getValue().toString()).append(" ");
-
+				jsq++;
 			}
 		}
 		
