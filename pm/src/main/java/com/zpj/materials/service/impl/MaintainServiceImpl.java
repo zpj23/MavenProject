@@ -44,6 +44,7 @@ public class MaintainServiceImpl implements MaintainService {
 		
 		Map px=new HashMap();
 	    px.put("registertime", "desc");
+	    px.put("createtime", "desc");
 		return maintainDao.findPageDateSqlT(tablename, param,px , page, limit, Maintain.class);
 	}
 
@@ -52,6 +53,7 @@ public class MaintainServiceImpl implements MaintainService {
 		if(null!=info.getId()&&!"".equalsIgnoreCase(info.getId())){
 			Maintain user=this.findById(info.getId());
 			if(null!=user){
+				info.setCreatetime(user.getCreatetime());
 				maintainDao.merge(info,info.getId());
 			}else{
 				maintainDao.add(info);

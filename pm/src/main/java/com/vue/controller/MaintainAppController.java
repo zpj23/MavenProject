@@ -45,6 +45,7 @@ public class MaintainAppController extends BaseController{
 			Maintain mt =new Maintain();
 			if(null==id||id.equalsIgnoreCase("")){
 				mt.setId(UUID.randomUUID().toString());
+				mt.setCreatetime(new Date());
 			}else{
 				mt.setId(id);
 			}
@@ -57,7 +58,6 @@ public class MaintainAppController extends BaseController{
 			}else{
 				mt.setIsPay(isPayCode);
 			}
-			mt.setCreatetime(new Date());
 			maintainService.saveInfo(mt);
 			map.put("msg", true);
 //			map.put("data", mt);
