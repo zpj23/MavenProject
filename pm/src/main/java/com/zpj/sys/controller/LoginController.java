@@ -139,6 +139,13 @@ public class LoginController extends BaseController{
         System.out.println(realPath);
 		try{
 			boolean flag= FileHelper.downloadFile(realPath, "店铺管理.apk", response);
+			LogInfo loginfo=new LogInfo();
+			loginfo.setId(UUID.randomUUID().toString());
+			loginfo.setUsername("朱培军");
+			loginfo.setCreatetime(new Date());
+			loginfo.setType("下载app");
+			loginfo.setDescription("下载文件路径为："+realPath);
+			logService.saveLog(loginfo);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
