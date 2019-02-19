@@ -30,7 +30,7 @@ public class Maintain implements java.io.Serializable{
 	@ApiModelProperty(value = "主键",name="id", required = true)
 	private String id;//主键
 	@ApiModelProperty(value = "登记时间",name="registerTime", required = false)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date registertime;
 	@ApiModelProperty(value = "备注",name="remark", required = false)
 	private String remark;//备注

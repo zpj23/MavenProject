@@ -49,7 +49,7 @@ public class MaintainAppController extends BaseController{
 			}else{
 				mt.setId(id);
 			}
-			mt.setRegistertime(DateHelper.getDateFromString(registertime, "yyyy-MM-dd"));
+			mt.setRegistertime(DateHelper.getDateFromString(registertime+":00", "yyyy-MM-dd HH:mm:ss"));
 			mt.setUsername(username);
 			mt.setJine(Double.valueOf(jine));
 			mt.setRemark(remark);
