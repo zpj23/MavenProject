@@ -55,6 +55,7 @@ public class DictionaryAppController extends BaseController{
 	@RequestMapping("/getSecondType")
 	@ResponseBody
 	public void getSecondType(String code){
+		String showName=ResourceCodeUtil.dpspType.get(code);
 		Map map=new HashMap();
 		List<Map> third=new ArrayList<>() ;
 		StringBuilder sb=new StringBuilder(50);
@@ -65,7 +66,9 @@ public class DictionaryAppController extends BaseController{
 				third.add(ResourceCodeUtil.third.get(k));
 			}
 		}
-		map.put("third", third); 
+		sb=null;
+		map.put("third", third);
+		map.put("title",showName);
 		Map param=new HashMap();
 		MyPage pagedata =goodsService.findPageData(param,1,500);		
 		if(null==pagedata.getData()){
@@ -147,7 +150,7 @@ public class DictionaryAppController extends BaseController{
 	/**
 	 * @Description (直接查询sys_dictionary_type展示数据列表)
 	 * @title findDataListInDataBaseByTypeCode
-	 * @param code void
+	 * @param
 	 * @author zpj
 	 * @Date 2018年12月9日 上午11:28:13
 	 */
