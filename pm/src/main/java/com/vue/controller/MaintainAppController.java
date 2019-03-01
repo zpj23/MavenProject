@@ -1,11 +1,7 @@
 package com.vue.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,7 +99,8 @@ public class MaintainAppController extends BaseController{
 			this.jsonWrite2(map);
 		}
 	}
-	
+
+
 //	public UserInfo getCurrentUser(HttpServletRequest request){
 //		UserInfo user = (UserInfo)request.getSession().getAttribute("jluserinfo");
 //		if(user==null){

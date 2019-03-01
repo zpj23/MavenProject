@@ -1,10 +1,6 @@
 package com.zpj.materials.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,7 +92,14 @@ public class MaintainServiceImpl implements MaintainService {
 			maintainDao.executeSql(" delete from "+tablename+" where id in ("+sb+")");
 		}
 	}
-
+	public List findUserNameList(){
+		List<Map> list=maintainDao.findMapObjBySqlNoPage("select DISTINCT(username) as name from "+tablename+" GROUP BY username ");
+		List list1=new ArrayList();
+		for (int i = 0; i <list.size() ; i++) {
+			list1.add(list.get(i).get("name"));
+		}
+		return list1;
+	}
 	public Maintain findById(String id) {
 		return maintainDao.get(id,Maintain.class);
 	}	
