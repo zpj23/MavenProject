@@ -18,6 +18,7 @@ import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
 
 import net.sf.ehcache.store.disk.ods.AATreeSet;
+import redis.clients.jedis.Jedis;
 
 /**
     * @ClassName: 字典资源初始化
@@ -28,7 +29,9 @@ import net.sf.ehcache.store.disk.ods.AATreeSet;
     */
     
 public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEvent>{
-	
+	/**
+	 * 根据code查询子节点下面的信息列表List<DictionaryType>
+	 */
 	public static Map<String,List<DictionaryType>> typeMap=new HashMap();
 	public static Map<String,List<DictionaryItem>> itemMap=new HashMap();
 	
@@ -45,7 +48,9 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	    */
 	    
 	public static List<Map> dpsp=new ArrayList<>();
-	
+
+	//jedis对象
+	public Jedis jedis=null;
 	
 	    /**
 	    * @Fields fst : 分别获取三层级的数据
@@ -73,6 +78,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	}
 	
 	public void initDictionary() {
+		jedis=RedisUtil.getJedis();
 		System.out.println("----初始化字典数据-----");
 		itemMap.clear();
 		typeMap.clear();
@@ -95,7 +101,6 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 			}
 		}
 		typeMap.put("ROOT", topList);
-		
 		/********初始化所有type信息**结束*********/
 		
 		
@@ -104,6 +109,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 		for(int q=0;q<typeList.size();q++){
 			dpspType.put(typeList.get(q).getTypeCode(),typeList.get(q).getTypeName());
 		}
+		jedis.hmset("dpspType",dpspType);
 		/********初始化商品分类信息**结束*********/
 		
 		/********初始化字典值信息**开始**************************/
@@ -226,7 +232,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 //		System.out.println(second);
 //		System.out.println(third);
 		/*****************/
-		System.out.println(typeMap);
+//		System.out.println(typeMap);
 	}
 	
 	

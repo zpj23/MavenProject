@@ -112,6 +112,16 @@ public class MaintainAppController extends BaseController{
 //		}
 //		return user;
 //	}
-	
-	
+
+
+	@RequestMapping("/findUserNameList")
+	@ResponseBody
+	public void findUserNameList(String name){
+		List list=maintainService.findUserNameList();
+		Map map =new HashMap();
+		map.put("msg", true);
+		map.put("data",list);
+		this.jsonWrite2(map);
+
+	}
 }
