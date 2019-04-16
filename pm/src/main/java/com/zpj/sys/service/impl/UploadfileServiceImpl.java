@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.zpj.common.FileHelper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class UploadfileServiceImpl implements UploadfileService{
 				String filetype = originalname.substring(originalname.lastIndexOf(".")+1);
 				String filename = DateHelper.getDateString(new Date(), "YYYYMMddHHmmssSSS")+"."+filetype;
 				String path = request.getSession().getServletContext().getRealPath("ueditor");
-				
+//				String path="D://haha/ueditor";
 				File targetFile = new File(path, filename);  
 		        if(!targetFile.exists()){  
 		            targetFile.mkdirs();  
@@ -45,8 +46,9 @@ public class UploadfileServiceImpl implements UploadfileService{
 	            file.transferTo(targetFile);
 	            //保存到数据库
 	            SysUploadFile fi = new SysUploadFile();
-	            fileUrl= request.getContextPath()+"/ueditor/"+filename;
-	            fi.setFileId(UUID.randomUUID().toString());
+	           // fileUrl= request.getContextPath()+"/ueditor/"+filename;
+				fileUrl= "/ueditor/"+filename;
+				fi.setFileId(UUID.randomUUID().toString());
 	            fi.setFileName(filename);
 				fi.setFileAlias(originalname); //文件原始名称
 				fi.setFileUrl(fileUrl);

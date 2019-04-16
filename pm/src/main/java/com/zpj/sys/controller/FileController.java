@@ -1,9 +1,11 @@
 package com.zpj.sys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -111,5 +113,120 @@ public class FileController extends BaseController{
 			FileHelper.downloadFile(path, filename, response);			
 		
 	}
+	
+	
+//	@RequestMapping("/image")  
+//	@ResponseBody
+//	public void image(@RequestParam("file")MultipartFile file,String path,HttpServletResponse response) throws IOException { 
+//		ResultData<Object> rd = new ResultData<>();
+//		String issave=CodeHelper.getCodeValue("issave");
+//		String url="/upload/image.do";
+//		String parmas="";
+//		parmas="file="+file+"&path="+path;
+//		try {
+//			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+//			if("jpg,png,bmp,jpeg".indexOf(suffix)<0){
+//				rd.setSuccess(false);
+//				rd.setMsg("文件格式不正确，请上传jpg,png,bmp,jpeg格式的图片文件！");
+//			}else{ // 10m
+//				rd.setMsg(FileUploadUtils.upload(file, path, request));
+//				rd.setSuccess(true);
+//			}
+//			if(issave.equals("true"))
+//				Logger.getLogger(this.getClass()).info(url+"|"+parmas+"|上传图片");
+//			
+//		} catch (Exception e) {
+//			rd.setSuccess(false);
+//			Logger.getLogger(this.getClass()).error(e.getMessage()+"|"+url+"|"+parmas+"|上传图片");
+//		}
+//		response.setCharacterEncoding("UTF-8");
+//		//response.getWriter().write(EmiJsonObj.fromObject(rd).toString());
+//		response.getWriter().write(EmiJsonObj.fromObject(true).toString());
+//	} 
+//
+//	@RequestMapping("/video")  
+//	@ResponseBody  
+//	public void video(@RequestParam("file")MultipartFile file,String path,HttpServletResponse response) throws IOException { 
+//		ResultData<Object> rd = new ResultData<>();
+//		String issave=CodeHelper.getCodeValue("issave");
+//		String url="/upload/video.do";
+//		String parmas="";
+//		parmas="file="+file+"&path="+path;
+//		try {
+//			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+//			if("mp3,wav,wma,mp4".indexOf(suffix)<0){
+//				rd.setSuccess(false);
+//				rd.setMsg("文件格式不正确，请上传mp3,wav,wma,mp4格式的音频文件！");
+//			}else{
+//				rd.setMsg(FileUploadUtils.upload(file, path, request));
+//				rd.setSuccess(true);
+//			}
+//			if(issave.equals("true"))
+//				Logger.getLogger(this.getClass()).info(url+"|"+parmas+"|上传视频");
+//		} catch (Exception e) {
+//			rd.setSuccess(false);
+//			Logger.getLogger(this.getClass()).error(e.getMessage()+"|"+url+"|"+parmas+"|上传视频");
+//		}
+//		response.setCharacterEncoding("UTF-8");
+//		response.getWriter().write(EmiJsonObj.fromObject(rd).toString());
+//	}
+//
+//	@RequestMapping("/photo")  
+//	@ResponseBody  
+//	public void photo(@RequestParam("file")MultipartFile file,String path,HttpServletResponse response) throws IOException { 
+//		ResultData<Object> rd = new ResultData<>();
+//		String issave=CodeHelper.getCodeValue("issave");
+//		String url="/upload/photo.do";
+//		String parmas="";
+//		parmas="file="+file+"&path="+path;
+//		try {
+//			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+//			if("jpg,png,bmp,jpeg".indexOf(suffix)<0){
+//				rd.setSuccess(false);
+//				rd.setMsg("文件格式不正确，请上传jpg,png,bmp,jpeg格式的图片文件！");
+//			}else{
+//				rd.setMsg(FileUploadUtils.upload(file, path, request));
+//				rd.setSuccess(true);
+//			}
+//			if(issave.equals("true"))
+//				Logger.getLogger(this.getClass()).info(url+"|"+parmas+"|上传照片");
+//		} catch (Exception e) {
+//			rd.setSuccess(false);
+//			Logger.getLogger(this.getClass()).error(e.getMessage()+"|"+url+"|"+parmas+"|上传照片");
+//		}
+//		response.setCharacterEncoding("UTF-8");
+//		response.getWriter().write(EmiJsonObj.fromObject(rd).toString());
+//	}
+//
+//	@RequestMapping("/file")  
+//	@ResponseBody  
+//	public void file(@RequestParam("file")MultipartFile file,String path) { 
+//		ResultData<Map> rd = new ResultData<>();
+//		String issave=CodeHelper.getCodeValue("issave");
+//		String url="/upload/file.do";
+//		String parmas="";
+//		parmas="file="+file+"&path="+path;
+//		try {
+//			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+//			if("mp3,mp4,wav,wma,jpg,png,bmp,jpeg,txt,doc,docx,xls,lrc".indexOf(suffix)<0){
+//				rd.setSuccess(false);
+//				rd.setMsg("文件格式不正确，请上传mp3,mp4,wav,wma,jpg,png,bmp,jpeg,txt,doc,docx,xls,lrc格式的文件！");
+//			}else{
+//				Map m = new HashMap();
+//				m.put("path", FileUploadUtils.upload2(file, path, request));
+//				m.put("name", file.getOriginalFilename());
+//				rd.setData(m);
+//				rd.setSuccess(true);
+//			}
+//			if(issave.equals("true"))
+//				Logger.getLogger(this.getClass()).info(url+"|"+parmas+"|上传文件");
+//		} catch (Exception e) {
+//			rd.setSuccess(false);
+//			Logger.getLogger(this.getClass()).error(e.getMessage()+"|"+url+"|"+parmas+"|上传文件");
+//		}
+//		responseJson(rd);
+//	}
+
+	
 	
 }

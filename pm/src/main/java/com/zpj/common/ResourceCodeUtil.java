@@ -50,7 +50,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	public static List<Map> dpsp=new ArrayList<>();
 
 	//jedis对象
-	public Jedis jedis=null;
+//	public Jedis jedis=null;
 	
 	    /**
 	    * @Fields fst : 分别获取三层级的数据
@@ -78,7 +78,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	}
 	
 	public void initDictionary() {
-		jedis=RedisUtil.getJedis();
+//		jedis=RedisUtil.getJedis();
 		System.out.println("----初始化字典数据-----");
 		itemMap.clear();
 		typeMap.clear();
@@ -109,7 +109,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 		for(int q=0;q<typeList.size();q++){
 			dpspType.put(typeList.get(q).getTypeCode(),typeList.get(q).getTypeName());
 		}
-		jedis.hmset("dpspType",dpspType);
+//		jedis.hmset("dpspType",dpspType);
 		/********初始化商品分类信息**结束*********/
 		
 		/********初始化字典值信息**开始**************************/
