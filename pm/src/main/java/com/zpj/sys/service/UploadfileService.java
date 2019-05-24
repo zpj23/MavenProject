@@ -1,5 +1,6 @@
 package com.zpj.sys.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,5 +29,7 @@ public interface UploadfileService {
 	String findFiles(String tableid, String modeltype);
 
 	void delFile(String fileid);
+
+	public String findFilesList(String tableid, String modeltype);
 
 }

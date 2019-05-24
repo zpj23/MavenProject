@@ -1,11 +1,7 @@
 package com.zpj.sys.service.impl;
 
 import java.io.File;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,6 +56,7 @@ public class UploadfileServiceImpl implements UploadfileService{
 				filedao.add(fi);
 				retMap.put("path", fileUrl);
 				retMap.put("id", fi.getFileId());
+				retMap.put("orgin",originalname);
 			}
             return retMap;
 	} catch (Exception e) {
@@ -126,7 +123,24 @@ public class UploadfileServiceImpl implements UploadfileService{
 		}
 		return "[]";
 	}
-
+	public String findFilesList(String tableid, String modeltype) {
+		String sql = "select * from SYS_UploadFile  where tableid='"+tableid+"' ";
+		if(StringUtils.isNotEmpty(modeltype)){
+			sql +=" and  modeltype ='"+modeltype+"'";
+		}
+		sql +=" order by createdate  ";
+		List<SysUploadFile> list = filedao.findBySqlT(sql, SysUploadFile.class);
+		StringBuilder sb=new StringBuilder(500);
+		if(list!=null&&list.size()>0){
+			for(int m=0;m<list.size();m++){
+				if(m>0){
+					sb.append(",");
+				}
+				sb.append(list.get(m).getFileUrl());
+			}
+		}
+		return sb.toString();
+	}
 
 	
 	public void delFile(String fileid) {

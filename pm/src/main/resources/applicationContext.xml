@@ -123,6 +123,11 @@
 <!--     <bean id="redisHttpSessionConfiguration" class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"> -->
 <!--         <property name="maxInactiveIntervalInSeconds" value="1800" /> -->
 <!--     </bean> -->
+<!--     redis缓存功能的bean -->
+<!--     <bean id="redisUtil" class="com.zpj.common.redis.RedisUtil"> -->
+<!-- 		<property name="redisTemplate" ref="redisTemplate" /> -->
+<!-- 	</bean> -->
+    
     
     <!-- Spring aop事务管理 -->
     <!-- 打开aop 注解 -->

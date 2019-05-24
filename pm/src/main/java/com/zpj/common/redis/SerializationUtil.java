@@ -1,4 +1,4 @@
-package com.zpj.common;
+package com.zpj.common.redis;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

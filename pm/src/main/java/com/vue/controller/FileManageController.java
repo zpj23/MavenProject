@@ -28,23 +28,28 @@ public class FileManageController extends BaseController{
 	@RequestMapping("upload")
 	@ResponseBody
 	public void uploadMultiply(HttpServletRequest request,MultipartFile file,String tableid,String modeltype) {
-		Map map=new HashMap();
+		tableid=request.getParameter("uid");
+		modeltype=request.getParameter("type");
 		MultipartHttpServletRequest mRequest=(MultipartHttpServletRequest)request;
 		Iterator<String> fns=mRequest.getFileNames();//获取上传的文件列表
+		List<Map> retList=new ArrayList<Map>();
+		Map map;
 		while(fns.hasNext()){
 			String s =fns.next();
 			System.out.println(s+"==="+mRequest.getFile(s));
 //          System.out.println(mRequest.getFile(s));//get file success!!!!!
 			MultipartFile mFile = mRequest.getFile(s);
+			map=new HashMap();
 			if(mFile.isEmpty()){
 				map.put("error", "EventAction.picture.failed");
+				map.put("status", 500);
 			}else{
-				uploadfileService.uploadMultiply(request,mFile,tableid,modeltype);
+				map=uploadfileService.uploadMultiply(request,mFile,tableid,modeltype);
+				map.put("status", 200);
 			}
+			retList.add(map);
 		}
-
-		map.put("code", 0);
-		this.jsonWrite2(map);
+		this.jsonWrite2(retList);
 	}
 
 }

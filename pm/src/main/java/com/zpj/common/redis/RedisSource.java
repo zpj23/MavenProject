@@ -1,25 +1,22 @@
-package com.zpj.common;/*
- * @Author zhupeijun
- * @Description //TODO $end$
- * @Date $time$ $date$
- * @Param $param$
- * @return $return$
- **/
-
-import com.zpj.sys.entity.User;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+package com.zpj.common.redis;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RedisUtil {
-    //服务器IP地址
+import org.junit.Test;
+
+import com.zpj.sys.entity.User;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+public class RedisSource {
+
+	//对象
+	public Jedis jedisTemplate;
+	//服务器IP地址
     private static String ADDR = "127.0.0.1";
 //端口
     private static int PORT = 6379;
@@ -42,6 +39,7 @@ public class RedisUtil {
 
     private static JedisPool jedisPool = null;
 
+    
     /**
      * 初始化Redis连接池
      */
@@ -101,17 +99,17 @@ public class RedisUtil {
     }
 
     public static void main(String[] args) {
-        Jedis jedis=RedisUtil.getJedis();
-        Jedis jedis1=RedisUtil.getJedis();
-        Jedis jedis2=RedisUtil.getJedis();
-        Jedis jedis3=RedisUtil.getJedis();
-        Jedis jedis4=RedisUtil.getJedis();
-        System.out.println("");RedisUtil.getJedis();
+        Jedis jedis=RedisSource.getJedis();
+        Jedis jedis1=RedisSource.getJedis();
+        Jedis jedis2=RedisSource.getJedis();
+        Jedis jedis3=RedisSource.getJedis();
+        Jedis jedis4=RedisSource.getJedis();
+        System.out.println("");RedisSource.getJedis();
         jedis.set("zpj12","hahha");
         jedis4.lpush("","");
         System.out.println(jedis.get("zpj12"));
         System.out.println(jedis);
-        RedisUtil.returnResource(jedis);
+        RedisSource.returnResource(jedis);
         System.out.println(jedis.get("zpj2"));
         System.out.println(jedis);
 
@@ -124,7 +122,7 @@ public class RedisUtil {
     public void test1() {
         String name = "name";
         String value = "qq";
-        Jedis jedis=RedisUtil.getJedis();
+        Jedis jedis=this.getJedis();
         jedis.set(name, value);
         System.out.println("追加前：" + jedis.get(name)); // 追加前：qq
 
@@ -144,7 +142,7 @@ public class RedisUtil {
      */
     @Test
     public void test2() {
-        Jedis jedis=RedisUtil.getJedis();
+        Jedis jedis=this.getJedis();
         jedis.mset("name1", "aa", "name2", "bb", "name3", "cc");
         System.out.println(jedis.mget("name1", "name2", "name3"));
     }
@@ -154,7 +152,7 @@ public class RedisUtil {
      */
     @Test
     public void test3() {
-        Jedis jedis=RedisUtil.getJedis();
+        Jedis jedis=this.getJedis();
         Map<String, String> map = new HashMap<String, String>();
         map.put("name", "fujianchao");
         map.put("password", "123");
@@ -189,7 +187,7 @@ public class RedisUtil {
      */
     @Test
     public void test4() {
-        Jedis jedis=RedisUtil.getJedis();
+        Jedis jedis=this.getJedis();
         jedis.lpush("list", "aa");
         jedis.lpush("list", "bb");
         jedis.lpush("list", "cc");
@@ -207,7 +205,7 @@ public class RedisUtil {
      */
     @Test
     public void test5() {
-        Jedis jedis=RedisUtil.getJedis();
+        Jedis jedis=this.getJedis();
         User user = new User();
         user.setId("123");
         user.setName("fighter");

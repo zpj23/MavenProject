@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.mysql.fabric.xmlrpc.base.Array;
+import com.zpj.common.redis.RedisUtil;
 import com.zpj.sys.entity.DictionaryItem;
 import com.zpj.sys.entity.DictionaryType;
 import com.zpj.sys.service.DictionaryService;
@@ -37,7 +38,7 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	
 	
 	    /**
-	    * @Fields dpspType : 可以根据code获取中文值
+	    * @Fields dpspType : 可以根据code获取中文值   key:编码,value:中文名称  
 	    */
 	    
 	public static Map<String,String> dpspType=new HashMap();
@@ -49,8 +50,6 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	    
 	public static List<Map> dpsp=new ArrayList<>();
 
-	//jedis对象
-//	public Jedis jedis=null;
 	
 	    /**
 	    * @Fields fst : 分别获取三层级的数据
@@ -63,6 +62,8 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	@Autowired
 	public DictionaryService dictionaryService;
 	
+//	@Autowired
+//	public RedisUtil redisUtil;
 	
 	
 	public static List<DictionaryType> findSon(DictionaryType cdt,List<DictionaryType> list){
@@ -78,7 +79,6 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 	}
 	
 	public void initDictionary() {
-//		jedis=RedisUtil.getJedis();
 		System.out.println("----初始化字典数据-----");
 		itemMap.clear();
 		typeMap.clear();
@@ -110,6 +110,10 @@ public class ResourceCodeUtil implements ApplicationListener<ContextRefreshedEve
 			dpspType.put(typeList.get(q).getTypeCode(),typeList.get(q).getTypeName());
 		}
 //		jedis.hmset("dpspType",dpspType);
+//		redisUtil.hPutAll("dpspType", dpspType);
+		
+//		Map tempMap=redisUtil.hGetAll("dpspType");
+		
 		/********初始化商品分类信息**结束*********/
 		
 		/********初始化字典值信息**开始**************************/

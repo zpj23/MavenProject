@@ -10,6 +10,7 @@ import com.zpj.common.BaseController;
 import com.zpj.common.MyPage;
 import com.zpj.materials.entity.KnowledgeInfo;
 import com.zpj.materials.service.KnowledgeService;
+import com.zpj.sys.service.UploadfileService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class KnowledgeAppController extends BaseController {
 
     @Autowired
     private KnowledgeService knowledgeService;
+    @Autowired
+    private UploadfileService uploadfileService;
 
     @RequestMapping("/findList")
     @ResponseBody
@@ -48,5 +51,17 @@ public class KnowledgeAppController extends BaseController {
         map.put("totalPage", totalPage);
         map.put("count", tot);
         this.jsonWrite2(map);
+    }
+
+    @RequestMapping("/findById")
+    @ResponseBody
+    public void findById(String id){
+        KnowledgeInfo knowledgeInfo=knowledgeService.findById(id);
+        String url=uploadfileService.findFilesList(id,"pic");
+        knowledgeInfo.setUrl(url);
+        Map map=new HashMap();
+        map.put("msg", true);
+        map.put("data", knowledgeInfo);
+        jsonWrite2(map);
     }
 }
