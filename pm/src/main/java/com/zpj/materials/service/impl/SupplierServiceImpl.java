@@ -31,7 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplierDao.findPageDateSqlT(tablename, param,px , page, limit, Supplier.class);
 	}
 
-	@Log(type="保存",remark="保存供货商信息")
+	//@Log(type="保存",remark="保存供货商信息")
 	public void saveInfo(Supplier info) {
 		if(info.getId()!=0){
 			Supplier user=this.findById(info.getId());

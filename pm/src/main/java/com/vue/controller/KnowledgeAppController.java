@@ -7,6 +7,7 @@ package com.vue.controller;
 */
 
 import com.zpj.common.BaseController;
+import com.zpj.common.DateHelper;
 import com.zpj.common.MyPage;
 import com.zpj.materials.entity.KnowledgeInfo;
 import com.zpj.materials.service.KnowledgeService;
@@ -57,11 +58,45 @@ public class KnowledgeAppController extends BaseController {
     @ResponseBody
     public void findById(String id){
         KnowledgeInfo knowledgeInfo=knowledgeService.findById(id);
-        String url=uploadfileService.findFilesList(id,"pic");
-        knowledgeInfo.setUrl(url);
+        //String url=uploadfileService.findFilesList(id,"pic");
+//        knowledgeInfo.setUrl(url);
         Map map=new HashMap();
         map.put("msg", true);
         map.put("data", knowledgeInfo);
         jsonWrite2(map);
+    }
+
+    @RequestMapping("/saveInfo")
+    @ResponseBody
+    public void saveInfo(String id,String registertime,String title,String content ,String picurl,String loginId,String isAdmin){
+        Map map=new HashMap();
+        try{
+            KnowledgeInfo mt =new KnowledgeInfo();
+            mt.setId(id);
+            mt.setRegistertime(DateHelper.getDateFromString(registertime+":00", "yyyy-MM-dd HH:mm:ss"));
+            mt.setTitle(title);
+            mt.setContent(content);
+            mt.setUrl(picurl);
+            knowledgeService.saveInfo(mt);
+            map.put("msg", true);
+//			map.put("data", mt);
+        }catch (Exception e) {
+            map.put("msg", false);
+            e.printStackTrace();
+        }
+
+        jsonWrite2(map);
+    }
+
+
+    @RequestMapping("/delInfoById")
+    @ResponseBody
+    public void delInfoById(String delId,String loginId,String isAdmin){
+        if(null!=delId&&!delId.equalsIgnoreCase("")){
+            knowledgeService.delete(delId);
+            Map map =new HashMap();
+            map.put("msg", true);
+            this.jsonWrite2(map);
+        }
     }
 }

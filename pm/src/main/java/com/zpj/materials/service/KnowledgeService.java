@@ -11,4 +11,8 @@ public interface KnowledgeService {
     MyPage findPageData(Map params, Integer page, Integer limit);
 
     public KnowledgeInfo findById(String id);
+
+    public void saveInfo(KnowledgeInfo info);
+
+    void delete(String deleteID);
 }

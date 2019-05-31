@@ -71,4 +71,16 @@ public class KnowledgeInfo implements java.io.Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder=new StringBuilder(100);
+        stringBuilder.append("id:"+this.getId())
+                .append(",registertime:"+this.getRegistertime())
+                .append(",title:"+this.title)
+                .append(",content:"+this.getContent())
+                .append(",url:"+this.getUrl());
+        return stringBuilder.toString();
+    }
 }
