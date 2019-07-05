@@ -124,4 +124,33 @@ public class MaintainAppController extends BaseController{
 		this.jsonWrite2(map);
 
 	}
+	@RequestMapping("/findChartData")
+	@ResponseBody
+	public void findChartData(String datemin,String datemax,String username,String ispay,String remark,String cpage,String pagerow,String loginId,String isAdmin ){
+//		List list=maintainService.findUserNameList();
+		Map param=new HashMap();
+		param.put("username", username);
+		param.put("starttime", datemin);
+		param.put("endtime", datemax);
+		param.put("ispay", ispay);
+		param.put("remark", remark);
+		//付款饼图数据
+		List list=maintainService.findPayCount(param);
+//		MyPage pagedata =maintainService.findPageData(param,Integer.parseInt(cpage),Integer.parseInt(pagerow));
+		Map map=new HashMap();
+//		if(null==pagedata.getData()){
+//			map.put("list", new ArrayList());
+//		}else{
+//			map.put("list", pagedata.getData());
+//		}
+//		int tot=(Integer)pagedata.getCount();
+//		double totalPage=Math.ceil((float)tot/Integer.parseInt(pagerow));
+//		map.put("totalPage", totalPage);
+		map.put("bingtu", list);
+		map.put("msg", true);
+		this.jsonWrite2(map);
+
+	}
+
+
 }

@@ -1,11 +1,6 @@
 package com.zpj.materials.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -19,9 +14,10 @@ import javax.persistence.Table;
 @Table(name = "jl_material_purchase_detail_info")
 public class PurchaseDetail implements java.io.Serializable {
 	private int id;//主键
-	private int goodsid;//物资id
+	private String goodsid;//物资id
+	private String goodsName;//商品名称
 	private double goodsprice;//物资单价
-	private int supplierid;//供应商id;
+	private String supplierid;//供应商id;
 	private double num=0;//采购数量
 	private String purchaseid;//关联采购单主键id
 	@Id
@@ -34,10 +30,10 @@ public class PurchaseDetail implements java.io.Serializable {
 		this.id = id;
 	}
 	@Column(name = "goodsid",  nullable = false, precision = 22, scale = 0)
-	public int getGoodsid() {
+	public String getGoodsid() {
 		return goodsid;
 	}
-	public void setGoodsid(int goodsid) {
+	public void setGoodsid(String goodsid) {
 		this.goodsid = goodsid;
 	}
 	@Column(name = "goodsprice", precision=12 ,scale=2)
@@ -49,10 +45,10 @@ public class PurchaseDetail implements java.io.Serializable {
 	}
 	
 	@Column(name = "supplierid",   precision = 22, scale = 0)
-	public int getSupplierid() {
+	public String getSupplierid() {
 		return supplierid;
 	}
-	public void setSupplierid(int supplierid) {
+	public void setSupplierid(String supplierid) {
 		this.supplierid = supplierid;
 	}
 	@Column(name = "num", precision=12 ,scale=2)
@@ -70,6 +66,22 @@ public class PurchaseDetail implements java.io.Serializable {
 	public void setPurchaseid(String purchaseid) {
 		this.purchaseid = purchaseid;
 	}
-	
-	
+
+	@Transient
+	public String getGoodsName() {
+		return goodsName;
+	}
+
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder(200);
+		stringBuilder.append("goodsid:"+this.getGoodsid())
+				.append(",goodsprice:"+this.getGoodsprice())
+				.append(",num:"+this.getNum()).append(",purchaseid:"+this.getPurchaseid());
+		return stringBuilder.toString();
+	}
 }

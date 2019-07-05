@@ -22,14 +22,14 @@ import javax.persistence.TemporalType;
 @Table(name = "jl_material_outstore_info")
 public class OutStore implements java.io.Serializable {
 	private int id;//主键
-	private int goodsid;//物资id
-	private int supplierid;//供应商id
+	private String goodsid;//物资id
+	private String supplierid;//供应商id
 	private int departmentid;//部门id
 	private String chargename;//领用人姓名
 	private double num=0;//出库数量
 	private double price=0;//出库（领用）金额
 	private Date createtime;//出库时间
-	
+	private String purchaseid;//采购单id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	@Column(name = "id",  nullable = false, precision = 22, scale = 0)
@@ -40,17 +40,17 @@ public class OutStore implements java.io.Serializable {
 		this.id = id;
 	}
 	@Column(name = "goodsid", precision = 22, scale = 0)
-	public int getGoodsid() {
+	public String getGoodsid() {
 		return goodsid;
 	}
-	public void setGoodsid(int goodsid) {
+	public void setGoodsid(String goodsid) {
 		this.goodsid = goodsid;
 	}
 	@Column(name = "supplierid", precision = 22, scale = 0)
-	public int getSupplierid() {
+	public String getSupplierid() {
 		return supplierid;
 	}
-	public void setSupplierid(int supplierid) {
+	public void setSupplierid(String supplierid) {
 		this.supplierid = supplierid;
 	}
 	@Column(name = "departmentid", precision = 22, scale = 0)
@@ -89,6 +89,22 @@ public class OutStore implements java.io.Serializable {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	
-	
+
+	public String getPurchaseid() {
+		return purchaseid;
+	}
+
+	public void setPurchaseid(String purchaseid) {
+		this.purchaseid = purchaseid;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder(200);
+		stringBuilder.append("goodsid:"+this.getGoodsid())
+				.append(",supplierid:"+this.getSupplierid())
+				.append(",num:"+this.getNum())
+				.append(",purchaseid:"+this.purchaseid);
+		return stringBuilder.toString();
+	}
 }

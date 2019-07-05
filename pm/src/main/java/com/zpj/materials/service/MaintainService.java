@@ -9,7 +9,9 @@ import com.zpj.materials.entity.Maintain;
 
 public interface MaintainService {
 	MyPage findPageData(Map params, Integer page, Integer limit);
-	
+
+	List findPayCount(Map param);
+
 	void saveInfo(Maintain info);
 
 	void delete(String deleteID);

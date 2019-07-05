@@ -1,15 +1,11 @@
 package com.zpj.materials.entity;
 
-import java.util.Date;
+import com.zpj.common.UUIDGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.*;
 
 /**
  * @Description: 采购登记表
@@ -21,14 +17,15 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "jl_material_purchase_info")
 public class Purchase implements java.io.Serializable {
-	private String id;//主键  生成规则CGD+时间戳
+	private String id= UUIDGenerator.generatePk("CGD");//主键  生成规则CGD+时间戳
 	private int departmentid;//采购部门id
-	private float totalprice;//合计采购金额
+	private double totalprice;//合计采购金额
 	private String chargename;//采购人
 	private int loginid;//登记人id
-	private String state;//采购状态（1采购中，2已审核入库，入库的话会存一条记录到入库表中,3未通过审核）
+	private String state;//0进货，1出货
 	private Date createtime;//创建时间采购时间
-	
+	private String name;//采购单名
+	private List<PurchaseDetail> details;//详细信息
 	@Id
 	@Column(name = "id")
 	public String getId() {
@@ -48,10 +45,10 @@ public class Purchase implements java.io.Serializable {
 	
 	
 	@Column(name = "totalprice", precision=12 ,scale=2)
-	public float getTotalprice() {
+	public double getTotalprice() {
 		return totalprice;
 	}
-	public void setTotalprice(float totalprice) {
+	public void setTotalprice(double totalprice) {
 		this.totalprice = totalprice;
 	}
 	@Column(name = "chargename", length = 100)
@@ -84,7 +81,30 @@ public class Purchase implements java.io.Serializable {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Transient
+	public List<PurchaseDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<PurchaseDetail> details) {
+		this.details = details;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder(200);
+		stringBuilder.append("name:"+this.getName())
+				.append(",state:"+this.getState())
+				.append(",totalprice:"+this.getTotalprice());
+		return stringBuilder.toString();
+	}
 }

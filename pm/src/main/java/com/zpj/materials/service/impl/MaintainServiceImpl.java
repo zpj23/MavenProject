@@ -29,10 +29,10 @@ public class MaintainServiceImpl implements MaintainService {
 		param.put("username-like", params.get("username"));
 		param.put("remark-like", params.get("remark"));
 		if(null!=params.get("starttime")&&!"".equalsIgnoreCase((String)params.get("starttime"))){
-			param.put("starttime-self", " registertime >='"+params.get("starttime")+"' ");
+			param.put("starttime-self", " registertime >='"+params.get("starttime")+" 00:00:00' ");
 		}
 		if(null!=params.get("endtime")&&!"".equalsIgnoreCase((String)params.get("endtime"))){
-			param.put("endtime-self", " registertime <='"+params.get("endtime")+"' ");
+			param.put("endtime-self", " registertime <='"+params.get("endtime")+" 23:59:59' ");
 		}
 		if(null!=params.get("ispay")&&!"".equalsIgnoreCase((String)params.get("ispay"))){
 			param.put("isPay-eq", params.get("ispay"));
@@ -42,6 +42,41 @@ public class MaintainServiceImpl implements MaintainService {
 	    px.put("registertime", "desc");
 //	    px.put("createtime", "desc");
 		return maintainDao.findPageDateSqlT(tablename, param,px , page, limit, Maintain.class);
+	}
+
+	public List findPayCount(Map params){
+		StringBuilder sql=new StringBuilder(100);
+		List retList=new ArrayList();
+		Map temp=null;
+		sql.append(" select sum(jine) as total from  "+tablename+" where isPay='1' ");
+		if(null!=params.get("starttime")&&!"".equalsIgnoreCase((String)params.get("starttime"))){
+			sql.append(" and registertime >='"+params.get("starttime")+"' ");
+		}
+		if(null!=params.get("endtime")&&!"".equalsIgnoreCase((String)params.get("endtime"))){
+			sql.append(" and registertime <='"+params.get("endtime")+"' ");
+		}
+		if(null!=params.get("username")&&!"".equalsIgnoreCase((String)params.get("username"))){
+			sql.append(" and username like '"+params.get("username")+"'");
+		}
+
+
+		List<Map> ispay=maintainDao.findMapObjBySqlNoPage(sql.toString());
+		if(null!=ispay&&ispay.size()>0){
+			temp=new HashMap<>();
+			temp.put("name","已付款");
+			temp.put("value",ispay.get(0).get("total"));
+			retList.add(temp);
+		}
+		sql=new StringBuilder(100);
+		sql.append(" select sum(jine) as total from  "+tablename+" where isPay='0' ");
+		List<Map> unpay=maintainDao.findMapObjBySqlNoPage(sql.toString());
+		if(null!=unpay&&unpay.size()>0){
+			temp=new HashMap<>();
+			temp.put("name","未付款");
+			temp.put("value",unpay.get(0).get("total"));
+			retList.add(temp);
+		}
+		return retList;
 	}
 
 //	@Log(type="保存",remark="保存修理信息")

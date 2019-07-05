@@ -22,8 +22,8 @@ import javax.persistence.TemporalType;
 @Table(name = "jl_material_store_info")
 public class Store implements java.io.Serializable {
 	private int id;//主键
-	private int goodsid;//物资id
-	private int supplierid;//供应商id
+	private String goodsid;//物资id
+	private String supplierid;//供应商id
 	private double num=0;//库存总数量
 	private double price=0;//库存总金额
 	private Date updatetime;//更新时间
@@ -38,18 +38,18 @@ public class Store implements java.io.Serializable {
 		this.id = id;
 	}
 	@Column(name = "goodsid", precision = 22, scale = 0)
-	public int getGoodsid() {
+	public String getGoodsid() {
 		return goodsid;
 	}
-	public void setGoodsid(int goodsid) {
+	public void setGoodsid(String goodsid) {
 		this.goodsid = goodsid;
 	}
 
 	@Column(name = "supplierid", precision = 22, scale = 0)
-	public int getSupplierid() {
+	public String getSupplierid() {
 		return supplierid;
 	}
-	public void setSupplierid(int supplierid) {
+	public void setSupplierid(String supplierid) {
 		this.supplierid = supplierid;
 	}
 	
@@ -76,6 +76,13 @@ public class Store implements java.io.Serializable {
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder(200);
+		stringBuilder.append("goodsid:"+this.getGoodsid())
+				.append(",supplierid:"+this.getSupplierid())
+				.append(",num:"+this.getNum()).append(",price:"+this.getPrice());
+		return stringBuilder.toString();
+	}
 }

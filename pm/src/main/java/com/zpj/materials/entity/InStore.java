@@ -24,8 +24,8 @@ import io.swagger.annotations.ApiModel;
 @Table(name = "jl_material_instore_info")
 public class InStore implements java.io.Serializable{
 	private int id;//主键
-	private int goodsid;//物资id
-	private int supplierid;//供货商id
+	private String goodsid;//物资id
+	private String supplierid;//供货商id
 	private int departmentid;//入库部门id
 	private double num=0;//入库数量
 	private double price;//入库金额
@@ -42,17 +42,17 @@ public class InStore implements java.io.Serializable{
 		this.id = id;
 	}
 	@Column(name = "goodsid", precision = 22, scale = 0)
-	public int getGoodsid() {
+	public String getGoodsid() {
 		return goodsid;
 	}
-	public void setGoodsid(int goodsid) {
+	public void setGoodsid(String goodsid) {
 		this.goodsid = goodsid;
 	}
-	@Column(name = "supplierid", precision = 22, scale = 0)
-	public int getSupplierid() {
+	@Column(name = "supplierid", length = 50)
+	public String getSupplierid() {
 		return supplierid;
 	}
-	public void setSupplierid(int supplierid) {
+	public void setSupplierid(String supplierid) {
 		this.supplierid = supplierid;
 	}
 	@Column(name = "departmentid", precision = 22, scale = 0)
@@ -96,5 +96,15 @@ public class InStore implements java.io.Serializable{
 	public void setPurchaseid(String purchaseid) {
 		this.purchaseid = purchaseid;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder=new StringBuilder(200);
+		stringBuilder.append("goodsid:"+this.getGoodsid())
+					.append(",supplierid:"+this.getSupplierid())
+				.append(",num:"+this.getNum())
+				.append(",purchaseid:"+this.purchaseid);
+		return stringBuilder.toString();
+	}
 }
