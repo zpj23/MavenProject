@@ -60,7 +60,7 @@ public class GoodsAppController extends BaseController{
 	
 	@RequestMapping("/saveInfo")
 	@ResponseBody
-	public void saveInfo(String id,String name,String type,String unit,String purchasePrice,String sellingPrice,String remark,String supplierName,String supplierId,String goodsType,String loginId,String isAdmin){
+	public void saveInfo(String id,String name,String type,String unit,String purchasePrice,String sellingPrice,String remark,String supplierName,String supplierId,String goodsType,String purchaseDate,String loginId,String isAdmin){
 		Goods goods=new Goods();
 		if(id.equalsIgnoreCase("")){
 			goods.setId(UUID.randomUUID().toString());
@@ -77,6 +77,7 @@ public class GoodsAppController extends BaseController{
 		goods.setSupplierName(supplierName);
 		goods.setType(type);
 		goods.setUnit(unit);
+		goods.setPurchaseDate(purchaseDate);
 		goodsService.saveInfo(goods);
 		
 		Map map=new HashMap();

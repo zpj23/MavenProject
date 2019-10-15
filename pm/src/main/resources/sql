@@ -1,0 +1,9 @@
+select right(name,7),name from jl_material_goods_info
+
+update jl_material_goods_info set purchaseDate=right(name,7)
+
+select purchaseDate,name from jl_material_goods_info
+
+SELECT left(purchaseDate,6),purchaseDate from jl_material_goods_info
+
+update jl_material_goods_info set purchaseDate=left(purchaseDate,6) 

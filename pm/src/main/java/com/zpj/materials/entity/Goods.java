@@ -42,7 +42,9 @@ public class Goods implements java.io.Serializable{
 	private Date createtime=new Date();//创建时间
 	@ApiModelProperty(value = "备注",name="remark", required = false)
 	private String remark;
-	
+	@ApiModelProperty(value = "进货日期",name="purchaseDate", required = false)
+	private String purchaseDate;
+
 	@ApiModelProperty(value = "附件路径已逗号分割",name="fujian", required = false)
 	private String fujian;
 	
@@ -135,6 +137,14 @@ public class Goods implements java.io.Serializable{
 		this.goodsTypeName = goodsTypeName;
 	}
 
+	public String getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
 	@Override
 	public String toString() {
 		return "id:"+this.getId()+
@@ -145,6 +155,7 @@ public class Goods implements java.io.Serializable{
 				",sellingPrice:"+this.getSellingPrice()+
 				",supplierName:"+this.getSupplierName()+
 				",goodsType:"+this.getGoodsType()+
+				",purchaseDate:"+this.getPurchaseDate()+
 				",remark:"+this.getRemark();
 	}
 }

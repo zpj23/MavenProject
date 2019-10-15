@@ -114,15 +114,18 @@ public class DictionaryServiceImpl implements DictionaryService {
 		}
 		return null;
 	}
-public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
+	public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
 		try{
+
+
 			if(null==dt.getId()||dt.getId()==0){
+//				List list=dtDao.findBySql(" select typeCode,id from sys_dictionary_type where typeCode='"+dt.getTypeCode()+"'");
+//				if(null!=list&&list.size()>0){
+//					dt.setTypeCode(dt.getTypeCode()+System.currentTimeMillis());
+//				}
 				dtDao.add(dt);
 			}else{
 				dtDao.merge(dt, String.valueOf(dt.getId()));
-//				if(!oldType.equalsIgnoreCase("")&&!oldType.equalsIgnoreCase(dt.getTypeCode())){
-//					dtDao.executeSql(" update "+tablename_item+" set typeCode='"+dt.getTypeCode()+"' where typeCode='"+oldType+"'");
-//				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -130,6 +133,7 @@ public void saveDictionaryTypeByPhone(DictionaryType dt,String oldType){
 		}
 		
 	}
+
 	public void saveDictionaryType(DictionaryType dt){
 		
 		try{
