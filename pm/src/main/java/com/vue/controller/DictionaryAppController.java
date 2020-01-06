@@ -141,10 +141,16 @@ public class DictionaryAppController extends BaseController{
 	@ResponseBody
 	public void delByCode(String code){
 		DictionaryType dt=	dictionaryService.findDicTypeByCode(code);
-		if(null!=dt){
-			dictionaryService.delDictionaryType(String.valueOf(dt.getId()));
+		List list=dictionaryService.findChlidrenDictionaryTypeByCode(code);
+		ResultData<Map> rd=new ResultData<Map>(null,"删除失败", false);
+		if(null!=list&&list.size()>0){
+			rd=new ResultData<Map>(null,"失败，存在子节点", false);
+		}else{
+			if(null!=dt){
+				dictionaryService.delDictionaryType(String.valueOf(dt.getId()));
+				rd=new ResultData<Map>(null,"删除成功", true);
+			}
 		}
-		ResultData<Map> rd=new ResultData<Map>(null,"删除成功", true);
 		this.jsonWrite2(rd);
 	}
 	/**
