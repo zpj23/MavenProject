@@ -61,7 +61,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 		condition.put("parentTypeid-self", "parentTypeid<>0");
 		Map<String,Object> px=new HashMap();
 		px.put("orderNum", "asc");
-		MyPage mp= dtDao.findPageDateSqlT("sys_dictionary_type", condition, px, 1, 500, DictionaryType.class);
+		MyPage mp= dtDao.findPageDateSqlT("sys_dictionary_type", condition, px, 1, 2000, DictionaryType.class);
 		return (List<DictionaryType>)mp.getData();
 	}
 	
