@@ -35,7 +35,7 @@ public class GoodsServiceImpl implements GoodsService {
 			param.put("goodsType-like", canshu.get("goodsType"));
 		}
 		Map px=new HashMap();
-//	    px.put("createtime", "desc");
+	    px.put("supplierId", "desc");
 		px.put(" RIGHT(name,8) ", "desc");
 		return goodsDao.findPageDateSqlT(tablename, param,px , page, limit, Goods.class);
 	}
