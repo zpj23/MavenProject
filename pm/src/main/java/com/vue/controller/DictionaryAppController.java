@@ -70,7 +70,7 @@ public class DictionaryAppController extends BaseController{
 		map.put("third", third);
 		map.put("title",showName);
 		Map param=new HashMap();
-		MyPage pagedata =goodsService.findPageData(param,1,1000);
+		MyPage pagedata =goodsService.findPageData(param,1,10000);
 		if(null==pagedata.getData()){
 			map.put("goodslist", new ArrayList());
 		}else{
