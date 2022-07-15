@@ -13,7 +13,7 @@
 	    <project.basedir>F:\workspace8\ragdoll</project.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.14.RELEASE</spring.version>
-		<jackson.version>2.8.2</jackson.version>
+		<jackson.version>2.12.6.1</jackson.version>
 	</properties>
 
 	<dependencies>
